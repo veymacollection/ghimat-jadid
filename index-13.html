@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>مدیریت قیمت محصولات</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 25px;
+      background: #f5f5f5;
+      font-family: Tahoma, Arial, sans-serif;
+      color: #222;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 0;
+      margin-bottom: 25px;
+      font-size: 25px;
+    }
+
+    .table-wrapper {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      min-width: 750px;
+      border-collapse: collapse;
+      direction: rtl;
+    }
+
+    th,
+    td {
+      border: 1px solid #ddd;
+      padding: 12px 10px;
+      text-align: center;
+    }
+
+    th {
+      background: #222;
+      color: white;
+      font-weight: bold;
+    }
+
+    tr:nth-child(even) {
+      background: #fafafa;
+    }
+
+    input {
+      width: 100%;
+      padding: 9px;
+      border: 1px solid #ccc;
+      border-radius: 7px;
+      text-align: center;
+      font-family: inherit;
+      font-size: 14px;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #222;
+    }
+
+    .save-btn {
+      border: none;
+      background: #222;
+      color: white;
+      padding: 9px 15px;
+      border-radius: 7px;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .save-btn:hover {
+      background: #444;
+    }
+
+    .add-btn {
+      display: block;
+      margin: 20px auto 0;
+      border: none;
+      background: #222;
+      color: white;
+      padding: 12px 25px;
+      border-radius: 9px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 15px;
+    }
+
+    .add-btn:hover {
+      background: #444;
+    }
+
+    .message {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 14px;
+      color: #16803c;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 10px;
+      }
+
+      .container {
+        padding: 15px;
+      }
+
+      h1 {
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1>مدیریت قیمت محصولات</h1>
+
+    <div class="table-wrapper">
+
+      <table id="priceTable">
+
+        <thead>
+          <tr>
+            <th>ردیف</th>
+            <th>اسم محصول</th>
+            <th>کد محصول</th>
+            <th>قیمت فعلی</th>
+            <th>قیمت جدید</th>
+            <th>ذخیره</th>
+          </tr>
+        </thead>
+
+        <tbody id="productList">
+
+          <tr>
+            <td>۱</td>
+
+            <td>
+              <input type="text" value="شورتک پلنگی">
+            </td>
+
+            <td>
+              <input type="text" value="101">
+            </td>
+
+            <td>
+              <input type="text" value="350,000">
+            </td>
+
+            <td>
+              <input type="text" value="380,000">
+            </td>
+
+            <td>
+              <button class="save-btn" onclick="saveProduct(this)">
+                💾 ذخیره
+              </button>
+            </td>
+          </tr>
+
+          <tr>
+            <td>۲</td>
+
+            <td>
+              <input type="text" value="ست سه‌تیکه">
+            </td>
+
+            <td>
+              <input type="text" value="205">
+            </td>
+
+            <td>
+              <input type="text" value="520,000">
+            </td>
+
+            <td>
+              <input type="text" value="550,000">
+            </td>
+
+            <td>
+              <button class="save-btn" onclick="saveProduct(this)">
+                💾 ذخیره
+              </button>
+            </td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+    <button class="add-btn" onclick="addProduct()">
+      ➕ افزودن محصول جدید
+    </button>
+
+    <div class="message" id="message"></div>
+
+  </div>
+
+
+  <script>
+
+    // ذخیره تغییرات همان ردیف
+    function saveProduct(button) {
+
+      const row = button.closest("tr");
+
+      const inputs = row.querySelectorAll("input");
+
+      const name = inputs[0].value;
+      const code = inputs[1].value;
+      const currentPrice = inputs[2].value;
+      const newPrice = inputs[3].value;
+
+      console.log({
+        name,
+        code,
+        currentPrice,
+        newPrice
+      });
+
+      document.getElementById("message").innerText =
+        "تغییرات این محصول آماده ذخیره در GitHub است.";
+    }
+
+
+    // افزودن محصول جدید
+    function addProduct() {
+
+      const tbody = document.getElementById("productList");
+
+      const rowNumber = tbody.rows.length + 1;
+
+      const row = document.createElement("tr");
+
+      row.innerHTML = `
+        <td>${rowNumber}</td>
+
+        <td>
+          <input type="text" placeholder="نام محصول">
+        </td>
+
+        <td>
+          <input type="text" placeholder="کد محصول">
+        </td>
+
+        <td>
+          <input type="text" placeholder="قیمت فعلی">
+        </td>
+
+        <td>
+          <input type="text" placeholder="قیمت جدید">
+        </td>
+
+        <td>
+          <button class="save-btn" onclick="saveProduct(this)">
+            💾 ذخیره
+          </button>
+        </td>
+      `;
+
+      tbody.appendChild(row);
+    }
+
+  </script>
+
+</body>
+</html>
