@@ -10,7 +10,7 @@
       --primary-hover: #1d4ed8;
       --success: #16a34a;
       --danger: #dc2626;
-      --bg: #f8fafc;
+      --bg: #f1f5f9;
       --card: #ffffff;
       --border: #e2e8f0;
       --text: #1e293b;
@@ -27,77 +27,134 @@
       font-family: "Tahoma", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.6;
+      line-height: 1.5;
       min-height: 100vh;
-      overflow-x: hidden;
+      padding-bottom: 90px;
     }
 
     .container {
-      max-width: 1100px;
+      max-width: 100%;
       margin: 0 auto;
-      padding: 20px 16px 40px;
-      width: 100%;
+      padding: 16px 12px;
     }
 
     header {
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 20px;
-      margin-bottom: 20px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      padding: 16px 18px;
+      margin-bottom: 14px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
     }
 
     header h1 {
-      font-size: 1.5rem;
-      margin-bottom: 6px;
+      font-size: 1.35rem;
+      margin-bottom: 4px;
     }
 
-    header p {
+    header .count {
       color: var(--muted);
-      font-size: 0.9rem;
+      font-size: 0.95rem;
     }
 
-    .stats {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 14px;
+    .search-wrap {
+      position: relative;
+      margin-bottom: 14px;
     }
 
-    .stat {
-      background: #eff6ff;
-      color: var(--primary);
-      padding: 6px 12px;
-      border-radius: 8px;
-      font-size: 0.85rem;
-      font-weight: 600;
-    }
-
-    .toolbar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 16px;
-      align-items: center;
-    }
-
-    .search-box {
-      flex: 1;
-      min-width: 200px;
-    }
-
-    .search-box input {
+    .search-wrap input {
       width: 100%;
-      padding: 10px 14px;
+      padding: 12px 44px 12px 14px;
       border: 1px solid var(--border);
-      border-radius: 8px;
+      border-radius: 10px;
       font-size: 0.95rem;
       outline: none;
+      background: var(--card);
       transition: border-color 0.2s;
     }
 
-    .search-box input:focus {
+    .search-wrap input:focus {
+      border-color: var(--primary);
+    }
+
+    .search-wrap .icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      pointer-events: none;
+      font-size: 1.1rem;
+    }
+
+    .table-wrap {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+
+    table {
+      width: 100%;
+      min-width: 720px;
+      border-collapse: collapse;
+    }
+
+    thead {
+      background: #f1f5f9;
+    }
+
+    th, td {
+      padding: 11px 10px;
+      text-align: right;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.88rem;
+      white-space: nowrap;
+    }
+
+    th {
+      font-weight: 700;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    tbody tr:hover {
+      background: #f8fafc;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    .price {
+      font-weight: 600;
+      color: var(--success);
+      direction: ltr;
+      display: inline-block;
+    }
+
+    .code {
+      font-family: monospace;
+      background: #f1f5f9;
+      padding: 2px 7px;
+      border-radius: 5px;
+      font-size: 0.82rem;
+    }
+
+    .new-price-input {
+      width: 110px;
+      padding: 7px 8px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 0.85rem;
+      text-align: center;
+      outline: none;
+      direction: ltr;
+    }
+
+    .new-price-input:focus {
       border-color: var(--primary);
     }
 
@@ -105,11 +162,11 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
-      padding: 10px 16px;
+      gap: 4px;
+      padding: 7px 12px;
       border: none;
-      border-radius: 8px;
-      font-size: 0.9rem;
+      border-radius: 7px;
+      font-size: 0.82rem;
       font-weight: 600;
       cursor: pointer;
       transition: background 0.2s, transform 0.1s;
@@ -117,7 +174,12 @@
     }
 
     .btn:active {
-      transform: scale(0.98);
+      transform: scale(0.97);
+    }
+
+    .btn-sm {
+      padding: 6px 10px;
+      font-size: 0.78rem;
     }
 
     .btn-primary {
@@ -141,8 +203,6 @@
     .btn-danger {
       background: var(--danger);
       color: white;
-      padding: 6px 10px;
-      font-size: 0.8rem;
     }
 
     .btn-danger:hover {
@@ -159,71 +219,38 @@
       background: #f1f5f9;
     }
 
-    .table-wrap {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      table-layout: fixed;
-    }
-
-    thead {
-      background: #f1f5f9;
-    }
-
-    th, td {
-      padding: 12px 10px;
-      text-align: right;
-      border-bottom: 1px solid var(--border);
-      font-size: 0.9rem;
-      word-wrap: break-word;
-    }
-
-    th {
-      font-weight: 700;
-      color: var(--muted);
-      font-size: 0.8rem;
-    }
-
-    th:nth-child(1), td:nth-child(1) { width: 8%; }
-    th:nth-child(2), td:nth-child(2) { width: 42%; }
-    th:nth-child(3), td:nth-child(3) { width: 15%; }
-    th:nth-child(4), td:nth-child(4) { width: 20%; }
-    th:nth-child(5), td:nth-child(5) { width: 15%; }
-
-    tbody tr:hover {
-      background: #f8fafc;
-    }
-
-    tbody tr:last-child td {
-      border-bottom: none;
-    }
-
-    .price {
-      font-weight: 600;
-      color: var(--success);
-      direction: ltr;
-      display: inline-block;
-    }
-
-    .code {
-      font-family: monospace;
-      background: #f1f5f9;
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-size: 0.85rem;
+    .actions {
+      display: flex;
+      gap: 6px;
+      align-items: center;
     }
 
     .empty {
       text-align: center;
       padding: 40px 20px;
       color: var(--muted);
+    }
+
+    .bottom-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--card);
+      border-top: 1px solid var(--border);
+      padding: 12px 16px;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      box-shadow: 0 -4px 12px rgba(0,0,0,0.06);
+      z-index: 100;
+    }
+
+    .bottom-bar .btn {
+      flex: 1;
+      max-width: 280px;
+      padding: 13px 16px;
+      font-size: 0.95rem;
     }
 
     .modal-overlay {
@@ -243,27 +270,27 @@
 
     .modal {
       background: white;
-      border-radius: 12px;
+      border-radius: 14px;
       width: 100%;
-      max-width: 420px;
-      padding: 24px;
+      max-width: 400px;
+      padding: 22px;
       box-shadow: 0 20px 40px rgba(0,0,0,0.15);
     }
 
     .modal h2 {
-      font-size: 1.2rem;
-      margin-bottom: 18px;
+      font-size: 1.15rem;
+      margin-bottom: 16px;
     }
 
     .form-group {
-      margin-bottom: 14px;
+      margin-bottom: 13px;
     }
 
     .form-group label {
       display: block;
-      font-size: 0.85rem;
+      font-size: 0.84rem;
       font-weight: 600;
-      margin-bottom: 6px;
+      margin-bottom: 5px;
       color: var(--muted);
     }
 
@@ -283,18 +310,19 @@
     .modal-actions {
       display: flex;
       gap: 10px;
-      margin-top: 20px;
+      margin-top: 18px;
     }
 
     .modal-actions .btn {
       flex: 1;
+      padding: 11px;
     }
 
     .toast {
       position: fixed;
-      bottom: 24px;
+      bottom: 100px;
       left: 50%;
-      transform: translateX(-50%) translateY(100px);
+      transform: translateX(-50%) translateY(80px);
       background: #1e293b;
       color: white;
       padding: 12px 20px;
@@ -310,37 +338,18 @@
       transform: translateX(-50%) translateY(0);
       opacity: 1;
     }
-
-    @media (max-width: 640px) {
-      th:nth-child(1), td:nth-child(1) { display: none; }
-      th:nth-child(2), td:nth-child(2) { width: 45%; }
-      th:nth-child(3), td:nth-child(3) { width: 18%; }
-      th:nth-child(4), td:nth-child(4) { width: 22%; }
-      th:nth-child(5), td:nth-child(5) { width: 15%; }
-
-      header h1 { font-size: 1.25rem; }
-      .btn { padding: 9px 12px; font-size: 0.85rem; }
-    }
   </style>
 </head>
 <body>
   <div class="container">
     <header>
       <h1>مدیریت محصولات</h1>
-      <p>لیست محصولات فروشگاه — مناسب GitHub Pages</p>
-      <div class="stats">
-        <span class="stat" id="totalCount">تعداد: 0</span>
-        <span class="stat" id="totalValue">جمع کل: ۰ تومان</span>
-      </div>
+      <div class="count" id="totalCount">تعداد محصولات: 0</div>
     </header>
 
-    <div class="toolbar">
-      <div class="search-box">
-        <input type="text" id="searchInput" placeholder="جستجو بر اساس نام یا کد محصول...">
-      </div>
-      <button class="btn btn-primary" onclick="openAddModal()">+ افزودن محصول</button>
-      <button class="btn btn-success" onclick="saveToFile()">ذخیره JSON</button>
-      <button class="btn btn-outline" onclick="loadFromStorage()">بازیابی</button>
+    <div class="search-wrap">
+      <input type="text" id="searchInput" placeholder="جستجو بر اساس نام یا کد محصول...">
+      <span class="icon">🔍</span>
     </div>
 
     <div class="table-wrap">
@@ -350,15 +359,20 @@
             <th>ردیف</th>
             <th>نام محصول</th>
             <th>کد</th>
-            <th>قیمت (تومان)</th>
+            <th>قیمت فعلی</th>
+            <th>قیمت جدید</th>
             <th>عملیات</th>
           </tr>
         </thead>
-        <tbody id="productTable">
-        </tbody>
+        <tbody id="productTable"></tbody>
       </table>
       <div class="empty" id="emptyState" style="display:none;">محصولی یافت نشد</div>
     </div>
+  </div>
+
+  <div class="bottom-bar">
+    <button class="btn btn-primary" onclick="openAddModal()">+ افزودن محصول</button>
+    <button class="btn btn-success" onclick="saveToFile()">ذخیره JSON</button>
   </div>
 
   <div class="modal-overlay" id="addModal">
@@ -448,14 +462,14 @@
     let nextId = 57;
 
     function formatPrice(num) {
-      return num.toLocaleString("fa-IR");
+      return Number(num).toLocaleString("fa-IR");
     }
 
     function showToast(msg) {
       const t = document.getElementById("toast");
       t.textContent = msg;
       t.classList.add("show");
-      setTimeout(() => t.classList.remove("show"), 2500);
+      setTimeout(() => t.classList.remove("show"), 2200);
     }
 
     function renderTable(list = products) {
@@ -468,21 +482,47 @@
       } else {
         empty.style.display = "none";
         tbody.innerHTML = list.map((p, i) => `
-          <tr>
+          <tr data-id="${p.id}">
             <td>${i + 1}</td>
             <td>${p.name}</td>
             <td><span class="code">${p.code}</span></td>
             <td><span class="price">${formatPrice(p.price)}</span></td>
             <td>
-              <button class="btn btn-danger" onclick="deleteProduct(${p.id})">حذف</button>
+              <input type="number" class="new-price-input" 
+                     placeholder="قیمت جدید" 
+                     data-id="${p.id}"
+                     id="newPrice-${p.id}">
+            </td>
+            <td>
+              <div class="actions">
+                <button class="btn btn-success btn-sm" onclick="updatePrice(${p.id})">ثبت</button>
+                <button class="btn btn-danger btn-sm" onclick="deleteProduct(${p.id})">حذف</button>
+              </div>
             </td>
           </tr>
         `).join("");
       }
 
-      document.getElementById("totalCount").textContent = `تعداد: ${list.length}`;
-      const sum = list.reduce((a, b) => a + b.price, 0);
-      document.getElementById("totalValue").textContent = `جمع کل: ${formatPrice(sum)} تومان`;
+      document.getElementById("totalCount").textContent = `تعداد محصولات: ${list.length}`;
+    }
+
+    function updatePrice(id) {
+      const input = document.getElementById("newPrice-" + id);
+      const val = parseInt(input.value, 10);
+
+      if (isNaN(val) || val < 0) {
+        showToast("قیمت جدید معتبر نیست");
+        return;
+      }
+
+      const product = products.find(p => p.id === id);
+      if (product) {
+        product.price = val;
+        input.value = "";
+        saveToStorage();
+        applySearch();
+        showToast("قیمت به‌روزرسانی شد");
+      }
     }
 
     function deleteProduct(id) {
@@ -498,7 +538,9 @@
       document.getElementById("newName").value = "";
       document.getElementById("newCode").value = "";
       document.getElementById("newPrice").value = "";
-      document.getElementById("newName").focus();
+      setTimeout(function() {
+        document.getElementById("newName").focus();
+      }, 100);
     }
 
     function closeAddModal() {
@@ -515,7 +557,7 @@
         return;
       }
 
-      products.push({ id: nextId++, name, code, price });
+      products.push({ id: nextId++, name: name, code: code, price: price });
       saveToStorage();
       closeAddModal();
       applySearch();
@@ -528,10 +570,9 @@
         renderTable(products);
         return;
       }
-      const filtered = products.filter(p =>
-        p.name.toLowerCase().includes(q) ||
-        p.code.toLowerCase().includes(q)
-      );
+      const filtered = products.filter(function(p) {
+        return p.name.toLowerCase().includes(q) || p.code.toLowerCase().includes(q);
+      });
       renderTable(filtered);
     }
 
@@ -549,8 +590,6 @@
         nextId = parseInt(localStorage.getItem("products_nextId") || "57", 10);
         applySearch();
         showToast("داده‌ها بازیابی شد");
-      } else {
-        showToast("داده‌ای برای بازیابی وجود ندارد");
       }
     }
 
@@ -570,7 +609,11 @@
       if (e.target === this) closeAddModal();
     });
 
-    renderTable();
+    if (localStorage.getItem("products_data")) {
+      loadFromStorage();
+    } else {
+      renderTable();
+    }
   </script>
 </body>
 </html>
