@@ -1,293 +1,1477 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>مدیریت قیمت محصولات</title>
+  <title>مدیریت قیمت | Veyma Collection</title>
 
   <style>
+
     * {
       box-sizing: border-box;
     }
 
     body {
       margin: 0;
-      padding: 25px;
       background: #f5f5f5;
-      font-family: Tahoma, Arial, sans-serif;
       color: #222;
+      font-family: Tahoma, Arial, sans-serif;
     }
 
     .container {
-      max-width: 1100px;
-      margin: auto;
-      background: white;
-      padding: 25px;
-      border-radius: 15px;
-      box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+      width: 95%;
+      max-width: 1200px;
+      margin: 30px auto;
     }
 
     h1 {
       text-align: center;
-      margin-top: 0;
       margin-bottom: 25px;
       font-size: 25px;
     }
 
+    .top-box {
+      background: #fff;
+      border-radius: 12px;
+      padding: 18px;
+      margin-bottom: 20px;
+      box-shadow: 0 3px 12px rgba(0,0,0,.07);
+    }
+
+    .top-box p {
+      margin: 5px 0;
+      color: #666;
+      font-size: 14px;
+    }
+
+    .message {
+      display: none;
+      background: #fff;
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
     .table-wrapper {
-      width: 100%;
+      background: #fff;
+      border-radius: 12px;
       overflow-x: auto;
+      box-shadow: 0 3px 12px rgba(0,0,0,.07);
     }
 
     table {
       width: 100%;
-      min-width: 750px;
+      min-width: 900px;
       border-collapse: collapse;
-      direction: rtl;
-    }
-
-    th,
-    td {
-      border: 1px solid #ddd;
-      padding: 12px 10px;
-      text-align: center;
     }
 
     th {
       background: #222;
-      color: white;
-      font-weight: bold;
+      color: #fff;
+      padding: 14px 10px;
+      font-size: 14px;
     }
 
-    tr:nth-child(even) {
-      background: #fafafa;
+    td {
+      padding: 11px 10px;
+      border-bottom: 1px solid #e5e5e5;
+      text-align: center;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
     }
 
     input {
       width: 100%;
-      padding: 9px;
+      padding: 10px;
       border: 1px solid #ccc;
       border-radius: 7px;
-      text-align: center;
+      outline: none;
       font-family: inherit;
       font-size: 14px;
+      background: #fff;
     }
 
     input:focus {
-      outline: none;
-      border-color: #222;
+      border-color: #555;
+    }
+
+    .new-price {
+      background: #fffbea;
     }
 
     .save-btn {
-      border: none;
       background: #222;
       color: white;
-      padding: 9px 15px;
+      border: none;
       border-radius: 7px;
+      padding: 10px 15px;
       cursor: pointer;
       font-family: inherit;
+      white-space: nowrap;
     }
 
     .save-btn:hover {
-      background: #444;
+      opacity: .85;
+    }
+
+    .add-row {
+      background: #f3fff6;
     }
 
     .add-btn {
-      display: block;
-      margin: 20px auto 0;
-      border: none;
-      background: #222;
+      width: 100%;
+      background: #198754;
       color: white;
-      padding: 12px 25px;
-      border-radius: 9px;
+      border: none;
+      border-radius: 7px;
+      padding: 10px;
       cursor: pointer;
       font-family: inherit;
-      font-size: 15px;
     }
 
     .add-btn:hover {
-      background: #444;
+      opacity: .85;
     }
 
-    .message {
-      text-align: center;
-      margin-top: 15px;
-      font-size: 14px;
-      color: #16803c;
+    .pending {
+      margin-top: 6px;
+      font-size: 11px;
+      color: #a66a00;
+      line-height: 1.5;
+    }
+
+    .number {
+      font-weight: bold;
+      width: 50px;
     }
 
     @media (max-width: 600px) {
-      body {
-        padding: 10px;
-      }
 
       .container {
-        padding: 15px;
+        width: 98%;
+        margin: 15px auto;
       }
 
       h1 {
-        font-size: 20px;
+        font-size: 21px;
       }
+
     }
+
   </style>
 </head>
 
+
 <body>
 
-  <div class="container">
+<div class="container">
 
-    <h1>مدیریت قیمت محصولات</h1>
+  <h1>
+    مدیریت قیمت محصولات
+  </h1>
 
-    <div class="table-wrapper">
 
-      <table id="priceTable">
+  <div class="top-box">
 
-        <thead>
-          <tr>
-            <th>ردیف</th>
-            <th>اسم محصول</th>
-            <th>کد محصول</th>
-            <th>قیمت فعلی</th>
-            <th>قیمت جدید</th>
-            <th>ذخیره</th>
-          </tr>
-        </thead>
+    <strong>
+      Veyma Collection
+    </strong>
 
-        <tbody id="productList">
-
-          <tr>
-            <td>۱</td>
-
-            <td>
-              <input type="text" value="شورتک پلنگی">
-            </td>
-
-            <td>
-              <input type="text" value="101">
-            </td>
-
-            <td>
-              <input type="text" value="350,000">
-            </td>
-
-            <td>
-              <input type="text" value="380,000">
-            </td>
-
-            <td>
-              <button class="save-btn" onclick="saveProduct(this)">
-                💾 ذخیره
-              </button>
-            </td>
-          </tr>
-
-          <tr>
-            <td>۲</td>
-
-            <td>
-              <input type="text" value="ست سه‌تیکه">
-            </td>
-
-            <td>
-              <input type="text" value="205">
-            </td>
-
-            <td>
-              <input type="text" value="520,000">
-            </td>
-
-            <td>
-              <input type="text" value="550,000">
-            </td>
-
-            <td>
-              <button class="save-btn" onclick="saveProduct(this)">
-                💾 ذخیره
-              </button>
-            </td>
-          </tr>
-
-        </tbody>
-
-      </table>
-
-    </div>
-
-    <button class="add-btn" onclick="addProduct()">
-      ➕ افزودن محصول جدید
-    </button>
-
-    <div class="message" id="message"></div>
+    <p>
+      قیمت جدید پس از ثبت، ۲۴ ساعت بعد به صورت خودکار جایگزین قیمت فعلی می‌شود.
+    </p>
 
   </div>
 
 
-  <script>
+  <div id="message" class="message"></div>
 
-    // ذخیره تغییرات همان ردیف
-    function saveProduct(button) {
 
-      const row = button.closest("tr");
+  <div class="table-wrapper">
 
-      const inputs = row.querySelectorAll("input");
+    <table>
 
-      const name = inputs[0].value;
-      const code = inputs[1].value;
-      const currentPrice = inputs[2].value;
-      const newPrice = inputs[3].value;
+      <thead>
 
-      console.log({
-        name,
-        code,
-        currentPrice,
-        newPrice
-      });
+        <tr>
 
-      document.getElementById("message").innerText =
-        "تغییرات این محصول آماده ذخیره در GitHub است.";
+          <th class="number">
+            #
+          </th>
+
+          <th>
+            نام محصول
+          </th>
+
+          <th>
+            کد محصول
+          </th>
+
+          <th>
+            قیمت فعلی
+          </th>
+
+          <th>
+            قیمت جدید
+          </th>
+
+          <th>
+            عملیات
+          </th>
+
+        </tr>
+
+      </thead>
+
+
+      <tbody id="productList">
+
+        <!-- محصولات اینجا قرار می‌گیرند -->
+
+
+        <!-- ردیف افزودن محصول جدید -->
+
+        <tr class="add-row">
+
+          <td class="number">
+            +
+          </td>
+
+          <td>
+
+            <input
+              type="text"
+              id="newProductName"
+              placeholder="نام محصول"
+            >
+
+          </td>
+
+
+          <td>
+
+            <input
+              type="text"
+              id="newProductCode"
+              placeholder="کد محصول"
+            >
+
+          </td>
+
+
+          <td>
+
+            <input
+              type="number"
+              id="newProductCurrentPrice"
+              placeholder="قیمت فعلی"
+            >
+
+          </td>
+
+
+          <td>
+
+            <input
+              type="number"
+              id="newProductNewPrice"
+              placeholder="قیمت جدید"
+            >
+
+          </td>
+
+
+          <td>
+
+            <button
+              class="add-btn"
+              onclick="addProduct()"
+            >
+              ＋ افزودن محصول
+            </button>
+
+          </td>
+
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>
+
+
+<script>
+
+
+/* ==========================================
+   تنظیمات
+========================================== */
+
+const WAIT_TIME = 24 * 60 * 60 * 1000;
+
+
+/* ==========================================
+   نمایش پیام
+========================================== */
+
+function showMessage(text) {
+
+  const box = document.getElementById("message");
+
+  box.innerText = text;
+
+  box.style.display = "block";
+
+  setTimeout(function () {
+
+    box.style.display = "none";
+
+  }, 4000);
+
+}
+
+
+/* ==========================================
+   افزودن محصول
+========================================== */
+
+function addProduct() {
+
+  const name =
+    document.getElementById("newProductName").value.trim();
+
+  const code =
+    document.getElementById("newProductCode").value.trim();
+
+  const currentPrice =
+    document.getElementById("newProductCurrentPrice").value.trim();
+
+  const newPrice =
+    document.getElementById("newProductNewPrice").value.trim();
+
+
+  if (!name || !code || !currentPrice) {
+
+    showMessage(
+      "لطفاً نام محصول، کد محصول و قیمت فعلی را وارد کنید."
+    );
+
+    return;
+  }
+
+
+  const tbody =
+    document.getElementById("productList");
+
+
+  const addRow =
+    document.querySelector(".add-row");
+
+
+  const productRows =
+    document.querySelectorAll(".product-row");
+
+
+  const number =
+    productRows.length + 1;
+
+
+  const row =
+    document.createElement("tr");
+
+
+  row.className =
+    "product-row";
+
+
+  /*
+    اگر قیمت جدید وارد شده باشد،
+    زمان ثبت آن ذخیره می‌شود.
+  */
+
+  if (newPrice !== "") {
+
+    row.dataset.newPriceTime =
+      Date.now();
+
+  }
+
+
+  row.innerHTML = `
+
+    <td class="number">
+      ${number}
+    </td>
+
+    <td>
+
+      <input
+        type="text"
+        class="product-name"
+        value="${escapeHtml(name)}"
+      >
+
+    </td>
+
+    <td>
+
+      <input
+        type="text"
+        class="product-code"
+        value="${escapeHtml(code)}"
+      >
+
+    </td>
+
+    <td>
+
+      <input
+        type="number"
+        class="current-price"
+        value="${escapeHtml(currentPrice)}"
+      >
+
+    </td>
+
+    <td>
+
+      <input
+        type="number"
+        class="new-price"
+        value="${escapeHtml(newPrice)}"
+        placeholder="قیمت جدید"
+      >
+
+      <div class="pending">
+
+        ${
+          newPrice
+          ? "قیمت جدید ۲۴ ساعت بعد خودکار فعال می‌شود."
+          : ""
+        }
+
+      </div>
+
+    </td>
+
+    <td>
+
+      <button
+        class="save-btn"
+        onclick="saveProduct(this)"
+      >
+        💾 ذخیره
+      </button>
+
+    </td>
+
+  `;
+
+
+  /*
+    محصول جدید قبل از ردیف افزودن قرار می‌گیرد.
+  */
+
+  tbody.insertBefore(row, addRow);
+
+
+  /*
+    خالی کردن فرم افزودن
+  */
+
+  document.getElementById("newProductName").value = "";
+
+  document.getElementById("newProductCode").value = "";
+
+  document.getElementById("newProductCurrentPrice").value = "";
+
+  document.getElementById("newProductNewPrice").value = "";
+
+
+  updateNumbers();
+
+
+  showMessage(
+    "محصول با موفقیت اضافه شد."
+  );
+
+}
+
+
+/* ==========================================
+   ذخیره محصول
+========================================== */
+
+function saveProduct(button) {
+
+  const row =
+    button.closest(".product-row");
+
+
+  const name =
+    row.querySelector(".product-name").value.trim();
+
+  const code =
+    row.querySelector(".product-code").value.trim();
+
+  const currentPrice =
+    row.querySelector(".current-price").value.trim();
+
+  const newPrice =
+    row.querySelector(".new-price").value.trim();
+
+
+  if (!name || !code || !currentPrice) {
+
+    showMessage(
+      "نام، کد و قیمت فعلی نمی‌تواند خالی باشد."
+    );
+
+    return;
+  }
+
+
+  /*
+    اگر قیمت جدید وارد شده باشد،
+    زمان ثبت آن از همین لحظه شروع می‌شود.
+  */
+
+  if (newPrice !== "") {
+
+    row.dataset.newPriceTime =
+      Date.now();
+
+
+    row.querySelector(".pending").innerText =
+      "قیمت جدید ۲۴ ساعت بعد خودکار فعال می‌شود.";
+
+  }
+
+
+  /*
+    در مرحله اتصال به GitHub،
+    اطلاعات همین محصول از اینجا
+    برای ذخیره در فایل محصولات ارسال می‌شود.
+  */
+
+  const product = {
+
+    name: name,
+
+    code: code,
+
+    currentPrice: currentPrice,
+
+    newPrice: newPrice,
+
+    newPriceTime:
+      row.dataset.newPriceTime || null
+
+  };
+
+
+  console.log(
+    "اطلاعات آماده ذخیره:",
+    product
+  );
+
+
+  showMessage(
+    "اطلاعات محصول ذخیره شد."
+  );
+
+}
+
+
+/* ==========================================
+   تغییر قیمت خودکار بعد از ۲۴ ساعت
+========================================== */
+
+function checkAutomaticPrices() {
+
+  const rows =
+    document.querySelectorAll(".product-row");
+
+
+  const now =
+    Date.now();
+
+
+  rows.forEach(function(row) {
+
+
+    const newPriceInput =
+      row.querySelector(".new-price");
+
+
+    const currentPriceInput =
+      row.querySelector(".current-price");
+
+
+    const pending =
+      row.querySelector(".pending");
+
+
+    const newPrice =
+      newPriceInput.value.trim();
+
+
+    const savedTime =
+      Number(row.dataset.newPriceTime);
+
+
+    if (
+      newPrice &&
+      savedTime &&
+      now - savedTime >= WAIT_TIME
+    ) {
+
+
+      /*
+        قیمت جدید می‌شود قیمت فعلی
+      */
+
+      currentPriceInput.value =
+        newPrice;
+
+
+      /*
+        قیمت جدید خالی می‌شود
+      */
+
+      newPriceInput.value = "";
+
+
+      /*
+        زمان پاک می‌شود
+      */
+
+      row.dataset.newPriceTime =
+        "";
+
+
+      pending.innerText =
+        "قیمت جدید به صورت خودکار فعال شد.";
+
+
+      /*
+        در نسخه متصل به GitHub،
+        تغییر نهایی اینجا ذخیره خواهد شد.
+      */
+
+      console.log(
+        "قیمت محصول به صورت خودکار تغییر کرد."
+      );
+
     }
 
+  });
 
-    // افزودن محصول جدید
-    function addProduct() {
+}
 
-      const tbody = document.getElementById("productList");
 
-      const rowNumber = tbody.rows.length + 1;
+/* ==========================================
+   شماره‌گذاری محصولات
+========================================== */
 
-      const row = document.createElement("tr");
+function updateNumbers() {
 
-      row.innerHTML = `
-        <td>${rowNumber}</td>
+  const rows =
+    document.querySelectorAll(".product-row");
 
-        <td>
-          <input type="text" placeholder="نام محصول">
-        </td>
 
-        <td>
-          <input type="text" placeholder="کد محصول">
-        </td>
+  rows.forEach(function(row, index) {
 
-        <td>
-          <input type="text" placeholder="قیمت فعلی">
-        </td>
+    row.querySelector(".number").innerText =
+      index + 1;
 
-        <td>
-          <input type="text" placeholder="قیمت جدید">
-        </td>
+  });
 
-        <td>
-          <button class="save-btn" onclick="saveProduct(this)">
-            💾 ذخیره
-          </button>
-        </td>
-      `;
+}
 
-      tbody.appendChild(row);
-    }
 
-  </script>
+/* ==========================================
+   جلوگیری از خراب شدن HTML
+========================================== */
+
+function escapeHtml(text) {
+
+  return text
+
+    .replace(/&/g, "&amp;")
+
+    .replace(/</g, "&lt;")
+
+    .replace(/>/g, "&gt;")
+
+    .replace(/"/g, "&quot;")
+
+    .replace(/'/g, "&#039;");
+
+}
+
+
+/* ==========================================
+   بررسی خودکار هر دقیقه
+========================================== */
+
+checkAutomaticPrices();
+
+
+setInterval(
+  checkAutomaticPrices,
+  60 * 1000
+);
+
+
+</script>
 
 </body>
+
+</html><!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>مدیریت قیمت | Veyma Collection</title>
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #f5f5f5;
+      color: #222;
+      font-family: Tahoma, Arial, sans-serif;
+    }
+
+    .container {
+      width: 95%;
+      max-width: 1200px;
+      margin: 30px auto;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 25px;
+      font-size: 25px;
+    }
+
+    .top-box {
+      background: #fff;
+      border-radius: 12px;
+      padding: 18px;
+      margin-bottom: 20px;
+      box-shadow: 0 3px 12px rgba(0,0,0,.07);
+    }
+
+    .top-box p {
+      margin: 5px 0;
+      color: #666;
+      font-size: 14px;
+    }
+
+    .message {
+      display: none;
+      background: #fff;
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    .table-wrapper {
+      background: #fff;
+      border-radius: 12px;
+      overflow-x: auto;
+      box-shadow: 0 3px 12px rgba(0,0,0,.07);
+    }
+
+    table {
+      width: 100%;
+      min-width: 900px;
+      border-collapse: collapse;
+    }
+
+    th {
+      background: #222;
+      color: #fff;
+      padding: 14px 10px;
+      font-size: 14px;
+    }
+
+    td {
+      padding: 11px 10px;
+      border-bottom: 1px solid #e5e5e5;
+      text-align: center;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 7px;
+      outline: none;
+      font-family: inherit;
+      font-size: 14px;
+      background: #fff;
+    }
+
+    input:focus {
+      border-color: #555;
+    }
+
+    .new-price {
+      background: #fffbea;
+    }
+
+    .save-btn {
+      background: #222;
+      color: white;
+      border: none;
+      border-radius: 7px;
+      padding: 10px 15px;
+      cursor: pointer;
+      font-family: inherit;
+      white-space: nowrap;
+    }
+
+    .save-btn:hover {
+      opacity: .85;
+    }
+
+    .add-row {
+      background: #f3fff6;
+    }
+
+    .add-btn {
+      width: 100%;
+      background: #198754;
+      color: white;
+      border: none;
+      border-radius: 7px;
+      padding: 10px;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .add-btn:hover {
+      opacity: .85;
+    }
+
+    .pending {
+      margin-top: 6px;
+      font-size: 11px;
+      color: #a66a00;
+      line-height: 1.5;
+    }
+
+    .number {
+      font-weight: bold;
+      width: 50px;
+    }
+
+    @media (max-width: 600px) {
+
+      .container {
+        width: 98%;
+        margin: 15px auto;
+      }
+
+      h1 {
+        font-size: 21px;
+      }
+
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+<div class="container">
+
+  <h1>
+    مدیریت قیمت محصولات
+  </h1>
+
+
+  <div class="top-box">
+
+    <strong>
+      Veyma Collection
+    </strong>
+
+    <p>
+      قیمت جدید پس از ثبت، ۲۴ ساعت بعد به صورت خودکار جایگزین قیمت فعلی می‌شود.
+    </p>
+
+  </div>
+
+
+  <div id="message" class="message"></div>
+
+
+  <div class="table-wrapper">
+
+    <table>
+
+      <thead>
+
+        <tr>
+
+          <th class="number">
+            #
+          </th>
+
+          <th>
+            نام محصول
+          </th>
+
+          <th>
+            کد محصول
+          </th>
+
+          <th>
+            قیمت فعلی
+          </th>
+
+          <th>
+            قیمت جدید
+          </th>
+
+          <th>
+            عملیات
+          </th>
+
+        </tr>
+
+      </thead>
+
+
+      <tbody id="productList">
+
+        <!-- محصولات اینجا قرار می‌گیرند -->
+
+
+        <!-- ردیف افزودن محصول جدید -->
+
+        <tr class="add-row">
+
+          <td class="number">
+            +
+          </td>
+
+          <td>
+
+            <input
+              type="text"
+              id="newProductName"
+              placeholder="نام محصول"
+            >
+
+          </td>
+
+
+          <td>
+
+            <input
+              type="text"
+              id="newProductCode"
+              placeholder="کد محصول"
+            >
+
+          </td>
+
+
+          <td>
+
+            <input
+              type="number"
+              id="newProductCurrentPrice"
+              placeholder="قیمت فعلی"
+            >
+
+          </td>
+
+
+          <td>
+
+            <input
+              type="number"
+              id="newProductNewPrice"
+              placeholder="قیمت جدید"
+            >
+
+          </td>
+
+
+          <td>
+
+            <button
+              class="add-btn"
+              onclick="addProduct()"
+            >
+              ＋ افزودن محصول
+            </button>
+
+          </td>
+
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>
+
+
+<script>
+
+
+/* ==========================================
+   تنظیمات
+========================================== */
+
+const WAIT_TIME = 24 * 60 * 60 * 1000;
+
+
+/* ==========================================
+   نمایش پیام
+========================================== */
+
+function showMessage(text) {
+
+  const box = document.getElementById("message");
+
+  box.innerText = text;
+
+  box.style.display = "block";
+
+  setTimeout(function () {
+
+    box.style.display = "none";
+
+  }, 4000);
+
+}
+
+
+/* ==========================================
+   افزودن محصول
+========================================== */
+
+function addProduct() {
+
+  const name =
+    document.getElementById("newProductName").value.trim();
+
+  const code =
+    document.getElementById("newProductCode").value.trim();
+
+  const currentPrice =
+    document.getElementById("newProductCurrentPrice").value.trim();
+
+  const newPrice =
+    document.getElementById("newProductNewPrice").value.trim();
+
+
+  if (!name || !code || !currentPrice) {
+
+    showMessage(
+      "لطفاً نام محصول، کد محصول و قیمت فعلی را وارد کنید."
+    );
+
+    return;
+  }
+
+
+  const tbody =
+    document.getElementById("productList");
+
+
+  const addRow =
+    document.querySelector(".add-row");
+
+
+  const productRows =
+    document.querySelectorAll(".product-row");
+
+
+  const number =
+    productRows.length + 1;
+
+
+  const row =
+    document.createElement("tr");
+
+
+  row.className =
+    "product-row";
+
+
+  /*
+    اگر قیمت جدید وارد شده باشد،
+    زمان ثبت آن ذخیره می‌شود.
+  */
+
+  if (newPrice !== "") {
+
+    row.dataset.newPriceTime =
+      Date.now();
+
+  }
+
+
+  row.innerHTML = `
+
+    <td class="number">
+      ${number}
+    </td>
+
+    <td>
+
+      <input
+        type="text"
+        class="product-name"
+        value="${escapeHtml(name)}"
+      >
+
+    </td>
+
+    <td>
+
+      <input
+        type="text"
+        class="product-code"
+        value="${escapeHtml(code)}"
+      >
+
+    </td>
+
+    <td>
+
+      <input
+        type="number"
+        class="current-price"
+        value="${escapeHtml(currentPrice)}"
+      >
+
+    </td>
+
+    <td>
+
+      <input
+        type="number"
+        class="new-price"
+        value="${escapeHtml(newPrice)}"
+        placeholder="قیمت جدید"
+      >
+
+      <div class="pending">
+
+        ${
+          newPrice
+          ? "قیمت جدید ۲۴ ساعت بعد خودکار فعال می‌شود."
+          : ""
+        }
+
+      </div>
+
+    </td>
+
+    <td>
+
+      <button
+        class="save-btn"
+        onclick="saveProduct(this)"
+      >
+        💾 ذخیره
+      </button>
+
+    </td>
+
+  `;
+
+
+  /*
+    محصول جدید قبل از ردیف افزودن قرار می‌گیرد.
+  */
+
+  tbody.insertBefore(row, addRow);
+
+
+  /*
+    خالی کردن فرم افزودن
+  */
+
+  document.getElementById("newProductName").value = "";
+
+  document.getElementById("newProductCode").value = "";
+
+  document.getElementById("newProductCurrentPrice").value = "";
+
+  document.getElementById("newProductNewPrice").value = "";
+
+
+  updateNumbers();
+
+
+  showMessage(
+    "محصول با موفقیت اضافه شد."
+  );
+
+}
+
+
+/* ==========================================
+   ذخیره محصول
+========================================== */
+
+function saveProduct(button) {
+
+  const row =
+    button.closest(".product-row");
+
+
+  const name =
+    row.querySelector(".product-name").value.trim();
+
+  const code =
+    row.querySelector(".product-code").value.trim();
+
+  const currentPrice =
+    row.querySelector(".current-price").value.trim();
+
+  const newPrice =
+    row.querySelector(".new-price").value.trim();
+
+
+  if (!name || !code || !currentPrice) {
+
+    showMessage(
+      "نام، کد و قیمت فعلی نمی‌تواند خالی باشد."
+    );
+
+    return;
+  }
+
+
+  /*
+    اگر قیمت جدید وارد شده باشد،
+    زمان ثبت آن از همین لحظه شروع می‌شود.
+  */
+
+  if (newPrice !== "") {
+
+    row.dataset.newPriceTime =
+      Date.now();
+
+
+    row.querySelector(".pending").innerText =
+      "قیمت جدید ۲۴ ساعت بعد خودکار فعال می‌شود.";
+
+  }
+
+
+  /*
+    در مرحله اتصال به GitHub،
+    اطلاعات همین محصول از اینجا
+    برای ذخیره در فایل محصولات ارسال می‌شود.
+  */
+
+  const product = {
+
+    name: name,
+
+    code: code,
+
+    currentPrice: currentPrice,
+
+    newPrice: newPrice,
+
+    newPriceTime:
+      row.dataset.newPriceTime || null
+
+  };
+
+
+  console.log(
+    "اطلاعات آماده ذخیره:",
+    product
+  );
+
+
+  showMessage(
+    "اطلاعات محصول ذخیره شد."
+  );
+
+}
+
+
+/* ==========================================
+   تغییر قیمت خودکار بعد از ۲۴ ساعت
+========================================== */
+
+function checkAutomaticPrices() {
+
+  const rows =
+    document.querySelectorAll(".product-row");
+
+
+  const now =
+    Date.now();
+
+
+  rows.forEach(function(row) {
+
+
+    const newPriceInput =
+      row.querySelector(".new-price");
+
+
+    const currentPriceInput =
+      row.querySelector(".current-price");
+
+
+    const pending =
+      row.querySelector(".pending");
+
+
+    const newPrice =
+      newPriceInput.value.trim();
+
+
+    const savedTime =
+      Number(row.dataset.newPriceTime);
+
+
+    if (
+      newPrice &&
+      savedTime &&
+      now - savedTime >= WAIT_TIME
+    ) {
+
+
+      /*
+        قیمت جدید می‌شود قیمت فعلی
+      */
+
+      currentPriceInput.value =
+        newPrice;
+
+
+      /*
+        قیمت جدید خالی می‌شود
+      */
+
+      newPriceInput.value = "";
+
+
+      /*
+        زمان پاک می‌شود
+      */
+
+      row.dataset.newPriceTime =
+        "";
+
+
+      pending.innerText =
+        "قیمت جدید به صورت خودکار فعال شد.";
+
+
+      /*
+        در نسخه متصل به GitHub،
+        تغییر نهایی اینجا ذخیره خواهد شد.
+      */
+
+      console.log(
+        "قیمت محصول به صورت خودکار تغییر کرد."
+      );
+
+    }
+
+  });
+
+}
+
+
+/* ==========================================
+   شماره‌گذاری محصولات
+========================================== */
+
+function updateNumbers() {
+
+  const rows =
+    document.querySelectorAll(".product-row");
+
+
+  rows.forEach(function(row, index) {
+
+    row.querySelector(".number").innerText =
+      index + 1;
+
+  });
+
+}
+
+
+/* ==========================================
+   جلوگیری از خراب شدن HTML
+========================================== */
+
+function escapeHtml(text) {
+
+  return text
+
+    .replace(/&/g, "&amp;")
+
+    .replace(/</g, "&lt;")
+
+    .replace(/>/g, "&gt;")
+
+    .replace(/"/g, "&quot;")
+
+    .replace(/'/g, "&#039;");
+
+}
+
+
+/* ==========================================
+   بررسی خودکار هر دقیقه
+========================================== */
+
+checkAutomaticPrices();
+
+
+setInterval(
+  checkAutomaticPrices,
+  60 * 1000
+);
+
+
+</script>
+
+</body>
+
 </html>
