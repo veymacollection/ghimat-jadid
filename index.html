@@ -1,739 +1,576 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>مدیریت قیمت | Veyma Collection</title>
-
+  <title>مدیریت محصولات</title>
   <style>
+    :root {
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --success: #16a34a;
+      --danger: #dc2626;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --border: #e2e8f0;
+      --text: #1e293b;
+      --muted: #64748b;
+    }
 
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     body {
-      margin: 0;
-      background: #f5f5f5;
-      color: #222;
-      font-family: Tahoma, Arial, sans-serif;
+      font-family: "Tahoma", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
     }
 
     .container {
-      width: 95%;
-      max-width: 1200px;
-      margin: 30px auto;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px 16px 40px;
+      width: 100%;
     }
 
-    h1 {
-      text-align: center;
-      margin-bottom: 25px;
-      font-size: 25px;
-    }
-
-    .top-box {
-      background: #fff;
+    header {
+      background: var(--card);
+      border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 18px;
+      padding: 20px;
       margin-bottom: 20px;
-      box-shadow: 0 3px 12px rgba(0,0,0,.07);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
     }
 
-    .top-box p {
-      margin: 5px 0;
-      color: #666;
-      font-size: 14px;
+    header h1 {
+      font-size: 1.5rem;
+      margin-bottom: 6px;
     }
 
-    .message {
-      display: none;
-      background: #fff;
+    header p {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .stats {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+
+    .stat {
+      background: #eff6ff;
+      color: var(--primary);
+      padding: 6px 12px;
       border-radius: 8px;
-      padding: 12px;
-      margin-bottom: 15px;
-      text-align: center;
+      font-size: 0.85rem;
+      font-weight: 600;
     }
 
-    .table-wrapper {
-      background: #fff;
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 16px;
+      align-items: center;
+    }
+
+    .search-box {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .search-box input:focus {
+      border-color: var(--primary);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      white-space: nowrap;
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-hover);
+    }
+
+    .btn-success {
+      background: var(--success);
+      color: white;
+    }
+
+    .btn-success:hover {
+      background: #15803d;
+    }
+
+    .btn-danger {
+      background: var(--danger);
+      color: white;
+      padding: 6px 10px;
+      font-size: 0.8rem;
+    }
+
+    .btn-danger:hover {
+      background: #b91c1c;
+    }
+
+    .btn-outline {
+      background: white;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-outline:hover {
+      background: #f1f5f9;
+    }
+
+    .table-wrap {
+      background: var(--card);
+      border: 1px solid var(--border);
       border-radius: 12px;
-      overflow-x: auto;
-      box-shadow: 0 3px 12px rgba(0,0,0,.07);
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
     }
 
     table {
       width: 100%;
-      min-width: 900px;
       border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    thead {
+      background: #f1f5f9;
+    }
+
+    th, td {
+      padding: 12px 10px;
+      text-align: right;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+      word-wrap: break-word;
     }
 
     th {
-      background: #222;
-      color: #fff;
-      padding: 14px 10px;
-      font-size: 14px;
+      font-weight: 700;
+      color: var(--muted);
+      font-size: 0.8rem;
     }
 
-    td {
-      padding: 11px 10px;
-      border-bottom: 1px solid #e5e5e5;
-      text-align: center;
+    th:nth-child(1), td:nth-child(1) { width: 8%; }
+    th:nth-child(2), td:nth-child(2) { width: 42%; }
+    th:nth-child(3), td:nth-child(3) { width: 15%; }
+    th:nth-child(4), td:nth-child(4) { width: 20%; }
+    th:nth-child(5), td:nth-child(5) { width: 15%; }
+
+    tbody tr:hover {
+      background: #f8fafc;
     }
 
-    tr:last-child td {
+    tbody tr:last-child td {
       border-bottom: none;
     }
 
-    input {
+    .price {
+      font-weight: 600;
+      color: var(--success);
+      direction: ltr;
+      display: inline-block;
+    }
+
+    .code {
+      font-family: monospace;
+      background: #f1f5f9;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.85rem;
+    }
+
+    .empty {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--muted);
+    }
+
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.5);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 16px;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal {
+      background: white;
+      border-radius: 12px;
       width: 100%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 7px;
+      max-width: 420px;
+      padding: 24px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    }
+
+    .modal h2 {
+      font-size: 1.2rem;
+      margin-bottom: 18px;
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--muted);
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.95rem;
       outline: none;
-      font-family: inherit;
-      font-size: 14px;
-      background: #fff;
     }
 
-    input:focus {
-      border-color: #555;
+    .form-group input:focus {
+      border-color: var(--primary);
     }
 
-    .new-price {
-      background: #fffbea;
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
     }
 
-    .save-btn {
-      background: #222;
+    .modal-actions .btn {
+      flex: 1;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #1e293b;
       color: white;
-      border: none;
-      border-radius: 7px;
-      padding: 10px 15px;
-      cursor: pointer;
-      font-family: inherit;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      opacity: 0;
+      transition: all 0.3s ease;
+      z-index: 2000;
       white-space: nowrap;
     }
 
-    .save-btn:hover {
-      opacity: .85;
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
     }
 
-    .add-row {
-      background: #f3fff6;
+    @media (max-width: 640px) {
+      th:nth-child(1), td:nth-child(1) { display: none; }
+      th:nth-child(2), td:nth-child(2) { width: 45%; }
+      th:nth-child(3), td:nth-child(3) { width: 18%; }
+      th:nth-child(4), td:nth-child(4) { width: 22%; }
+      th:nth-child(5), td:nth-child(5) { width: 15%; }
+
+      header h1 { font-size: 1.25rem; }
+      .btn { padding: 9px 12px; font-size: 0.85rem; }
     }
-
-    .add-btn {
-      width: 100%;
-      background: #198754;
-      color: white;
-      border: none;
-      border-radius: 7px;
-      padding: 10px;
-      cursor: pointer;
-      font-family: inherit;
-    }
-
-    .add-btn:hover {
-      opacity: .85;
-    }
-
-    .pending {
-      margin-top: 6px;
-      font-size: 11px;
-      color: #a66a00;
-      line-height: 1.5;
-    }
-
-    .number {
-      font-weight: bold;
-      width: 50px;
-    }
-
-    @media (max-width: 600px) {
-
-      .container {
-        width: 98%;
-        margin: 15px auto;
-      }
-
-      h1 {
-        font-size: 21px;
-      }
-
-    }
-
   </style>
 </head>
-
-
 <body>
-
-<div class="container">
-
-  <h1>
-    مدیریت قیمت محصولات
-  </h1>
-
-
-  <div class="top-box">
-
-    <strong>
-      Veyma Collection
-    </strong>
-
-    <p>
-      قیمت جدید پس از ثبت، ۲۴ ساعت بعد به صورت خودکار جایگزین قیمت فعلی می‌شود.
-    </p>
-
-  </div>
-
-
-  <div id="message" class="message"></div>
-
-
-  <div class="table-wrapper">
-
-    <table>
-
-      <thead>
-
-        <tr>
-
-          <th class="number">
-            #
-          </th>
-
-          <th>
-            نام محصول
-          </th>
-
-          <th>
-            کد محصول
-          </th>
-
-          <th>
-            قیمت فعلی
-          </th>
-
-          <th>
-            قیمت جدید
-          </th>
-
-          <th>
-            عملیات
-          </th>
-
-        </tr>
-
-      </thead>
-
-
-      <tbody id="productList">
-
-        <!-- محصولات اینجا قرار می‌گیرند -->
-
-
-        <!-- ردیف افزودن محصول جدید -->
-
-        <tr class="add-row">
-
-          <td class="number">
-            +
-          </td>
-
-          <td>
-
-            <input
-              type="text"
-              id="newProductName"
-              placeholder="نام محصول"
-            >
-
-          </td>
-
-
-          <td>
-
-            <input
-              type="text"
-              id="newProductCode"
-              placeholder="کد محصول"
-            >
-
-          </td>
-
-
-          <td>
-
-            <input
-              type="number"
-              id="newProductCurrentPrice"
-              placeholder="قیمت فعلی"
-            >
-
-          </td>
-
-
-          <td>
-
-            <input
-              type="number"
-              id="newProductNewPrice"
-              placeholder="قیمت جدید"
-            >
-
-          </td>
-
-
-          <td>
-
-            <button
-              class="add-btn"
-              onclick="addProduct()"
-            >
-              ＋ افزودن محصول
-            </button>
-
-          </td>
-
-        </tr>
-
-      </tbody>
-
-    </table>
-
-  </div>
-
-</div>
-
-
-<script>
-
-
-/* ==========================================
-   تنظیمات
-========================================== */
-
-const WAIT_TIME = 24 * 60 * 60 * 1000;
-
-
-/* ==========================================
-   نمایش پیام
-========================================== */
-
-function showMessage(text) {
-
-  const box = document.getElementById("message");
-
-  box.innerText = text;
-
-  box.style.display = "block";
-
-  setTimeout(function () {
-
-    box.style.display = "none";
-
-  }, 4000);
-
-}
-
-
-/* ==========================================
-   افزودن محصول
-========================================== */
-
-function addProduct() {
-
-  const name =
-    document.getElementById("newProductName").value.trim();
-
-  const code =
-    document.getElementById("newProductCode").value.trim();
-
-  const currentPrice =
-    document.getElementById("newProductCurrentPrice").value.trim();
-
-  const newPrice =
-    document.getElementById("newProductNewPrice").value.trim();
-
-
-  if (!name || !code || !currentPrice) {
-
-    showMessage(
-      "لطفاً نام محصول، کد محصول و قیمت فعلی را وارد کنید."
-    );
-
-    return;
-  }
-
-
-  const tbody =
-    document.getElementById("productList");
-
-
-  const addRow =
-    document.querySelector(".add-row");
-
-
-  const productRows =
-    document.querySelectorAll(".product-row");
-
-
-  const number =
-    productRows.length + 1;
-
-
-  const row =
-    document.createElement("tr");
-
-
-  row.className =
-    "product-row";
-
-
-  /*
-    اگر قیمت جدید وارد شده باشد،
-    زمان ثبت آن ذخیره می‌شود.
-  */
-
-  if (newPrice !== "") {
-
-    row.dataset.newPriceTime =
-      Date.now();
-
-  }
-
-
-  row.innerHTML = `
-
-    <td class="number">
-      ${number}
-    </td>
-
-    <td>
-
-      <input
-        type="text"
-        class="product-name"
-        value="${escapeHtml(name)}"
-      >
-
-    </td>
-
-    <td>
-
-      <input
-        type="text"
-        class="product-code"
-        value="${escapeHtml(code)}"
-      >
-
-    </td>
-
-    <td>
-
-      <input
-        type="number"
-        class="current-price"
-        value="${escapeHtml(currentPrice)}"
-      >
-
-    </td>
-
-    <td>
-
-      <input
-        type="number"
-        class="new-price"
-        value="${escapeHtml(newPrice)}"
-        placeholder="قیمت جدید"
-      >
-
-      <div class="pending">
-
-        ${
-          newPrice
-          ? "قیمت جدید ۲۴ ساعت بعد خودکار فعال می‌شود."
-          : ""
-        }
-
+  <div class="container">
+    <header>
+      <h1>مدیریت محصولات</h1>
+      <p>لیست محصولات فروشگاه — مناسب GitHub Pages</p>
+      <div class="stats">
+        <span class="stat" id="totalCount">تعداد: 0</span>
+        <span class="stat" id="totalValue">جمع کل: ۰ تومان</span>
       </div>
-
-    </td>
-
-    <td>
-
-      <button
-        class="save-btn"
-        onclick="saveProduct(this)"
-      >
-        💾 ذخیره
-      </button>
-
-    </td>
-
-  `;
-
-
-  /*
-    محصول جدید قبل از ردیف افزودن قرار می‌گیرد.
-  */
-
-  tbody.insertBefore(row, addRow);
-
-
-  /*
-    خالی کردن فرم افزودن
-  */
-
-  document.getElementById("newProductName").value = "";
-
-  document.getElementById("newProductCode").value = "";
-
-  document.getElementById("newProductCurrentPrice").value = "";
-
-  document.getElementById("newProductNewPrice").value = "";
-
-
-  updateNumbers();
-
-
-  showMessage(
-    "محصول با موفقیت اضافه شد."
-  );
-
-}
-
-
-/* ==========================================
-   ذخیره محصول
-========================================== */
-
-function saveProduct(button) {
-
-  const row =
-    button.closest(".product-row");
-
-
-  const name =
-    row.querySelector(".product-name").value.trim();
-
-  const code =
-    row.querySelector(".product-code").value.trim();
-
-  const currentPrice =
-    row.querySelector(".current-price").value.trim();
-
-  const newPrice =
-    row.querySelector(".new-price").value.trim();
-
-
-  if (!name || !code || !currentPrice) {
-
-    showMessage(
-      "نام، کد و قیمت فعلی نمی‌تواند خالی باشد."
-    );
-
-    return;
-  }
-
-
-  /*
-    اگر قیمت جدید وارد شده باشد،
-    زمان ثبت آن از همین لحظه شروع می‌شود.
-  */
-
-  if (newPrice !== "") {
-
-    row.dataset.newPriceTime =
-      Date.now();
-
-
-    row.querySelector(".pending").innerText =
-      "قیمت جدید ۲۴ ساعت بعد خودکار فعال می‌شود.";
-
-  }
-
-
-  /*
-    در مرحله اتصال به GitHub،
-    اطلاعات همین محصول از اینجا
-    برای ذخیره در فایل محصولات ارسال می‌شود.
-  */
-
-  const product = {
-
-    name: name,
-
-    code: code,
-
-    currentPrice: currentPrice,
-
-    newPrice: newPrice,
-
-    newPriceTime:
-      row.dataset.newPriceTime || null
-
-  };
-
-
-  console.log(
-    "اطلاعات آماده ذخیره:",
-    product
-  );
-
-
-  showMessage(
-    "اطلاعات محصول ذخیره شد."
-  );
-
-}
-
-
-/* ==========================================
-   تغییر قیمت خودکار بعد از ۲۴ ساعت
-========================================== */
-
-function checkAutomaticPrices() {
-
-  const rows =
-    document.querySelectorAll(".product-row");
-
-
-  const now =
-    Date.now();
-
-
-  rows.forEach(function(row) {
-
-
-    const newPriceInput =
-      row.querySelector(".new-price");
-
-
-    const currentPriceInput =
-      row.querySelector(".current-price");
-
-
-    const pending =
-      row.querySelector(".pending");
-
-
-    const newPrice =
-      newPriceInput.value.trim();
-
-
-    const savedTime =
-      Number(row.dataset.newPriceTime);
-
-
-    if (
-      newPrice &&
-      savedTime &&
-      now - savedTime >= WAIT_TIME
-    ) {
-
-
-      /*
-        قیمت جدید می‌شود قیمت فعلی
-      */
-
-      currentPriceInput.value =
-        newPrice;
-
-
-      /*
-        قیمت جدید خالی می‌شود
-      */
-
-      newPriceInput.value = "";
-
-
-      /*
-        زمان پاک می‌شود
-      */
-
-      row.dataset.newPriceTime =
-        "";
-
-
-      pending.innerText =
-        "قیمت جدید به صورت خودکار فعال شد.";
-
-
-      /*
-        در نسخه متصل به GitHub،
-        تغییر نهایی اینجا ذخیره خواهد شد.
-      */
-
-      console.log(
-        "قیمت محصول به صورت خودکار تغییر کرد."
-      );
-
+    </header>
+
+    <div class="toolbar">
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="جستجو بر اساس نام یا کد محصول...">
+      </div>
+      <button class="btn btn-primary" onclick="openAddModal()">+ افزودن محصول</button>
+      <button class="btn btn-success" onclick="saveToFile()">ذخیره JSON</button>
+      <button class="btn btn-outline" onclick="loadFromStorage()">بازیابی</button>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>ردیف</th>
+            <th>نام محصول</th>
+            <th>کد</th>
+            <th>قیمت (تومان)</th>
+            <th>عملیات</th>
+          </tr>
+        </thead>
+        <tbody id="productTable">
+        </tbody>
+      </table>
+      <div class="empty" id="emptyState" style="display:none;">محصولی یافت نشد</div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="addModal">
+    <div class="modal">
+      <h2>افزودن محصول جدید</h2>
+      <div class="form-group">
+        <label>نام محصول</label>
+        <input type="text" id="newName" placeholder="مثال: شلوار جین">
+      </div>
+      <div class="form-group">
+        <label>کد محصول</label>
+        <input type="text" id="newCode" placeholder="مثال: 9901">
+      </div>
+      <div class="form-group">
+        <label>قیمت (تومان)</label>
+        <input type="number" id="newPrice" placeholder="مثال: 450000">
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-outline" onclick="closeAddModal()">انصراف</button>
+        <button class="btn btn-primary" onclick="addProduct()">افزودن</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    let products = [
+      { id: 1,  name: "شلوارک النیا",              code: "2101", price: 210000 },
+      { id: 2,  name: "شلوار گیاهی النیا گل‌دار",   code: "2102", price: 210000 },
+      { id: 3,  name: "شلوارک ML",                 code: "2201", price: 220000 },
+      { id: 4,  name: "تاپ پلنگی",                 code: "2302", price: 230000 },
+      { id: 5,  name: "شلوار گیاهی مختلف",         code: "2301", price: 230000 },
+      { id: 6,  name: "شلوارک پلنگی",              code: "2321", price: 232000 },
+      { id: 7,  name: "شلوارک لیدی",               code: "2321", price: 232000 },
+      { id: 8,  name: "شلوار گیاهی گل‌ریز",        code: "2502", price: 250000 },
+      { id: 9,  name: "شورتک موسلین",              code: "2501", price: 250000 },
+      { id: 10, name: "شلوار گیاهی لیدی",          code: "2602", price: 260000 },
+      { id: 11, name: "شلوار گیاهی ساده لیدی",     code: "2602", price: 260000 },
+      { id: 12, name: "شلوارک نخی",                code: "2601", price: 262000 },
+      { id: 13, name: "شلوار صوفیا ژاکارد",        code: "2701", price: 270000 },
+      { id: 14, name: "شورتک نخی",                 code: "1951", price: 280000 },
+      { id: 15, name: "شلوار مرطوب GVG",           code: "2902", price: 290000 },
+      { id: 16, name: "شلوار نانو مرطوب",          code: "2901", price: 290000 },
+      { id: 17, name: "تاپ کرکره‌ای مشکی",         code: "3002", price: 300000 },
+      { id: 18, name: "جوراب شلواری پتتی",         code: "3001", price: 300000 },
+      { id: 19, name: "جوراب شلواری گندمی",        code: "3101", price: 310000 },
+      { id: 20, name: "تیشرت پلوشرت ویسکوز",       code: "3201", price: 320000 },
+      { id: 21, name: "پلوشرت پلنگی",              code: "3301", price: 330000 },
+      { id: 22, name: "شورتک گیاهی پنبه",          code: "2401", price: 330000 },
+      { id: 23, name: "شلوارک پنبه",               code: "3301", price: 330000 },
+      { id: 24, name: "دامن نخی تایلندی",          code: "3401", price: 380000 },
+      { id: 25, name: "شلوار کربیتی مشکی",         code: "3801", price: 380000 },
+      { id: 26, name: "شلوارک الکرا",              code: "3801", price: 380000 },
+      { id: 27, name: "شلوار نخی",                 code: "3701", price: 400000 },
+      { id: 28, name: "دامن شلواری توپ‌توپی",      code: "4001", price: 400000 },
+      { id: 29, name: "ست پنبه گیاهی تاپ شورتک",  code: "4401", price: 440000 },
+      { id: 30, name: "شلوار موسلین",              code: "4504", price: 443000 },
+      { id: 31, name: "دامن شلواری طرح لی",        code: "4502", price: 450000 },
+      { id: 32, name: "دامن شلواری چهارخونه",      code: "4501", price: 450000 },
+      { id: 33, name: "ست گیاهی لیدی",             code: "4503", price: 450000 },
+      { id: 34, name: "ست تاپ دامن کوک",           code: "4505", price: 450000 },
+      { id: 35, name: "شلوار کربیتی پنبه گیاهی",   code: "4801", price: 480000 },
+      { id: 36, name: "تیشرت شلوارک زور",          code: "5402", price: 540000 },
+      { id: 37, name: "تیشرت شلوارک ML",           code: "5402", price: 540000 },
+      { id: 38, name: "ست سه تیکه",                code: "5501", price: 550000 },
+      { id: 39, name: "تاپ شورتک کربیتی",          code: "5401", price: 550000 },
+      { id: 40, name: "ست گیاهی CZU",              code: "5701", price: 570000 },
+      { id: 41, name: "شلوار نگین‌دار موسلین",     code: "3501", price: 585000 },
+      { id: 42, name: "ست گیاهی تیشرت شلوار Atar", code: "6001", price: 600000 },
+      { id: 43, name: "ست نگین‌دار",               code: "6201", price: 620000 },
+      { id: 44, name: "ست الکرا کراپ شورتک",       code: "6201", price: 620000 },
+      { id: 45, name: "ست نخی تایلندی",            code: "6601", price: 660000 },
+      { id: 46, name: "ست موسلین",                 code: "7001", price: 679000 },
+      { id: 47, name: "ست پنبه تیشرت شلوارک",      code: "6801", price: 680000 },
+      { id: 48, name: "ست الکرا",                  code: "7002", price: 700000 },
+      { id: 49, name: "ست الکرا نایک",             code: "7003", price: 700000 },
+      { id: 50, name: "ست کربیتی پلنگی بغل نوار",  code: "7201", price: 720000 },
+      { id: 51, name: "تیشرت شلوار کربیتی جدید",   code: "7501", price: 750000 },
+      { id: 52, name: "ست موسلین پلنگی",           code: "7501", price: 750000 },
+      { id: 53, name: "ست تاپ دامن موسلین",        code: "8001", price: 800000 },
+      { id: 54, name: "شلوار کرپ مورگان",          code: "10001", price: 1000000 },
+      { id: 55, name: "شلوار پوست ماری مخمل",      code: "3501", price: 350000 },
+      { id: 56, name: "شلوار آبرنگی",              code: "3581", price: 358000 }
+    ];
+
+    let nextId = 57;
+
+    function formatPrice(num) {
+      return num.toLocaleString("fa-IR");
     }
 
-  });
+    function showToast(msg) {
+      const t = document.getElementById("toast");
+      t.textContent = msg;
+      t.classList.add("show");
+      setTimeout(() => t.classList.remove("show"), 2500);
+    }
 
-}
+    function renderTable(list = products) {
+      const tbody = document.getElementById("productTable");
+      const empty = document.getElementById("emptyState");
 
+      if (list.length === 0) {
+        tbody.innerHTML = "";
+        empty.style.display = "block";
+      } else {
+        empty.style.display = "none";
+        tbody.innerHTML = list.map((p, i) => `
+          <tr>
+            <td>${i + 1}</td>
+            <td>${p.name}</td>
+            <td><span class="code">${p.code}</span></td>
+            <td><span class="price">${formatPrice(p.price)}</span></td>
+            <td>
+              <button class="btn btn-danger" onclick="deleteProduct(${p.id})">حذف</button>
+            </td>
+          </tr>
+        `).join("");
+      }
 
-/* ==========================================
-   شماره‌گذاری محصولات
-========================================== */
+      document.getElementById("totalCount").textContent = `تعداد: ${list.length}`;
+      const sum = list.reduce((a, b) => a + b.price, 0);
+      document.getElementById("totalValue").textContent = `جمع کل: ${formatPrice(sum)} تومان`;
+    }
 
-function updateNumbers() {
+    function deleteProduct(id) {
+      if (!confirm("آیا از حذف این محصول مطمئن هستید؟")) return;
+      products = products.filter(p => p.id !== id);
+      saveToStorage();
+      applySearch();
+      showToast("محصول حذف شد");
+    }
 
-  const rows =
-    document.querySelectorAll(".product-row");
+    function openAddModal() {
+      document.getElementById("addModal").classList.add("active");
+      document.getElementById("newName").value = "";
+      document.getElementById("newCode").value = "";
+      document.getElementById("newPrice").value = "";
+      document.getElementById("newName").focus();
+    }
 
+    function closeAddModal() {
+      document.getElementById("addModal").classList.remove("active");
+    }
 
-  rows.forEach(function(row, index) {
+    function addProduct() {
+      const name = document.getElementById("newName").value.trim();
+      const code = document.getElementById("newCode").value.trim();
+      const price = parseInt(document.getElementById("newPrice").value, 10);
 
-    row.querySelector(".number").innerText =
-      index + 1;
+      if (!name || !code || isNaN(price) || price < 0) {
+        showToast("لطفاً همه فیلدها را درست پر کنید");
+        return;
+      }
 
-  });
+      products.push({ id: nextId++, name, code, price });
+      saveToStorage();
+      closeAddModal();
+      applySearch();
+      showToast("محصول اضافه شد");
+    }
 
-}
+    function applySearch() {
+      const q = document.getElementById("searchInput").value.trim().toLowerCase();
+      if (!q) {
+        renderTable(products);
+        return;
+      }
+      const filtered = products.filter(p =>
+        p.name.toLowerCase().includes(q) ||
+        p.code.toLowerCase().includes(q)
+      );
+      renderTable(filtered);
+    }
 
+    document.getElementById("searchInput").addEventListener("input", applySearch);
 
-/* ==========================================
-   جلوگیری از خراب شدن HTML
-========================================== */
+    function saveToStorage() {
+      localStorage.setItem("products_data", JSON.stringify(products));
+      localStorage.setItem("products_nextId", nextId);
+    }
 
-function escapeHtml(text) {
+    function loadFromStorage() {
+      const data = localStorage.getItem("products_data");
+      if (data) {
+        products = JSON.parse(data);
+        nextId = parseInt(localStorage.getItem("products_nextId") || "57", 10);
+        applySearch();
+        showToast("داده‌ها بازیابی شد");
+      } else {
+        showToast("داده‌ای برای بازیابی وجود ندارد");
+      }
+    }
 
-  return text
+    function saveToFile() {
+      const dataStr = JSON.stringify(products, null, 2);
+      const blob = new Blob([dataStr], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "products.json";
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast("فایل products.json دانلود شد");
+    }
 
-    .replace(/&/g, "&amp;")
+    document.getElementById("addModal").addEventListener("click", function(e) {
+      if (e.target === this) closeAddModal();
+    });
 
-    .replace(/</g, "&lt;")
-
-    .replace(/>/g, "&gt;")
-
-    .replace(/"/g, "&quot;")
-
-    .replace(/'/g, "&#039;");
-
-}
-
-
-/* ==========================================
-   بررسی خودکار هر دقیقه
-========================================== */
-
-checkAutomaticPrices();
-
-
-setInterval(
-  checkAutomaticPrices,
-  60 * 1000
-);
-
-
-</script>
-
+    renderTable();
+  </script>
 </body>
-
 </html>
