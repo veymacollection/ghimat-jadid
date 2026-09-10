@@ -166,28 +166,28 @@
       "name": "دامن نخی تایلندی",
       "code": "3401",
       "price": 380000,
-      "salePrice": null
+      "salePrice": 420000
     },
     {
       "id": 25,
       "name": "شلوار کبریتی مشکی",
       "code": "3801",
       "price": 380000,
-      "salePrice": null
+      "salePrice": 440000
     },
     {
       "id": 26,
       "name": "شلوارک لاکرا",
       "code": "3801",
       "price": 380000,
-      "salePrice": null
+      "salePrice": 450000
     },
     {
       "id": 27,
       "name": "شلوار نخی",
       "code": "3701",
-      "price": 400000,
-      "salePrice": null
+      "price": 380000,
+      "salePrice": 450000
     },
     {
       "id": 28,
