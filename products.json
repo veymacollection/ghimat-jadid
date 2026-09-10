@@ -131,35 +131,35 @@
       "name": "جوراب شلواری گندمی",
       "code": "3101",
       "price": 310000,
-      "salePrice": null
+      "salePrice": 380000
     },
     {
       "id": 20,
       "name": "تیشرت پلوشرت ویسکوز",
       "code": "3201",
       "price": 320000,
-      "salePrice": null
+      "salePrice": 390000
     },
     {
       "id": 21,
       "name": "پلوشرت پلنگی",
       "code": "3301",
-      "price": 330000,
-      "salePrice": null
+      "price": 350000,
+      "salePrice": 395000
     },
     {
       "id": 22,
       "name": "شورتک گیاهی پنبه",
       "code": "2401",
-      "price": 330000,
-      "salePrice": null
+      "price": 260000,
+      "salePrice": 290000
     },
     {
       "id": 23,
       "name": "شلوارک پنبه",
       "code": "3301",
       "price": 330000,
-      "salePrice": null
+      "salePrice": 390000
     },
     {
       "id": 24,
