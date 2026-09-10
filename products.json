@@ -102,29 +102,29 @@
       "id": 15,
       "name": "شلوار مرطوب GVG",
       "code": "2902",
-      "price": 290000,
-      "salePrice": null
+      "price": 350000,
+      "salePrice": 360000
     },
     {
       "id": 16,
       "name": "شلوار نانو مرطوب",
       "code": "2901",
-      "price": 290000,
-      "salePrice": null
+      "price": 350000,
+      "salePrice": 360000
     },
     {
       "id": 17,
       "name": "تاپ کرکره‌ای مشکی",
       "code": "3002",
       "price": 300000,
-      "salePrice": null
+      "salePrice": 340000
     },
     {
       "id": 18,
       "name": "جوراب شلواری پنتی",
       "code": "3001",
-      "price": 300000,
-      "salePrice": null
+      "price": 330000,
+      "salePrice": 380000
     },
     {
       "id": 19,
