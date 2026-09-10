@@ -67,29 +67,29 @@
       "id": 10,
       "name": "شلوار گیاهی لیدی",
       "code": "2602",
-      "price": 260000,
-      "salePrice": null
+      "price": 300000,
+      "salePrice": 320000
     },
     {
       "id": 11,
       "name": "شلوار گیاهی ساده لیدی",
       "code": "2602",
-      "price": 260000,
-      "salePrice": null
+      "price": 300000,
+      "salePrice": 320000
     },
     {
       "id": 12,
       "name": "شلوارک نخی",
       "code": "2601",
-      "price": 262000,
-      "salePrice": null
+      "price": 275000,
+      "salePrice": 300000
     },
     {
       "id": 13,
       "name": "شلوار صوفیا ژاکارد",
       "code": "2701",
       "price": 270000,
-      "salePrice": null
+      "salePrice": 290000
     },
     {
       "id": 14,
