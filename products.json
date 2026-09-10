@@ -214,15 +214,15 @@
       "id": 31,
       "name": "دامن شلواری طرح لی",
       "code": "4502",
-      "price": 450000,
-      "salePrice": null
+      "price": 500000,
+      "salePrice": 590000
     },
     {
       "id": 32,
       "name": "دامن شلواری چهارخونه",
       "code": "4501",
-      "price": 450000,
-      "salePrice": null
+      "price": 500000,
+      "salePrice": 590000
     },
     {
       "id": 33,
