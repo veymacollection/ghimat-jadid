@@ -194,14 +194,14 @@
       "name": "دامن شلواری توپ‌توپی",
       "code": "4001",
       "price": 400000,
-      "salePrice": null
+      "salePrice": 480000
     },
     {
       "id": 29,
       "name": "ست پنبه گیاهی تاپ شورتک",
       "code": "4401",
-      "price": 440000,
-      "salePrice": null
+      "price": 480000,
+      "salePrice": 550000
     },
     {
       "id": 30,
