@@ -5,399 +5,456 @@
       "name": "شلوارک لانیا",
       "code": "2101",
       "price": 230000,
-      "salePrice": 260000
+      "salePrice": 260000,
+      "singlePrice": null
     },
     {
       "id": 2,
       "name": "شلوار گیاهی لانیا گل‌دار",
       "code": "2102",
       "price": 250000,
-      "salePrice": 280000
+      "salePrice": 280000,
+      "singlePrice": null
     },
     {
       "id": 3,
       "name": "شلوارک ML",
       "code": "2201",
       "price": 240000,
-      "salePrice": 280000
+      "salePrice": 280000,
+      "singlePrice": null
     },
     {
       "id": 4,
       "name": "تاپ پلنگی",
       "code": "2302",
       "price": 250000,
-      "salePrice": 290000
+      "salePrice": 290000,
+      "singlePrice": null
     },
     {
       "id": 5,
       "name": "شلوار گیاهی مختلف",
       "code": "2301",
       "price": 250000,
-      "salePrice": 280000
+      "salePrice": 280000,
+      "singlePrice": null
     },
     {
       "id": 6,
       "name": "شلوارک پلنگی",
       "code": "2321",
       "price": 265000,
-      "salePrice": 300000
+      "salePrice": 300000,
+      "singlePrice": null
     },
     {
       "id": 7,
       "name": "شلوارک لیدی",
-      "code": "2321",
+      "code": "2322",
       "price": 265000,
-      "salePrice": 300000
+      "salePrice": 300000,
+      "singlePrice": null
     },
     {
       "id": 8,
       "name": "شلوار گیاهی گل‌ریز",
       "code": "2502",
       "price": 280000,
-      "salePrice": 310000
+      "salePrice": 310000,
+      "singlePrice": null
     },
     {
       "id": 9,
       "name": "شورتک موسلین",
       "code": "2501",
       "price": 280000,
-      "salePrice": 310000
+      "salePrice": 310000,
+      "singlePrice": null
     },
     {
       "id": 10,
       "name": "شلوار گیاهی لیدی",
       "code": "2602",
       "price": 300000,
-      "salePrice": 320000
+      "salePrice": 320000,
+      "singlePrice": null
     },
     {
       "id": 11,
       "name": "شلوار گیاهی ساده لیدی",
-      "code": "2602",
+      "code": "2603",
       "price": 300000,
-      "salePrice": 320000
+      "salePrice": 320000,
+      "singlePrice": null
     },
     {
       "id": 12,
       "name": "شلوارک نخی",
       "code": "2601",
       "price": 275000,
-      "salePrice": 300000
+      "salePrice": 300000,
+      "singlePrice": null
     },
     {
       "id": 13,
       "name": "شلوار صوفیا ژاکارد",
       "code": "2701",
       "price": 270000,
-      "salePrice": 290000
+      "salePrice": 290000,
+      "singlePrice": null
     },
     {
       "id": 14,
       "name": "شورتک نخی",
       "code": "1951",
       "price": 210000,
-      "salePrice": 240000
+      "salePrice": 240000,
+      "singlePrice": null
     },
     {
       "id": 15,
       "name": "شلوار مرطوب GVG",
       "code": "2902",
       "price": 350000,
-      "salePrice": 360000
+      "salePrice": 360000,
+      "singlePrice": null
     },
     {
       "id": 16,
       "name": "شلوار نانو مرطوب",
       "code": "2901",
       "price": 350000,
-      "salePrice": 360000
+      "salePrice": 360000,
+      "singlePrice": null
     },
     {
       "id": 17,
       "name": "تاپ کرکره‌ای مشکی",
       "code": "3002",
       "price": 300000,
-      "salePrice": 340000
+      "salePrice": 340000,
+      "singlePrice": null
     },
     {
       "id": 18,
       "name": "جوراب شلواری پنتی",
       "code": "3001",
       "price": 330000,
-      "salePrice": 380000
+      "salePrice": 380000,
+      "singlePrice": null
     },
     {
       "id": 19,
       "name": "جوراب شلواری گندمی",
       "code": "3101",
       "price": 310000,
-      "salePrice": 380000
+      "salePrice": 380000,
+      "singlePrice": null
     },
     {
       "id": 20,
       "name": "تیشرت پلوشرت ویسکوز",
       "code": "3201",
       "price": 320000,
-      "salePrice": 390000
+      "salePrice": 390000,
+      "singlePrice": null
     },
     {
       "id": 21,
       "name": "پلوشرت پلنگی",
       "code": "3301",
       "price": 350000,
-      "salePrice": 395000
+      "salePrice": 395000,
+      "singlePrice": null
     },
     {
       "id": 22,
       "name": "شورتک گیاهی پنبه",
       "code": "2401",
       "price": 260000,
-      "salePrice": 290000
+      "salePrice": 290000,
+      "singlePrice": null
     },
     {
       "id": 23,
       "name": "شلوارک پنبه",
-      "code": "3301",
+      "code": "3302",
       "price": 330000,
-      "salePrice": 390000
+      "salePrice": 390000,
+      "singlePrice": null
     },
     {
       "id": 24,
       "name": "دامن نخی تایلندی",
       "code": "3401",
       "price": 380000,
-      "salePrice": 420000
+      "salePrice": 420000,
+      "singlePrice": null
     },
     {
       "id": 25,
       "name": "شلوار کبریتی مشکی",
       "code": "3801",
       "price": 380000,
-      "salePrice": 440000
+      "salePrice": 440000,
+      "singlePrice": null
     },
     {
       "id": 26,
       "name": "شلوارک لاکرا",
-      "code": "3801",
+      "code": "3802",
       "price": 380000,
-      "salePrice": 450000
+      "salePrice": 450000,
+      "singlePrice": null
     },
     {
       "id": 27,
       "name": "شلوار نخی",
       "code": "3701",
       "price": 380000,
-      "salePrice": 450000
+      "salePrice": 450000,
+      "singlePrice": null
     },
     {
       "id": 28,
       "name": "دامن شلواری توپ‌توپی",
       "code": "4001",
       "price": 400000,
-      "salePrice": 480000
+      "salePrice": 480000,
+      "singlePrice": null
     },
     {
       "id": 29,
       "name": "ست پنبه گیاهی تاپ شورتک",
       "code": "4401",
       "price": 480000,
-      "salePrice": 550000
+      "salePrice": 550000,
+      "singlePrice": null
     },
     {
       "id": 30,
       "name": "شلوار موسلین",
       "code": "4504",
       "price": 500000,
-      "salePrice": 520000
+      "salePrice": 520000,
+      "singlePrice": null
     },
     {
       "id": 31,
       "name": "دامن شلواری طرح لی",
       "code": "4502",
       "price": 500000,
-      "salePrice": 590000
+      "salePrice": 590000,
+      "singlePrice": null
     },
     {
       "id": 32,
       "name": "دامن شلواری چهارخونه",
       "code": "4501",
       "price": 500000,
-      "salePrice": 590000
+      "salePrice": 590000,
+      "singlePrice": null
     },
     {
       "id": 33,
       "name": "ست گیاهی لیدی",
       "code": "4503",
       "price": 500000,
-      "salePrice": 580000
+      "salePrice": 580000,
+      "singlePrice": null
     },
     {
       "id": 34,
       "name": "ست تاپ دامن کوک",
       "code": "4505",
       "price": 450000,
-      "salePrice": 550000
+      "salePrice": 550000,
+      "singlePrice": null
     },
     {
       "id": 35,
       "name": "شلوار کبریتی پنبه گیاهی",
       "code": "4801",
       "price": 550000,
-      "salePrice": 590000
+      "salePrice": 590000,
+      "singlePrice": null
     },
     {
       "id": 36,
       "name": "تیشرت شلوارک ژور",
       "code": "5402",
       "price": 600000,
-      "salePrice": 720000
+      "salePrice": 720000,
+      "singlePrice": null
     },
     {
       "id": 37,
       "name": "تیشرت شلوارک ML",
-      "code": "5402",
+      "code": "5403",
       "price": 580000,
-      "salePrice": 620000
+      "salePrice": 620000,
+      "singlePrice": null
     },
     {
       "id": 38,
       "name": "ست سه تیکه",
       "code": "5501",
       "price": 550000,
-      "salePrice": 650000
+      "salePrice": 650000,
+      "singlePrice": null
     },
     {
       "id": 39,
       "name": "تاپ شورتک کبریتی",
       "code": "5401",
       "price": 580000,
-      "salePrice": 660000
+      "salePrice": 660000,
+      "singlePrice": null
     },
     {
       "id": 40,
       "name": "ست گیاهی CZU",
       "code": "5701",
       "price": 570000,
-      "salePrice": 650000
+      "salePrice": 650000,
+      "singlePrice": null
     },
     {
       "id": 41,
       "name": "شلوار نگین‌دار موسلین",
       "code": "4901",
       "price": 490000,
-      "salePrice": 580000
+      "salePrice": 580000,
+      "singlePrice": null
     },
     {
       "id": 42,
       "name": "ست گیاهی تیشرت شلوار Atara",
       "code": "6001",
       "price": 620000,
-      "salePrice": 720000
+      "salePrice": 720000,
+      "singlePrice": null
     },
     {
       "id": 43,
       "name": "ست نگین‌دار",
       "code": "6201",
       "price": 620000,
-      "salePrice": 730000
+      "salePrice": 730000,
+      "singlePrice": null
     },
     {
       "id": 44,
       "name": "ست لاکرا کراپ شورتک",
-      "code": "6201",
+      "code": "6202",
       "price": 620000,
-      "salePrice": 755000
+      "salePrice": 755000,
+      "singlePrice": null
     },
     {
       "id": 45,
       "name": "ست نخی تایلندی",
       "code": "6601",
       "price": 680000,
-      "salePrice": 760000
+      "salePrice": 760000,
+      "singlePrice": null
     },
     {
       "id": 47,
       "name": "ست پنبه تیشرت شلوارک",
       "code": "6801",
       "price": 680000,
-      "salePrice": 795000
+      "salePrice": 795000,
+      "singlePrice": null
     },
     {
       "id": 48,
       "name": "ست لاکرا",
       "code": "7002",
       "price": 700000,
-      "salePrice": 795000
+      "salePrice": 795000,
+      "singlePrice": null
     },
     {
       "id": 49,
       "name": "ست لاکرا نایک",
       "code": "7003",
       "price": 700000,
-      "salePrice": 795000
+      "salePrice": 795000,
+      "singlePrice": null
     },
     {
       "id": 50,
       "name": "ست کبریتی پلنگی بغل نوار",
       "code": "7201",
       "price": 690000,
-      "salePrice": 860000
-    },
-    {
-      "id": 51,
-      "name": "تیشرت شلوار کبریتی جدید",
-      "code": "7501",
-      "price": 750000,
-      "salePrice": 890000
+      "salePrice": 860000,
+      "singlePrice": null
     },
     {
       "id": 52,
       "name": "ست موسلین پلنگی",
       "code": "7501",
       "price": 850000,
-      "salePrice": 960000
+      "salePrice": 960000,
+      "singlePrice": null
     },
     {
       "id": 53,
       "name": "ست تاپ دامن موسلین",
       "code": "8001",
       "price": 800000,
-      "salePrice": 910000
+      "salePrice": 910000,
+      "singlePrice": null
     },
     {
       "id": 54,
       "name": "شلوار کرپ مورگان",
       "code": "10001",
       "price": 1000000,
-      "salePrice": 1150000
+      "salePrice": 1150000,
+      "singlePrice": null
     },
     {
       "id": 55,
       "name": "شلوار پوست ماری مخمل",
       "code": "3501",
       "price": 400000,
-      "salePrice": 450000
+      "salePrice": 450000,
+      "singlePrice": null
     },
     {
       "id": 56,
       "name": "شلوار آبرنگی",
       "code": "3581",
       "price": 358000,
-      "salePrice": 540000
+      "salePrice": 540000,
+      "singlePrice": null
+    },
+    {
+      "id": 57,
+      "name": "ست کبریتی سفید جدید",
+      "code": "7502",
+      "price": 750000,
+      "salePrice": 890000,
+      "singlePrice": null
     },
     {
       "id": 62,
       "name": "ست لاریس مودال",
       "code": "1002",
       "price": 1000000,
-      "salePrice": 1150000
+      "salePrice": 1150000,
+      "singlePrice": null
     },
     {
       "id": 63,
       "name": "ست موسلین سه تیکه",
       "code": "1201",
       "price": 1200000,
-      "salePrice": 1350000
+      "salePrice": 1350000,
+      "singlePrice": null
     }
   ],
   "nextId": 64
