@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>مدیریت محصولات</title>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   <style>
     :root {
       --primary: #2563eb;
@@ -25,7 +29,7 @@
     }
 
     body {
-      font-family: "Tahoma", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      font-family: "Vazirmatn", "Tahoma", "Segoe UI", Geneva, Verdana, sans-serif;
       background: var(--bg);
       color: var(--text);
       line-height: 1.5;
@@ -71,6 +75,7 @@
       font-size: 0.95rem;
       outline: none;
       background: var(--card);
+      transition: border-color 0.2s;
     }
 
     .search-wrap input:focus {
@@ -87,17 +92,53 @@
       font-size: 1.1rem;
     }
 
+    /* دکمه‌های PDF */
+    .pdf-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .share-list-btn {
+      width: 100%;
+      padding: 12px 14px;
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .wholesale-pdf-btn {
+      background: #475569;
+    }
+
+    .single-pdf-btn {
+      background: var(--primary);
+    }
+
+    .share-list-btn:active {
+      transform: scale(0.98);
+    }
+
     .table-wrap {
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 12px;
       overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
       box-shadow: 0 1px 3px rgba(0,0,0,0.04);
     }
 
     table {
       width: 100%;
-      min-width: 1050px;
+      min-width: 1120px;
       border-collapse: collapse;
     }
 
@@ -105,8 +146,7 @@
       background: #f1f5f9;
     }
 
-    th,
-    td {
+    th, td {
       padding: 11px 10px;
       text-align: right;
       border-bottom: 1px solid var(--border);
@@ -124,30 +164,15 @@
       background: #f8fafc;
     }
 
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
     .price {
       font-weight: 600;
       color: var(--success);
       direction: ltr;
       display: inline-block;
-    }
-
-    .sale-price {
-      font-weight: 600;
-      color: #b45309;
-      direction: ltr;
-      display: inline-block;
-    }
-
-    .single-price {
-      font-weight: 600;
-      color: #7c3aed;
-      direction: ltr;
-      display: inline-block;
-    }
-
-    .single-unavailable {
-      color: var(--muted);
-      font-size: 0.82rem;
     }
 
     .code {
@@ -173,19 +198,37 @@
       border-color: var(--primary);
     }
 
+    .sale-price-input,
     .single-price-input {
       width: 110px;
       padding: 7px 8px;
-      border: 1px solid var(--border);
+      border: 1px solid var(--primary);
       border-radius: 6px;
       font-size: 0.85rem;
       text-align: center;
       outline: none;
       direction: ltr;
+      background: #eff6ff;
     }
 
+    .sale-price-input:focus,
     .single-price-input:focus {
-      border-color: #7c3aed;
+      border-color: var(--primary-hover);
+    }
+
+    .single-price-input::placeholder {
+      font-size: 0.70rem;
+      color: #64748b;
+    }
+
+    .inline-input-group {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .inline-input-group .btn-sm {
+      padding: 6px 9px;
     }
 
     .btn {
@@ -199,7 +242,12 @@
       font-size: 0.82rem;
       font-weight: 600;
       cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
       white-space: nowrap;
+    }
+
+    .btn:active {
+      transform: scale(0.97);
     }
 
     .btn-sm {
@@ -300,6 +348,8 @@
       max-width: 400px;
       padding: 22px;
       box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+      max-height: 90vh;
+      overflow-y: auto;
     }
 
     .modal h2 {
@@ -357,27 +407,70 @@
       transition: all 0.3s ease;
       z-index: 2000;
       white-space: nowrap;
-      max-width: calc(100vw - 30px);
-      overflow: hidden;
-      text-overflow: ellipsis;
+      pointer-events: none;
     }
 
     .toast.show {
       transform: translateX(-50%) translateY(0);
       opacity: 1;
+      pointer-events: auto;
+    }
+
+    .desktop-share-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.55);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 3000;
+      padding: 16px;
+    }
+
+    .desktop-share-overlay.active {
+      display: flex;
+    }
+
+    .desktop-share-box {
+      width: 100%;
+      max-width: 430px;
+      background: #fff;
+      border-radius: 14px;
+      padding: 22px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+
+    .desktop-share-box h3 {
+      margin-bottom: 8px;
+      font-size: 1.15rem;
+    }
+
+    .desktop-share-box p {
+      color: var(--muted);
+      font-size: 0.86rem;
+      margin-bottom: 16px;
+    }
+
+    .desktop-share-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .desktop-share-actions .btn {
+      min-height: 46px;
+      font-size: 0.86rem;
     }
 
     .saving {
       opacity: 0.7;
       pointer-events: none;
     }
-
-    .loading {
-      text-align: center;
-      padding: 40px 20px;
-      color: var(--muted);
-    }
   </style>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 
 <body>
@@ -386,7 +479,7 @@
 
     <header>
       <h1>مدیریت محصولات</h1>
-      <div class="count" id="totalCount">در حال بارگذاری...</div>
+      <div class="count" id="totalCount">تعداد محصولات: 0</div>
     </header>
 
     <div class="search-wrap">
@@ -394,53 +487,80 @@
         type="text"
         id="searchInput"
         placeholder="جستجو بر اساس نام یا کد محصول..."
-        autocomplete="off"
       >
       <span class="icon">🔍</span>
     </div>
 
-    <div class="table-wrap">
+    <!-- دو PDF کاملاً جدا -->
+    <div class="pdf-buttons">
 
+      <button
+        class="share-list-btn wholesale-pdf-btn"
+        id="shareWholesaleBtn"
+        onclick="shareWholesaleList()"
+      >
+        📦 PDF قیمت عمده
+      </button>
+
+      <button
+        class="share-list-btn single-pdf-btn"
+        id="shareSingleBtn"
+        onclick="shareSinglePriceList()"
+      >
+        🛍️ PDF فروش تک
+      </button>
+
+    </div>
+
+    <div class="table-wrap">
       <table>
+
         <thead>
           <tr>
             <th>ردیف</th>
             <th>نام محصول</th>
             <th>کد</th>
-            <th>قیمت عمده</th>
+            <th>قیمت فعلی</th>
+            <th>قیمت جدید</th>
             <th>قیمت فروش</th>
-            <th>قیمت تک</th>
-            <th>قیمت جدید عمده</th>
-            <th>قیمت جدید تک</th>
+            <th>فروش تک</th>
             <th>عملیات</th>
           </tr>
         </thead>
 
         <tbody id="productTable"></tbody>
+
       </table>
 
       <div class="empty" id="emptyState" style="display:none;">
         محصولی یافت نشد
       </div>
-
-      <div class="loading" id="loadingState">
-        در حال دریافت اطلاعات محصولات...
-      </div>
-
     </div>
+
   </div>
 
+
   <div class="bottom-bar">
-    <button class="btn btn-primary" onclick="openAddModal()">
+
+    <button
+      class="btn btn-primary"
+      onclick="openAddModal()"
+    >
       + افزودن محصول
     </button>
 
-    <button class="btn btn-success" id="saveBtn" onclick="saveToGitHub()">
+    <button
+      class="btn btn-success"
+      id="saveBtn"
+      onclick="saveToGitHub()"
+    >
       ذخیره
     </button>
+
   </div>
 
-  <!-- Modal افزودن محصول -->
+
+  <!-- افزودن محصول -->
   <div class="modal-overlay" id="addModal">
 
     <div class="modal">
@@ -471,23 +591,29 @@
           type="number"
           id="newPrice"
           placeholder="مثال: 450000"
-          min="0"
-          step="1"
         >
       </div>
 
       <div class="form-group">
-        <label>قیمت تک (اختیاری)</label>
+        <label>فروش تک (اختیاری)</label>
         <input
           type="number"
           id="newSinglePrice"
-          placeholder="مثال: 550000"
-          min="0"
-          step="1"
+          placeholder="اگر ندارد خالی بگذارید"
+        >
+      </div>
+
+      <div class="form-group">
+        <label>قیمت فروش (اختیاری)</label>
+        <input
+          type="number"
+          id="newSalePrice"
+          placeholder="اگر ندارد خالی بگذارید"
         >
       </div>
 
       <div class="modal-actions">
+
         <button
           class="btn btn-outline"
           onclick="closeAddModal()"
@@ -501,986 +627,2010 @@
         >
           افزودن
         </button>
+
       </div>
 
     </div>
+
   </div>
+
 
   <div class="toast" id="toast"></div>
 
-  <script>
-    // =========================================================
-    // تنظیمات GitHub
-    // =========================================================
 
-    const GITHUB_USER = "veymacollection";
-    const GITHUB_REPO = "ghimat-jadid";
-    const GITHUB_TOKEN = "0uAebARPYwXD1iZSEdkknrGzhTJ3";
+  <div
+    class="desktop-share-overlay"
+    id="desktopShareModal"
+    style="display:none!important;"
+  >
 
-    const FILE_PATH = "products.json";
-    const BRANCH = "main";
+    <div class="desktop-share-box">
 
-    // =========================================================
-    // وضعیت برنامه
-    // =========================================================
+      <h3>اشتراک‌گذاری لیست قیمت</h3>
 
-    let products = [];
-    let nextId = 1;
-    let fileSha = null;
-    let isLoaded = false;
+      <p>
+        فایل PDF آماده است. در کامپیوتر، ابتدا فایل را ذخیره کنید و سپس با تلگرام یا واتساپ ارسال کنید.
+      </p>
 
-    // =========================================================
-    // ابزارهای عمومی
-    // =========================================================
+      <div class="desktop-share-actions">
 
-    function formatPrice(num) {
-      if (num === null || num === undefined || num === "") {
-        return "—";
-      }
+        <button
+          class="btn btn-primary"
+          id="downloadPdfBtn"
+        >
+          ⬇️ دانلود PDF
+        </button>
 
-      const number = Number(num);
+        <button
+          class="btn btn-success"
+          id="openTelegramBtn"
+        >
+          ✈️ باز کردن تلگرام
+        </button>
 
-      if (!Number.isFinite(number)) {
-        return "—";
-      }
+        <button
+          class="btn btn-outline"
+          id="openWhatsappBtn"
+        >
+          💬 باز کردن واتساپ
+        </button>
 
-      return number.toLocaleString("fa-IR");
+        <button
+          class="btn btn-outline"
+          id="copyShareTextBtn"
+        >
+          📋 کپی متن
+        </button>
+
+      </div>
+
+      <button
+        class="btn btn-outline"
+        style="width:100%;margin-top:10px;"
+        onclick="closeDesktopShare()"
+      >
+        بستن
+      </button>
+
+    </div>
+
+  </div>
+
+
+<script>
+
+  // =====================================================
+  // تنظیمات گیت‌هاب
+  // =====================================================
+
+  const GITHUB_USER = "veymacollection";
+  const GITHUB_REPO = "ghimat-jadid";
+
+  // توکن فعلی خودت را در همین خط قرار بده
+  const GITHUB_TOKEN = "YOUR_GITHUB_TOKEN_HERE";
+
+  const FILE_PATH = "products.json";
+
+  // =====================================================
+
+
+  let products = [
+
+    { id: 1,  name: "شلوارک لانیا", code: "2101", price: 210000 },
+    { id: 2,  name: "شلوار گیاهی لانیا گل‌دار", code: "2102", price: 210000 },
+    { id: 3,  name: "شلوارک ML", code: "2201", price: 220000 },
+    { id: 4,  name: "تاپ پلنگی", code: "2302", price: 230000 },
+    { id: 5,  name: "شلوار گیاهی مختلف", code: "2301", price: 230000 },
+    { id: 6,  name: "شلوارک پلنگی", code: "2321", price: 232000 },
+    { id: 7,  name: "شلوارک لیدی", code: "2321", price: 232000 },
+    { id: 8,  name: "شلوار گیاهی گل‌ریز", code: "2502", price: 250000 },
+    { id: 9,  name: "شورتک موسلین", code: "2501", price: 250000 },
+    { id: 10, name: "شلوار گیاهی لیدی", code: "2602", price: 260000 },
+    { id: 11, name: "شلوار گیاهی ساده لیدی", code: "2602", price: 260000 },
+    { id: 12, name: "شلوارک نخی", code: "2601", price: 262000 },
+    { id: 13, name: "شلوار صوفیا ژاکارد", code: "2701", price: 270000 },
+    { id: 14, name: "شورتک نخی", code: "1951", price: 280000 },
+    { id: 15, name: "شلوار مرطوب GVG", code: "2902", price: 290000 },
+    { id: 16, name: "شلوار نانو مرطوب", code: "2901", price: 290000 },
+    { id: 17, name: "تاپ کرکره‌ای مشکی", code: "3002", price: 300000 },
+    { id: 18, name: "جوراب شلواری پنتی", code: "3001", price: 300000 },
+    { id: 19, name: "جوراب شلواری گندمی", code: "3101", price: 310000 },
+    { id: 20, name: "تیشرت پلوشرت ویسکوز", code: "3201", price: 320000 },
+    { id: 21, name: "پلوشرت پلنگی", code: "3301", price: 330000 },
+    { id: 22, name: "شورتک گیاهی پنبه", code: "2401", price: 330000 },
+    { id: 23, name: "شلوارک پنبه", code: "3301", price: 330000 },
+    { id: 24, name: "دامن نخی تایلندی", code: "3401", price: 380000 },
+    { id: 25, name: "شلوار کبریتی مشکی", code: "3801", price: 380000 },
+    { id: 26, name: "شلوارک لاکرا", code: "3801", price: 380000 },
+    { id: 27, name: "شلوار نخی", code: "3701", price: 400000 },
+    { id: 28, name: "دامن شلواری توپ‌توپی", code: "4001", price: 400000 },
+    { id: 29, name: "ست پنبه گیاهی تاپ شورتک", code: "4401", price: 440000 },
+    { id: 30, name: "شلوار موسلین", code: "4504", price: 443000 },
+    { id: 31, name: "دامن شلواری طرح لی", code: "4502", price: 450000 },
+    { id: 32, name: "دامن شلواری چهارخونه", code: "4501", price: 450000 },
+    { id: 33, name: "ست گیاهی لیدی", code: "4503", price: 450000 },
+    { id: 34, name: "ست تاپ دامن کوک", code: "4505", price: 450000 },
+    { id: 35, name: "شلوار کبریتی پنبه گیاهی", code: "4801", price: 480000 },
+    { id: 36, name: "تیشرت شلوارک ژور", code: "5402", price: 540000 },
+    { id: 37, name: "تیشرت شلوارک ML", code: "5402", price: 540000 },
+    { id: 38, name: "ست سه تیکه", code: "5501", price: 550000 },
+    { id: 39, name: "تاپ شورتک کبریتی", code: "5401", price: 550000 },
+    { id: 40, name: "ست گیاهی CZU", code: "5701", price: 570000 },
+    { id: 41, name: "شلوار نگین‌دار موسلین", code: "3501", price: 585000 },
+    { id: 42, name: "ست گیاهی تیشرت شلوار Atar", code: "6001", price: 600000 },
+    { id: 43, name: "ست نگین‌دار", code: "6201", price: 620000 },
+    { id: 44, name: "ست لاکرا کراپ شورتک", code: "6201", price: 620000 },
+    { id: 45, name: "ست نخی تایلندی", code: "6601", price: 660000 },
+    { id: 46, name: "ست موسلین", code: "7001", price: 679000 },
+    { id: 47, name: "ست پنبه تیشرت شلوارک", code: "6801", price: 680000 },
+    { id: 48, name: "ست لاکرا", code: "7002", price: 700000 },
+    { id: 49, name: "ست لاکرا نایک", code: "7003", price: 700000 },
+    { id: 50, name: "ست کبریتی پلنگی بغل نوار", code: "7201", price: 720000 },
+    { id: 51, name: "تیشرت شلوار کبریتی جدید", code: "7501", price: 750000 },
+    { id: 52, name: "ست موسلین پلنگی", code: "7501", price: 750000 },
+    { id: 53, name: "ست تاپ دامن موسلین", code: "8001", price: 800000 },
+    { id: 54, name: "شلوار کرپ مورگان", code: "10001", price: 1000000 },
+    { id: 55, name: "شلوار پوست ماری مخمل", code: "3501", price: 350000 },
+    { id: 56, name: "شلوار آبرنگی", code: "3581", price: 358000 }
+
+  ];
+
+
+  // =====================================================
+  // آماده‌سازی داده‌ها
+  // =====================================================
+
+  products.forEach(function(p) {
+
+    if (p.salePrice === undefined) {
+      p.salePrice = null;
     }
 
-    function normalizePrice(value) {
-      if (
-        value === null ||
-        value === undefined ||
-        value === ""
-      ) {
-        return null;
-      }
-
-      const number = Number(value);
-
-      if (!Number.isFinite(number) || number < 0) {
-        return null;
-      }
-
-      return Math.floor(number);
+    if (p.singlePrice === undefined) {
+      p.singlePrice = null;
     }
 
-    function escapeHtml(value) {
-      return String(value ?? "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+  });
+
+
+  let nextId = 57;
+  let fileSha = null;
+  let isLoadedFromGitHub = false;
+
+
+  function calculateNextId() {
+
+    if (!products.length) {
+      return 1;
     }
 
-    function showToast(msg) {
-      const toast = document.getElementById("toast");
+    let maxId = products.reduce(function(max, p) {
 
-      toast.textContent = msg;
-      toast.classList.add("show");
+      const id = Number(p.id);
 
-      setTimeout(() => {
-        toast.classList.remove("show");
-      }, 3000);
+      return Number.isFinite(id)
+        ? Math.max(max, id)
+        : max;
+
+    }, 0);
+
+    return maxId + 1;
+  }
+
+
+  function formatPrice(num) {
+
+    if (
+      num === null ||
+      num === undefined ||
+      num === "" ||
+      !Number.isFinite(Number(num))
+    ) {
+      return "—";
     }
 
-    function calculateNextId() {
-      if (!products.length) {
-        return 1;
-      }
+    return Number(num).toLocaleString("fa-IR");
+  }
 
-      const maxId = products.reduce((max, product) => {
-        const id = Number(product.id);
 
-        return Number.isFinite(id)
-          ? Math.max(max, id)
-          : max;
-      }, 0);
+  function showToast(msg) {
 
-      return maxId + 1;
-    }
+    const t = document.getElementById("toast");
 
-    // =========================================================
-    // نمایش جدول
-    // =========================================================
+    t.textContent = msg;
 
-    function renderTable(list = products) {
-      const tbody = document.getElementById("productTable");
-      const empty = document.getElementById("emptyState");
-      const loading = document.getElementById("loadingState");
-      const totalCount = document.getElementById("totalCount");
+    t.classList.add("show");
 
-      loading.style.display = "none";
+    setTimeout(function() {
+      t.classList.remove("show");
+    }, 2500);
 
-      if (!list || list.length === 0) {
-        tbody.innerHTML = "";
-        empty.style.display = "block";
+  }
 
-        totalCount.textContent = "تعداد محصولات: 0";
-        return;
-      }
+
+  // =====================================================
+  // نمایش جدول
+  // =====================================================
+
+  function renderTable(list = products) {
+
+    const tbody = document.getElementById("productTable");
+    const empty = document.getElementById("emptyState");
+
+    if (list.length === 0) {
+
+      tbody.innerHTML = "";
+      empty.style.display = "block";
+
+    } else {
 
       empty.style.display = "none";
 
-      tbody.innerHTML = list.map((product, index) => {
-
-        const id = Number(product.id);
-
-        const singlePriceHtml =
-          product.singlePrice !== null &&
-          product.singlePrice !== undefined &&
-          product.singlePrice !== ""
-            ? `<span class="single-price">${formatPrice(product.singlePrice)}</span>`
-            : `<span class="single-unavailable">—</span>`;
+      tbody.innerHTML = list.map(function(p, i) {
 
         return `
-          <tr data-id="${id}">
 
-            <td>
-              ${index + 1}
-            </td>
+          <tr data-id="${p.id}">
 
-            <td>
-              ${escapeHtml(product.name)}
-            </td>
+            <td>${i + 1}</td>
+
+            <td>${escapeHtml(p.name)}</td>
 
             <td>
               <span class="code">
-                ${escapeHtml(product.code)}
+                ${escapeHtml(p.code)}
               </span>
             </td>
 
+            <!-- قیمت عمده -->
             <td>
               <span class="price">
-                ${formatPrice(product.price)}
+                ${formatPrice(p.price)}
               </span>
             </td>
 
+            <!-- قیمت جدید عمده -->
             <td>
-              <span class="sale-price">
-                ${formatPrice(product.salePrice)}
-              </span>
-            </td>
 
-            <td>
-              ${singlePriceHtml}
-            </td>
+              <div class="inline-input-group">
 
-            <td>
-              <input
-                type="number"
-                class="new-price-input"
-                placeholder="قیمت جدید"
-                id="newPrice-${id}"
-                min="0"
-                step="1"
-              >
-            </td>
-
-            <td>
-              <input
-                type="number"
-                class="single-price-input"
-                placeholder="قیمت تک"
-                id="newSinglePrice-${id}"
-                min="0"
-                step="1"
-                value="${
-                  product.singlePrice !== null &&
-                  product.singlePrice !== undefined
-                    ? product.singlePrice
-                    : ""
-                }"
-              >
-            </td>
-
-            <td>
-              <div class="actions">
+                <input
+                  type="number"
+                  class="new-price-input"
+                  placeholder="قیمت جدید"
+                  id="newPrice-${p.id}"
+                >
 
                 <button
                   class="btn btn-success btn-sm"
-                  onclick="updatePrices(${id})"
+                  onclick="updateCostPrice(${p.id})"
+                  title="ثبت قیمت جدید عمده"
                 >
-                  ثبت
+                  ✓
+                </button>
+
+              </div>
+
+            </td>
+
+            <!-- قیمت فروش قبلی -->
+            <td>
+
+              <div class="inline-input-group">
+
+                <input
+                  type="number"
+                  class="sale-price-input"
+                  placeholder="قیمت فروش"
+                  id="salePrice-${p.id}"
+                  value="${p.salePrice != null ? p.salePrice : ''}"
+                >
+
+                <button
+                  class="btn btn-success btn-sm"
+                  onclick="updateSalePrice(${p.id})"
+                  title="ثبت قیمت فروش"
+                >
+                  ✓
                 </button>
 
                 <button
+                  class="btn btn-primary btn-sm"
+                  onclick="shareSingleSale(${p.id})"
+                  title="ارسال قیمت فروش این محصول"
+                >
+                  📤
+                </button>
+
+              </div>
+
+            </td>
+
+            <!-- فروش تک -->
+            <td>
+
+              <div class="inline-input-group">
+
+                <input
+                  type="number"
+                  class="single-price-input"
+                  placeholder="فقط عمده ❌"
+                  id="singlePrice-${p.id}"
+                  value="${p.singlePrice != null ? p.singlePrice : ''}"
+                >
+
+                <button
+                  class="btn btn-success btn-sm"
+                  onclick="updateSinglePrice(${p.id})"
+                  title="ثبت فروش تک"
+                >
+                  ✓
+                </button>
+
+              </div>
+
+            </td>
+
+            <td>
+
+              <div class="actions">
+
+                <button
                   class="btn btn-danger btn-sm"
-                  onclick="deleteProduct(${id})"
+                  onclick="deleteProduct(${p.id})"
                 >
                   حذف
                 </button>
 
               </div>
+
+            </td>
+
+          </tr>
+
+        `;
+
+      }).join("");
+
+    }
+
+    document.getElementById("totalCount").textContent =
+      `تعداد محصولات: ${list.length}`;
+
+  }
+
+
+  // =====================================================
+  // قیمت عمده
+  // =====================================================
+
+  function updateCostPrice(id) {
+
+    const input =
+      document.getElementById("newPrice-" + id);
+
+    const val =
+      parseInt(input.value, 10);
+
+    if (isNaN(val) || val < 0) {
+
+      showToast("قیمت جدید معتبر نیست");
+      return;
+
+    }
+
+    const product =
+      products.find(function(p) {
+        return p.id === id;
+      });
+
+    if (product) {
+
+      product.price = val;
+
+      input.value = "";
+
+      applySearch();
+
+      showToast(
+        "قیمت عمده ثبت شد؛ لطفاً ذخیره را بزنید"
+      );
+
+    }
+
+  }
+
+
+  // =====================================================
+  // قیمت فروش
+  // =====================================================
+
+  function updateSalePrice(id) {
+
+    const input =
+      document.getElementById("salePrice-" + id);
+
+    const raw =
+      input.value.trim();
+
+    const val =
+      raw === "" ? null : parseInt(raw, 10);
+
+    if (
+      val !== null &&
+      (isNaN(val) || val < 0)
+    ) {
+
+      showToast("قیمت فروش معتبر نیست");
+      return;
+
+    }
+
+    const product =
+      products.find(function(p) {
+        return p.id === id;
+      });
+
+    if (product) {
+
+      product.salePrice = val;
+
+      applySearch();
+
+      showToast(
+        "قیمت فروش ثبت شد؛ لطفاً ذخیره را بزنید"
+      );
+
+    }
+
+  }
+
+
+  // =====================================================
+  // فروش تک
+  // =====================================================
+
+  function updateSinglePrice(id) {
+
+    const input =
+      document.getElementById("singlePrice-" + id);
+
+    const raw =
+      input.value.trim();
+
+    const val =
+      raw === "" ? null : parseInt(raw, 10);
+
+    if (
+      val !== null &&
+      (isNaN(val) || val < 0)
+    ) {
+
+      showToast("قیمت فروش تک معتبر نیست");
+      return;
+
+    }
+
+    const product =
+      products.find(function(p) {
+        return p.id === id;
+      });
+
+    if (product) {
+
+      product.singlePrice = val;
+
+      applySearch();
+
+      showToast(
+        "فروش تک ثبت شد؛ لطفاً ذخیره را بزنید"
+      );
+
+    }
+
+  }
+
+
+  // =====================================================
+  // اشتراک قیمت فروش محصول
+  // =====================================================
+
+  async function shareSingleSale(id) {
+
+    const product =
+      products.find(function(p) {
+        return p.id === id;
+      });
+
+    if (!product) {
+      return;
+    }
+
+    const input =
+      document.getElementById("salePrice-" + id);
+
+    const raw =
+      input ? input.value.trim() : "";
+
+    const val =
+      raw === ""
+        ? product.salePrice
+        : parseInt(raw, 10);
+
+    if (
+      val === null ||
+      val === undefined ||
+      val === "" ||
+      isNaN(val)
+    ) {
+
+      showToast("ابتدا قیمت فروش را وارد کنید");
+      return;
+
+    }
+
+    const text =
+      `${product.name} | کد: ${product.code} | ${formatPrice(val)} تومان`;
+
+    if (navigator.share) {
+
+      try {
+
+        await navigator.share({
+          title: "قیمت فروش محصول",
+          text: text
+        });
+
+      } catch (e) {
+
+        if (e.name !== "AbortError") {
+          showToast("خطا در اشتراک‌گذاری");
+        }
+
+      }
+
+    } else {
+
+      try {
+
+        await navigator.clipboard.writeText(text);
+
+        showToast(
+          "اشتراک‌گذاری در دسترس نیست، متن کپی شد"
+        );
+
+      } catch (e) {
+
+        showToast(
+          "اشتراک‌گذاری در این مرورگر پشتیبانی نمی‌شود"
+        );
+
+      }
+
+    }
+
+  }
+
+
+  // =====================================================
+  // ساخت PDF
+  // =====================================================
+
+  async function createPricePdf(type) {
+
+    const isSingle = type === "single";
+
+    const title =
+      isSingle
+        ? "لیست فروش تک"
+        : "لیست قیمت عمده";
+
+    const fileName =
+      isSingle
+        ? "لیست-فروش-تک.pdf"
+        : "لیست-قیمت-عمده.pdf";
+
+
+    /*
+     * برای فروش تک:
+     * همه محصولات نمایش داده می‌شوند.
+     *
+     * اگر singlePrice نداشته باشند:
+     * فروش فقط عمده ❌
+     *
+     * برای عمده:
+     * همه محصولات با قیمت عمده.
+     */
+
+    const list = products.slice();
+
+
+    if (list.length === 0) {
+
+      showToast("محصولی برای ساخت PDF وجود ندارد");
+      return;
+
+    }
+
+
+    showToast("در حال ساخت PDF کم‌حجم...");
+
+
+    const pdfContainer =
+      document.createElement("div");
+
+
+    /*
+     * عرض نسبتاً کم باعث می‌شود حجم تصویر PDF پایین بماند.
+     */
+
+    pdfContainer.style.cssText =
+      "position:fixed;" +
+      "top:-99999px;" +
+      "left:-99999px;" +
+      "width:650px;" +
+      "padding:20px;" +
+      "background:#ffffff;" +
+      "font-family:'Vazirmatn',Tahoma,sans-serif;" +
+      "direction:rtl;" +
+      "color:#1e293b;";
+
+
+    const rows =
+      list.map(function(p) {
+
+        let priceCell = "";
+
+        if (isSingle) {
+
+          if (
+            p.singlePrice !== null &&
+            p.singlePrice !== undefined &&
+            p.singlePrice !== "" &&
+            !isNaN(Number(p.singlePrice))
+          ) {
+
+            priceCell =
+              `<span style="font-weight:700;">
+                ${formatPrice(p.singlePrice)} تومان
+              </span>`;
+
+          } else {
+
+            priceCell =
+              `<span style="font-weight:700;">
+                فروش فقط عمده ❌
+              </span>`;
+
+          }
+
+        } else {
+
+          priceCell =
+            `<span style="font-weight:700;">
+              ${formatPrice(p.price)} تومان
+            </span>`;
+
+        }
+
+
+        return `
+          <tr>
+
+            <td style="
+              padding:7px 8px;
+              border:1px solid #dbe3ec;
+            ">
+              ${escapeHtml(p.name)}
+            </td>
+
+            <td style="
+              padding:7px 8px;
+              border:1px solid #dbe3ec;
+              text-align:center;
+              direction:ltr;
+            ">
+              ${escapeHtml(p.code)}
+            </td>
+
+            <td style="
+              padding:7px 8px;
+              border:1px solid #dbe3ec;
+              text-align:center;
+            ">
+              ${priceCell}
             </td>
 
           </tr>
         `;
+
       }).join("");
 
-      totalCount.textContent =
-        `تعداد محصولات: ${list.length}`;
-    }
 
-    // =========================================================
-    // تغییر قیمت عمده و قیمت تک
-    // =========================================================
+    pdfContainer.innerHTML = `
 
-    function updatePrices(id) {
+      <div style="
+        text-align:center;
+        margin-bottom:14px;
+      ">
 
-      const product = products.find(
-        p => Number(p.id) === Number(id)
-      );
+        <h2 style="
+          margin:0;
+          font-size:20px;
+          font-weight:700;
+        ">
+          ${title}
+        </h2>
 
-      if (!product) {
-        showToast("محصول پیدا نشد");
-        return;
-      }
+      </div>
 
-      const wholesaleInput =
-        document.getElementById(`newPrice-${id}`);
+      <table style="
+        width:100%;
+        border-collapse:collapse;
+        font-size:13px;
+      ">
 
-      const singleInput =
-        document.getElementById(`newSinglePrice-${id}`);
+        <thead>
 
-      // -------------------------
-      // قیمت عمده
-      // -------------------------
+          <tr style="
+            background:#f1f5f9;
+          ">
 
-      const wholesaleValue =
-        wholesaleInput.value.trim();
+            <th style="
+              padding:8px;
+              border:1px solid #dbe3ec;
+              text-align:right;
+            ">
+              نام محصول
+            </th>
 
-      if (wholesaleValue !== "") {
+            <th style="
+              padding:8px;
+              border:1px solid #dbe3ec;
+              text-align:center;
+            ">
+              کد
+            </th>
 
-        const wholesalePrice =
-          normalizePrice(wholesaleValue);
+            <th style="
+              padding:8px;
+              border:1px solid #dbe3ec;
+              text-align:center;
+            ">
+              ${isSingle ? "فروش تک" : "قیمت عمده"}
+            </th>
 
-        if (wholesalePrice === null) {
-          showToast("قیمت عمده معتبر نیست");
-          return;
+          </tr>
+
+        </thead>
+
+        <tbody>
+          ${rows}
+        </tbody>
+
+      </table>
+
+    `;
+
+
+    document.body.appendChild(pdfContainer);
+
+
+    try {
+
+      /*
+       * scale = 1
+       * و JPEG به جای PNG
+       * برای کاهش شدید حجم فایل.
+       */
+
+      const canvas =
+        await html2canvas(pdfContainer, {
+          scale: 1,
+          backgroundColor: "#ffffff",
+          useCORS: true,
+          logging: false
+        });
+
+
+      const {
+        jsPDF
+      } = window.jspdf;
+
+
+      const pdf =
+        new jsPDF({
+          unit: "pt",
+          format: "a4",
+          compress: true
+        });
+
+
+      const pageWidth =
+        pdf.internal.pageSize.getWidth();
+
+      const pageHeight =
+        pdf.internal.pageSize.getHeight();
+
+
+      const margin = 20;
+
+      const imgWidth =
+        pageWidth - (margin * 2);
+
+      const fullImgHeight =
+        (canvas.height * imgWidth) /
+        canvas.width;
+
+
+      /*
+       * تصویر JPEG با کیفیت کم.
+       * چند کیفیت امتحان می‌شود تا PDF تا حد امکان
+       * زیر 100KB باقی بماند.
+       */
+
+      const qualities = [
+        0.45,
+        0.35,
+        0.28,
+        0.22,
+        0.18,
+        0.14,
+        0.10
+      ];
+
+
+      let finalBlob = null;
+
+
+      for (
+        let q = 0;
+        q < qualities.length;
+        q++
+      ) {
+
+        const imgData =
+          canvas.toDataURL(
+            "image/jpeg",
+            qualities[q]
+          );
+
+
+        const testPdf =
+          new jsPDF({
+            unit: "pt",
+            format: "a4",
+            compress: true
+          });
+
+
+        let remaining =
+          fullImgHeight;
+
+        let y =
+          margin;
+
+
+        /*
+         * تصویر بلند را روی چند صفحه قرار می‌دهیم.
+         */
+
+        testPdf.addImage(
+          imgData,
+          "JPEG",
+          margin,
+          y,
+          imgWidth,
+          fullImgHeight,
+          undefined,
+          "FAST"
+        );
+
+
+        remaining -=
+          (pageHeight - margin * 2);
+
+
+        while (remaining > 0) {
+
+          y =
+            margin -
+            (
+              fullImgHeight -
+              remaining -
+              (pageHeight - margin * 2)
+            );
+
+          /*
+           * محاسبه ساده‌تر برای صفحات بعدی
+           */
+          const pageOffset =
+            (
+              fullImgHeight -
+              remaining
+            );
+
+          testPdf.addPage();
+
+          testPdf.addImage(
+            imgData,
+            "JPEG",
+            margin,
+            margin - pageOffset,
+            imgWidth,
+            fullImgHeight,
+            undefined,
+            "FAST"
+          );
+
+          remaining -=
+            (pageHeight - margin * 2);
+
         }
 
-        product.price = wholesalePrice;
-      }
 
-      // -------------------------
-      // قیمت تک
-      // -------------------------
+        const blob =
+          testPdf.output("blob");
 
-      const singleValue =
-        singleInput.value.trim();
 
-      if (singleValue === "") {
-        product.singlePrice = null;
-      } else {
+        finalBlob = blob;
 
-        const singlePrice =
-          normalizePrice(singleValue);
 
-        if (singlePrice === null) {
-          showToast("قیمت تک معتبر نیست");
-          return;
+        /*
+         * هدف اصلی زیر 100KB است.
+         */
+
+        if (blob.size <= 100 * 1024) {
+          break;
         }
 
-        product.singlePrice = singlePrice;
       }
 
-      applySearch();
 
-      showToast(
-        "قیمت‌ها ثبت شدند — برای ذخیره دائمی، دکمه ذخیره را بزنید"
-      );
-    }
+      const file =
+        new File(
+          [finalBlob],
+          fileName,
+          {
+            type: "application/pdf"
+          }
+        );
 
-    // برای سازگاری با نسخه قبلی
-    function updatePrice(id) {
-      updatePrices(id);
-    }
 
-    // =========================================================
-    // حذف محصول
-    // =========================================================
+      /*
+       * موبایل:
+       * Share واقعی فایل PDF
+       *
+       * دسکتاپ:
+       * دانلود مستقیم
+       */
 
-    function deleteProduct(id) {
+      const isMobileDevice =
+        /Android|iPhone|iPad|iPod|Windows Phone|Mobile/i.test(
+          navigator.userAgent
+        );
 
-      const product = products.find(
-        p => Number(p.id) === Number(id)
-      );
-
-      if (!product) {
-        showToast("محصول پیدا نشد");
-        return;
-      }
-
-      const confirmed = confirm(
-        `آیا از حذف محصول «${product.name}» مطمئن هستید؟`
-      );
-
-      if (!confirmed) {
-        return;
-      }
-
-      products = products.filter(
-        p => Number(p.id) !== Number(id)
-      );
-
-      // nextId هیچ‌وقت به عقب برنمی‌گردد.
-      // این کار از ایجاد ID تکراری جلوگیری می‌کند.
-      nextId = Math.max(nextId, calculateNextId());
-
-      applySearch();
-
-      showToast(
-        "محصول حذف شد — برای ذخیره در گیت‌هاب دکمه ذخیره را بزنید"
-      );
-    }
-
-    // =========================================================
-    // Modal افزودن محصول
-    // =========================================================
-
-    function openAddModal() {
-
-      document
-        .getElementById("addModal")
-        .classList.add("active");
-
-      document.getElementById("newName").value = "";
-      document.getElementById("newCode").value = "";
-      document.getElementById("newPrice").value = "";
-      document.getElementById("newSinglePrice").value = "";
-
-      setTimeout(() => {
-        document
-          .getElementById("newName")
-          .focus();
-      }, 100);
-    }
-
-    function closeAddModal() {
-
-      document
-        .getElementById("addModal")
-        .classList.remove("active");
-    }
-
-    function addProduct() {
-
-      const name =
-        document.getElementById("newName")
-          .value
-          .trim();
-
-      const code =
-        document.getElementById("newCode")
-          .value
-          .trim();
-
-      const priceText =
-        document.getElementById("newPrice")
-          .value
-          .trim();
-
-      const singlePriceText =
-        document.getElementById("newSinglePrice")
-          .value
-          .trim();
-
-      const price =
-        normalizePrice(priceText);
 
       if (
-        !name ||
-        !code ||
-        price === null
+        isMobileDevice &&
+        navigator.share &&
+        navigator.canShare &&
+        navigator.canShare({
+          files: [file]
+        })
       ) {
-        showToast(
-          "لطفاً نام، کد و قیمت عمده را درست وارد کنید"
-        );
-        return;
-      }
 
-      let singlePrice = null;
+        try {
 
-      if (singlePriceText !== "") {
+          await navigator.share({
+            files: [file],
+            title: title,
+            text: title
+          });
 
-        singlePrice =
-          normalizePrice(singlePriceText);
-
-        if (singlePrice === null) {
-          showToast("قیمت تک معتبر نیست");
           return;
+
+        } catch (e) {
+
+          if (
+            e &&
+            e.name === "AbortError"
+          ) {
+            return;
+          }
+
+          console.warn(
+            "Mobile sharing failed",
+            e
+          );
+
         }
+
       }
 
-      // اطمینان از اینکه nextId همیشه امن است
-      nextId = Math.max(
-        nextId,
+
+      /*
+       * دسکتاپ:
+       * دانلود مستقیم
+       */
+
+      pdfDownloadBlob(
+        finalBlob,
+        fileName
+      );
+
+
+      const sizeKB =
+        Math.round(
+          finalBlob.size / 1024
+        );
+
+
+      if (sizeKB <= 100) {
+
+        showToast(
+          `PDF آماده شد (${sizeKB}KB)`
+        );
+
+      } else {
+
+        showToast(
+          `PDF آماده شد (${sizeKB}KB)`
+        );
+
+      }
+
+
+    } catch (e) {
+
+      console.error(e);
+
+      showToast(
+        "خطا در ساخت PDF"
+      );
+
+    } finally {
+
+      if (
+        pdfContainer.parentNode
+      ) {
+
+        pdfContainer.parentNode.removeChild(
+          pdfContainer
+        );
+
+      }
+
+    }
+
+  }
+
+
+  // =====================================================
+  // PDF عمده
+  // =====================================================
+
+  async function shareWholesaleList() {
+
+    await createPricePdf("wholesale");
+
+  }
+
+
+  // =====================================================
+  // PDF فروش تک
+  // =====================================================
+
+  async function shareSinglePriceList() {
+
+    await createPricePdf("single");
+
+  }
+
+
+  // =====================================================
+  // دانلود Blob
+  // =====================================================
+
+  function pdfDownloadBlob(
+    blob,
+    fileName
+  ) {
+
+    const url =
+      URL.createObjectURL(blob);
+
+    const a =
+      document.createElement("a");
+
+    a.href = url;
+
+    a.download = fileName;
+
+    a.style.display = "none";
+
+    document.body.appendChild(a);
+
+    a.click();
+
+
+    setTimeout(function() {
+
+      a.remove();
+
+      URL.revokeObjectURL(url);
+
+    }, 1500);
+
+  }
+
+
+  // برای سازگاری با بخش قدیمی
+  function downloadBlob(
+    blob,
+    fileName
+  ) {
+
+    pdfDownloadBlob(
+      blob,
+      fileName
+    );
+
+  }
+
+
+  // =====================================================
+  // HTML قدیمی اشتراک
+  // =====================================================
+
+  function createShareHtml(list) {
+
+    const rows =
+      list.map(function(p) {
+
+        return `
+
+          <tr>
+
+            <td>
+              ${escapeHtml(p.name)}
+            </td>
+
+            <td>
+              ${escapeHtml(p.code)}
+            </td>
+
+            <td>
+              ${formatPrice(p.salePrice)}
+              تومان
+            </td>
+
+          </tr>
+
+        `;
+
+      }).join("");
+
+
+    return `<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>لیست قیمت فروش</title>
+
+<style>
+
+body{
+  font-family:Tahoma,Arial,sans-serif;
+  padding:30px;
+  direction:rtl
+}
+
+h2{
+  margin-bottom:20px
+}
+
+table{
+  width:100%;
+  border-collapse:collapse
+}
+
+th,td{
+  border:1px solid #ddd;
+  padding:10px;
+  text-align:right
+}
+
+th{
+  background:#f1f5f9
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h2>
+لیست قیمت فروش
+</h2>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>
+نام محصول
+</th>
+
+<th>
+کد
+</th>
+
+<th>
+قیمت فروش
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+${rows}
+
+</tbody>
+
+</table>
+
+</body>
+
+</html>`;
+
+  }
+
+
+  // =====================================================
+  // Escape HTML
+  // =====================================================
+
+  function escapeHtml(value) {
+
+    return String(
+      value == null ? "" : value
+    )
+      .replace(
+        /&/g,
+        "&amp;"
+      )
+      .replace(
+        /</g,
+        "&lt;"
+      )
+      .replace(
+        />/g,
+        "&gt;"
+      )
+      .replace(
+        /"/g,
+        "&quot;"
+      )
+      .replace(
+        /'/g,
+        "&#039;"
+      );
+
+  }
+
+
+  function openDesktopShare() {
+
+    const modal =
+      document.getElementById(
+        "desktopShareModal"
+      );
+
+    modal.classList.add("active");
+
+  }
+
+
+  function closeDesktopShare() {
+
+    document
+      .getElementById(
+        "desktopShareModal"
+      )
+      .classList.remove("active");
+
+  }
+
+
+  // =====================================================
+  // حذف محصول
+  // =====================================================
+
+  function deleteProduct(id) {
+
+    if (
+      !confirm(
+        "آیا از حذف این محصول مطمئن هستید؟"
+      )
+    ) {
+      return;
+    }
+
+
+    products =
+      products.filter(function(p) {
+        return p.id !== id;
+      });
+
+
+    applySearch();
+
+
+    showToast(
+      "لطفاً دکمه ذخیره را بزنید"
+    );
+
+  }
+
+
+  // =====================================================
+  // افزودن محصول
+  // =====================================================
+
+  function openAddModal() {
+
+    document
+      .getElementById("addModal")
+      .classList.add("active");
+
+
+    document.getElementById("newName").value = "";
+    document.getElementById("newCode").value = "";
+    document.getElementById("newPrice").value = "";
+    document.getElementById("newSinglePrice").value = "";
+    document.getElementById("newSalePrice").value = "";
+
+
+    setTimeout(function() {
+
+      document
+        .getElementById("newName")
+        .focus();
+
+    }, 100);
+
+  }
+
+
+  function closeAddModal() {
+
+    document
+      .getElementById("addModal")
+      .classList.remove("active");
+
+  }
+
+
+  function addProduct() {
+
+    const name =
+      document
+        .getElementById("newName")
+        .value
+        .trim();
+
+
+    const code =
+      document
+        .getElementById("newCode")
+        .value
+        .trim();
+
+
+    const price =
+      parseInt(
+        document
+          .getElementById("newPrice")
+          .value,
+        10
+      );
+
+
+    const singleRaw =
+      document
+        .getElementById("newSinglePrice")
+        .value
+        .trim();
+
+
+    const saleRaw =
+      document
+        .getElementById("newSalePrice")
+        .value
+        .trim();
+
+
+    const singlePrice =
+      singleRaw === ""
+        ? null
+        : parseInt(singleRaw, 10);
+
+
+    const salePrice =
+      saleRaw === ""
+        ? null
+        : parseInt(saleRaw, 10);
+
+
+    if (
+      !name ||
+      !code ||
+      isNaN(price) ||
+      price < 0
+    ) {
+
+      showToast(
+        "لطفاً نام، کد و قیمت عمده را درست وارد کنید"
+      );
+
+      return;
+
+    }
+
+
+    if (
+      singlePrice !== null &&
+      (
+        isNaN(singlePrice) ||
+        singlePrice < 0
+      )
+    ) {
+
+      showToast(
+        "قیمت فروش تک معتبر نیست"
+      );
+
+      return;
+
+    }
+
+
+    if (
+      salePrice !== null &&
+      (
+        isNaN(salePrice) ||
+        salePrice < 0
+      )
+    ) {
+
+      showToast(
+        "قیمت فروش معتبر نیست"
+      );
+
+      return;
+
+    }
+
+
+    /*
+     * جلوگیری از مشکل nextId
+     */
+
+    nextId =
+      Math.max(
+        Number(nextId) || 1,
         calculateNextId()
       );
 
-      const newProduct = {
-        id: nextId,
-        name: name,
-        code: code,
-        price: price,
-        salePrice: null,
-        singlePrice: singlePrice
-      };
 
-      products.push(newProduct);
+    products.push({
 
-      nextId++;
+      id: nextId++,
 
-      closeAddModal();
+      name: name,
 
-      applySearch();
+      code: code,
 
-      showToast(
-        "محصول اضافه شد — برای ذخیره در گیت‌هاب دکمه ذخیره را بزنید"
-      );
+      price: price,
+
+      salePrice: salePrice,
+
+      singlePrice: singlePrice
+
+    });
+
+
+    closeAddModal();
+
+    applySearch();
+
+
+    showToast(
+      "محصول اضافه شد؛ لطفاً دکمه ذخیره را بزنید"
+    );
+
+  }
+
+
+  // =====================================================
+  // جستجو
+  // =====================================================
+
+  function applySearch() {
+
+    const q =
+      document
+        .getElementById("searchInput")
+        .value
+        .trim()
+        .toLowerCase();
+
+
+    if (!q) {
+
+      renderTable(products);
+
+      return;
+
     }
 
-    // =========================================================
-    // جستجو
-    // =========================================================
 
-    function normalizeSearchText(value) {
-      return String(value ?? "")
-        .toLowerCase()
-        .replace(/ي/g, "ی")
-        .replace(/ى/g, "ی")
-        .replace(/ك/g, "ک")
-        .trim();
-    }
+    const filtered =
+      products.filter(function(p) {
 
-    function applySearch() {
-
-      const q =
-        normalizeSearchText(
-          document.getElementById("searchInput").value
+        return (
+          String(p.name || "")
+            .toLowerCase()
+            .includes(q)
+          ||
+          String(p.code || "")
+            .toLowerCase()
+            .includes(q)
         );
 
-      if (!q) {
-        renderTable(products);
-        return;
-      }
+      });
 
-      const filtered =
-        products.filter(product => {
 
-          const name =
-            normalizeSearchText(product.name);
+    renderTable(filtered);
 
-          const code =
-            normalizeSearchText(product.code);
+  }
 
-          return (
-            name.includes(q) ||
-            code.includes(q)
-          );
-        });
 
-      renderTable(filtered);
-    }
+  document
+    .getElementById("searchInput")
+    .addEventListener(
+      "input",
+      applySearch
+    );
 
-    document
-      .getElementById("searchInput")
-      .addEventListener("input", applySearch);
 
-    // =========================================================
-    // ساخت JSON استاندارد برای ذخیره
-    // =========================================================
+  // =====================================================
+  // ذخیره روی GitHub
+  // =====================================================
 
-    function buildJsonContent() {
+  async function saveToGitHub() {
 
-      const cleanProducts =
-        products.map(product => ({
-          id: Number(product.id),
-          name: String(product.name ?? ""),
-          code: String(product.code ?? ""),
-          price: normalizePrice(product.price),
-          salePrice: normalizePrice(product.salePrice),
-          singlePrice: normalizePrice(product.singlePrice)
-        }));
+    const btn =
+      document.getElementById("saveBtn");
 
-      return JSON.stringify(
-        {
-          products: cleanProducts,
-          nextId: nextId
-        },
-        null,
-        2
-      );
-    }
 
-    // =========================================================
-    // تبدیل UTF-8 به Base64
-    // =========================================================
+    btn.classList.add("saving");
 
-    function utf8ToBase64(text) {
+    btn.textContent =
+      "در حال ذخیره...";
 
-      const bytes =
-        new TextEncoder().encode(text);
 
-      let binary = "";
+    try {
 
-      const chunkSize = 0x8000;
+      /*
+       * قبل از ذخیره همه محصولات را normalize می‌کنیم.
+       */
 
-      for (
-        let i = 0;
-        i < bytes.length;
-        i += chunkSize
-      ) {
-        binary += String.fromCharCode(
-          ...bytes.subarray(
-            i,
-            Math.min(i + chunkSize, bytes.length)
+      products.forEach(function(p) {
+
+        if (
+          p.salePrice === undefined
+        ) {
+          p.salePrice = null;
+        }
+
+        if (
+          p.singlePrice === undefined
+        ) {
+          p.singlePrice = null;
+        }
+
+      });
+
+
+      /*
+       * nextId همیشه درست باشد.
+       */
+
+      nextId =
+        Math.max(
+          Number(nextId) || 1,
+          calculateNextId()
+        );
+
+
+      const content =
+        JSON.stringify(
+          {
+            products: products,
+            nextId: nextId
+          },
+          null,
+          2
+        );
+
+
+      const encodedContent =
+        btoa(
+          unescape(
+            encodeURIComponent(content)
           )
         );
+
+
+      let sha =
+        fileSha;
+
+
+      if (!sha) {
+
+        try {
+
+          const getRes =
+            await fetch(
+              `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${FILE_PATH}`,
+              {
+                headers: {
+
+                  "Authorization":
+                    `token ${GITHUB_TOKEN}`,
+
+                  "Accept":
+                    "application/vnd.github.v3+json"
+
+                }
+
+              }
+            );
+
+
+          if (getRes.ok) {
+
+            const data =
+              await getRes.json();
+
+            sha =
+              data.sha;
+
+            fileSha =
+              sha;
+
+          }
+
+        } catch (e) {}
+
       }
 
-      return btoa(binary);
-    }
 
-    function base64ToUtf8(base64) {
+      const body = {
 
-      const binary =
-        atob(base64.replace(/\n/g, ""));
+        message:
+          "بروزرسانی محصولات",
 
-      const bytes =
-        Uint8Array.from(
-          binary,
-          char => char.charCodeAt(0)
-        );
+        content:
+          encodedContent,
 
-      return new TextDecoder().decode(bytes);
-    }
+        branch:
+          "main"
 
-    // =========================================================
-    // هدرهای GitHub
-    // =========================================================
-
-    function githubHeaders(includeJson = false) {
-
-      const headers = {
-        "Accept":
-          "application/vnd.github+json",
-
-        "Authorization":
-          `Bearer ${GITHUB_TOKEN}`,
-
-        "X-GitHub-Api-Version":
-          "2022-11-28"
       };
 
-      if (includeJson) {
-        headers["Content-Type"] =
-          "application/json";
+
+      if (sha) {
+
+        body.sha =
+          sha;
+
       }
 
-      return headers;
-    }
 
-    // =========================================================
-    // آدرس فایل GitHub
-    // =========================================================
+      const res =
+        await fetch(
+          `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${FILE_PATH}`,
+          {
 
-    function getGitHubFileUrl() {
+            method:
+              "PUT",
 
-      return (
-        `https://api.github.com/repos/` +
-        `${encodeURIComponent(GITHUB_USER)}/` +
-        `${encodeURIComponent(GITHUB_REPO)}/contents/` +
-        `${FILE_PATH}?ref=${encodeURIComponent(BRANCH)}`
-      );
-    }
+            headers: {
 
-    // =========================================================
-    // دریافت products.json از GitHub
-    // =========================================================
+              "Authorization":
+                `token ${GITHUB_TOKEN}`,
 
-    async function loadFromGitHub() {
+              "Accept":
+                "application/vnd.github.v3+json",
 
-      const url =
-        getGitHubFileUrl();
+              "Content-Type":
+                "application/json"
 
-      try {
+            },
 
-        const res =
-          await fetch(url, {
-            method: "GET",
-            headers: githubHeaders()
-          });
+            body:
+              JSON.stringify(body)
 
-        if (!res.ok) {
+          }
+        );
 
-          let message =
-            `خطای GitHub (${res.status})`;
 
-          try {
-            const errorData =
-              await res.json();
-
-            if (errorData.message) {
-              message +=
-                `: ${errorData.message}`;
-            }
-          } catch (_) {}
-
-          throw new Error(message);
-        }
+      if (res.ok) {
 
         const data =
           await res.json();
 
-        if (!data.content) {
-          throw new Error(
-            "محتوای products.json دریافت نشد"
-          );
+
+        if (
+          data.content &&
+          data.content.sha
+        ) {
+
+          fileSha =
+            data.content.sha;
+
         }
 
-        fileSha = data.sha;
+
+        showToast(
+          "✅ ذخیره شد، ممنون"
+        );
+
+      } else {
+
+        const err =
+          await res.json();
+
+
+        console.error(err);
+
+
+        showToast(
+          "خطا در ذخیره: " +
+          (
+            err.message ||
+            res.status
+          )
+        );
+
+      }
+
+    } catch (err) {
+
+      console.error(err);
+
+
+      showToast(
+        "خطا در ارتباط با گیت‌هاب"
+      );
+
+    }
+
+
+    btn.classList.remove("saving");
+
+    btn.textContent =
+      "ذخیره";
+
+  }
+
+
+  // =====================================================
+  // بارگذاری از GitHub
+  // =====================================================
+
+  async function loadFromGitHub() {
+
+    try {
+
+      const res =
+        await fetch(
+          `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${FILE_PATH}`,
+          {
+
+            headers: {
+
+              "Authorization":
+                `token ${GITHUB_TOKEN}`,
+
+              "Accept":
+                "application/vnd.github.v3+json"
+
+            }
+
+          }
+        );
+
+
+      if (res.ok) {
+
+        const data =
+          await res.json();
+
+
+        fileSha =
+          data.sha;
+
 
         const content =
-          base64ToUtf8(data.content);
+          decodeURIComponent(
+            escape(
+              atob(data.content)
+            )
+          );
+
 
         const parsed =
           JSON.parse(content);
 
-        // -----------------------------------------------------
-        // پشتیبانی از ساختار اصلی فعلی:
-        //
-        // {
-        //   "products": [...],
-        //   "nextId": 64
-        // }
-        //
-        // و همچنین آرایه مستقیم، برای سازگاری
-        // -----------------------------------------------------
 
-        let loadedProducts = [];
-        let storedNextId = null;
+        /*
+         * هم ساختار جدید:
+         * { products: [...], nextId: ... }
+         *
+         * و هم آرایه مستقیم را پشتیبانی می‌کنیم.
+         */
 
-        if (Array.isArray(parsed)) {
-
-          loadedProducts = parsed;
-
-        } else if (
+        if (
           parsed &&
           Array.isArray(parsed.products)
         ) {
 
-          loadedProducts =
+          products =
             parsed.products;
 
-          storedNextId =
-            Number(parsed.nextId);
+        } else if (
+          Array.isArray(parsed)
+        ) {
+
+          products =
+            parsed;
+
         } else {
 
-          throw new Error(
-            "ساختار products.json معتبر نیست"
-          );
+          return false;
+
         }
 
-        // -----------------------------------------------------
-        // نرمال‌سازی محصولات
-        // -----------------------------------------------------
 
-        products =
-          loadedProducts
-            .filter(product => product && product.id !== undefined)
-            .map(product => ({
-              id: Number(product.id),
-              name: String(product.name ?? ""),
-              code: String(product.code ?? ""),
-              price: normalizePrice(product.price),
-              salePrice: normalizePrice(product.salePrice),
-              singlePrice: normalizePrice(product.singlePrice)
-            }));
+        products.forEach(function(p) {
 
-        // -----------------------------------------------------
-        // محاسبه nextId
-        //
-        // اگر nextId ذخیره‌شده معتبر باشد و از maxId بزرگ‌تر
-        // باشد همان حفظ می‌شود.
-        // در غیر این صورت maxId + 1 استفاده می‌شود.
-        // -----------------------------------------------------
+          if (
+            p.salePrice === undefined
+          ) {
+            p.salePrice = null;
+          }
+
+          if (
+            p.singlePrice === undefined
+          ) {
+            p.singlePrice = null;
+          }
+
+        });
+
 
         const calculatedNextId =
           calculateNextId();
+
+
+        const storedNextId =
+          Number(parsed.nextId);
+
 
         if (
           Number.isFinite(storedNextId) &&
           storedNextId >= calculatedNextId
         ) {
-          nextId = Math.floor(storedNextId);
+
+          nextId =
+            Math.floor(storedNextId);
+
         } else {
-          nextId = calculatedNextId;
+
+          nextId =
+            calculatedNextId;
+
         }
 
-        isLoaded = true;
+
+        isLoadedFromGitHub =
+          true;
+
 
         renderTable();
 
+
         showToast(
-          `اطلاعات ${products.length} محصول از گیت‌هاب بارگذاری شد`
+          "اطلاعات از گیت‌هاب بارگذاری شد"
         );
+
 
         return true;
 
-      } catch (error) {
-
-        console.error(
-          "GitHub load error:",
-          error
-        );
-
-        isLoaded = false;
-
-        document.getElementById(
-          "loadingState"
-        ).style.display = "none";
-
-        document.getElementById(
-          "productTable"
-        ).innerHTML = "";
-
-        document.getElementById(
-          "emptyState"
-        ).style.display = "block";
-
-        document.getElementById(
-          "emptyState"
-        ).textContent =
-          "خطا در دریافت products.json از گیت‌هاب";
-
-        document.getElementById(
-          "totalCount"
-        ).textContent =
-          "اطلاعات بارگذاری نشد";
-
-        showToast(
-          "خطا در دریافت اطلاعات از گیت‌هاب"
-        );
-
-        return false;
       }
+
+    } catch (e) {
+
+      console.log(
+        "خطا در دریافت products.json",
+        e
+      );
+
     }
 
-    // =========================================================
-    // ذخیره products.json در GitHub
-    // =========================================================
 
-    async function saveToGitHub() {
+    isLoadedFromGitHub =
+      false;
 
-      if (!isLoaded) {
 
-        showToast(
-          "ابتدا باید اطلاعات محصولات از گیت‌هاب بارگذاری شود"
-        );
+    return false;
 
-        return;
-      }
+  }
 
-      if (
-        !GITHUB_TOKEN ||
-        GITHUB_TOKEN === "YOUR_GITHUB_TOKEN_HERE"
-      ) {
 
-        showToast(
-          "توکن GitHub در کد تنظیم نشده است"
-        );
+  // =====================================================
+  // بستن Modal با کلیک بیرون
+  // =====================================================
 
-        return;
-      }
-
-      const btn =
-        document.getElementById("saveBtn");
-
-      btn.classList.add("saving");
-      btn.textContent =
-        "در حال ذخیره...";
-
-      try {
-
-        // -----------------------------------------------------
-        // ابتدا SHA فعلی فایل را دوباره می‌گیریم.
-        //
-        // این کار باعث می‌شود اگر فایل روی GitHub تغییر کرده
-        // باشد، از SHA قدیمی استفاده نکنیم.
-        // -----------------------------------------------------
-
-        const latestRes =
-          await fetch(
-            getGitHubFileUrl(),
-            {
-              method: "GET",
-              headers: githubHeaders()
-            }
-          );
-
-        if (!latestRes.ok) {
-
-          const errorData =
-            await latestRes.json()
-              .catch(() => ({}));
-
-          throw new Error(
-            errorData.message ||
-            `خطا در دریافت نسخه فعلی فایل (${latestRes.status})`
-          );
-        }
-
-        const latestData =
-          await latestRes.json();
-
-        if (!latestData.sha) {
-          throw new Error(
-            "SHA فایل products.json دریافت نشد"
-          );
-        }
-
-        const latestSha =
-          latestData.sha;
-
-        // -----------------------------------------------------
-        // JSON نهایی
-        // -----------------------------------------------------
-
-        const content =
-          buildJsonContent();
-
-        const encodedContent =
-          utf8ToBase64(content);
-
-        // -----------------------------------------------------
-        // ذخیره
-        // -----------------------------------------------------
-
-        const body = {
-          message:
-            "بروزرسانی لیست محصولات",
-
-          content:
-            encodedContent,
-
-          branch:
-            BRANCH,
-
-          sha:
-            latestSha
-        };
-
-        const res =
-          await fetch(
-            `https://api.github.com/repos/` +
-            `${encodeURIComponent(GITHUB_USER)}/` +
-            `${encodeURIComponent(GITHUB_REPO)}/contents/` +
-            FILE_PATH,
-            {
-              method: "PUT",
-              headers: githubHeaders(true),
-              body: JSON.stringify(body)
-            }
-          );
-
-        const result =
-          await res.json();
-
-        if (!res.ok) {
-
-          console.error(
-            "GitHub save error:",
-            result
-          );
-
-          throw new Error(
-            result.message ||
-            `خطا در ذخیره (${res.status})`
-          );
-        }
+  document
+    .getElementById("addModal")
+    .addEventListener(
+      "click",
+      function(e) {
 
         if (
-          result.content &&
-          result.content.sha
+          e.target === this
         ) {
-          fileSha =
-            result.content.sha;
-        } else {
-          fileSha =
-            latestSha;
-        }
 
-        showToast(
-          "✅ محصولات با موفقیت در گیت‌هاب ذخیره شدند"
-        );
-
-      } catch (error) {
-
-        console.error(
-          "Save error:",
-          error
-        );
-
-        showToast(
-          "خطا در ذخیره: " +
-          (error.message || "خطای نامشخص")
-        );
-
-      } finally {
-
-        btn.classList.remove("saving");
-        btn.textContent =
-          "ذخیره";
-      }
-    }
-
-    // =========================================================
-    // بستن Modal با کلیک بیرون
-    // =========================================================
-
-    document
-      .getElementById("addModal")
-      .addEventListener("click", function(event) {
-
-        if (event.target === this) {
           closeAddModal();
+
         }
-      });
 
-    // =========================================================
-    // کلید Escape برای بستن Modal
-    // =========================================================
-
-    document.addEventListener(
-      "keydown",
-      function(event) {
-
-        if (
-          event.key === "Escape" &&
-          document
-            .getElementById("addModal")
-            .classList
-            .contains("active")
-        ) {
-          closeAddModal();
-        }
       }
     );
 
-    // =========================================================
-    // شروع برنامه
-    // =========================================================
 
-    (async function init() {
+  // =====================================================
+  // شروع برنامه
+  // =====================================================
 
+  (async function init() {
+
+    const loaded =
       await loadFromGitHub();
 
-    })();
 
-  </script>
+    if (!loaded) {
+
+      renderTable();
+
+    }
+
+  })();
+
+</script>
 
 </body>
 </html>
