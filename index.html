@@ -22,11 +22,7 @@
       --muted: #64748b;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: "Vazirmatn", "Tahoma", "Segoe UI", Geneva, Verdana, sans-serif;
@@ -37,11 +33,7 @@
       padding-bottom: 90px;
     }
 
-    .container {
-      max-width: 100%;
-      margin: 0 auto;
-      padding: 16px 12px;
-    }
+    .container { max-width: 100%; margin: 0 auto; padding: 16px 12px; }
 
     header {
       background: var(--card);
@@ -52,20 +44,10 @@
       box-shadow: 0 1px 3px rgba(0,0,0,0.04);
     }
 
-    header h1 {
-      font-size: 1.35rem;
-      margin-bottom: 4px;
-    }
+    header h1 { font-size: 1.35rem; margin-bottom: 4px; }
+    header .count { color: var(--muted); font-size: 0.95rem; }
 
-    header .count {
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    .search-wrap {
-      position: relative;
-      margin-bottom: 14px;
-    }
+    .search-wrap { position: relative; margin-bottom: 14px; }
 
     .search-wrap input {
       width: 100%;
@@ -78,9 +60,7 @@
       transition: border-color 0.2s;
     }
 
-    .search-wrap input:focus {
-      border-color: var(--primary);
-    }
+    .search-wrap input:focus { border-color: var(--primary); }
 
     .search-wrap .icon {
       position: absolute;
@@ -92,7 +72,6 @@
       font-size: 1.1rem;
     }
 
-    /* دکمه‌های PDF */
     .pdf-buttons {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -115,17 +94,9 @@
       gap: 6px;
     }
 
-    .wholesale-pdf-btn {
-      background: #475569;
-    }
-
-    .single-pdf-btn {
-      background: var(--primary);
-    }
-
-    .share-list-btn:active {
-      transform: scale(0.98);
-    }
+    .wholesale-pdf-btn { background: #475569; }
+    .single-pdf-btn { background: var(--primary); }
+    .share-list-btn:active { transform: scale(0.98); }
 
     .table-wrap {
       background: var(--card);
@@ -136,15 +107,8 @@
       box-shadow: 0 1px 3px rgba(0,0,0,0.04);
     }
 
-    table {
-      width: 100%;
-      min-width: 1120px;
-      border-collapse: collapse;
-    }
-
-    thead {
-      background: #f1f5f9;
-    }
+    table { width: 100%; min-width: 1120px; border-collapse: collapse; }
+    thead { background: #f1f5f9; }
 
     th, td {
       padding: 11px 10px;
@@ -154,19 +118,9 @@
       white-space: nowrap;
     }
 
-    th {
-      font-weight: 700;
-      color: var(--muted);
-      font-size: 0.8rem;
-    }
-
-    tbody tr:hover {
-      background: #f8fafc;
-    }
-
-    tbody tr:last-child td {
-      border-bottom: none;
-    }
+    th { font-weight: 700; color: var(--muted); font-size: 0.8rem; }
+    tbody tr:hover { background: #f8fafc; }
+    tbody tr:last-child td { border-bottom: none; }
 
     .price {
       font-weight: 600;
@@ -194,9 +148,7 @@
       direction: ltr;
     }
 
-    .new-price-input:focus {
-      border-color: var(--primary);
-    }
+    .new-price-input:focus { border-color: var(--primary); }
 
     .sale-price-input,
     .single-price-input {
@@ -212,9 +164,7 @@
     }
 
     .sale-price-input:focus,
-    .single-price-input:focus {
-      border-color: var(--primary-hover);
-    }
+    .single-price-input:focus { border-color: var(--primary-hover); }
 
     .single-price-input::placeholder {
       font-size: 0.70rem;
@@ -227,9 +177,7 @@
       gap: 4px;
     }
 
-    .inline-input-group .btn-sm {
-      padding: 6px 9px;
-    }
+    .inline-input-group .btn-sm { padding: 6px 9px; }
 
     .btn {
       display: inline-flex;
@@ -246,63 +194,19 @@
       white-space: nowrap;
     }
 
-    .btn:active {
-      transform: scale(0.97);
-    }
+    .btn:active { transform: scale(0.97); }
+    .btn-sm { padding: 6px 10px; font-size: 0.78rem; }
+    .btn-primary { background: var(--primary); color: white; }
+    .btn-primary:hover { background: var(--primary-hover); }
+    .btn-success { background: var(--success); color: white; }
+    .btn-success:hover { background: #15803d; }
+    .btn-danger { background: var(--danger); color: white; }
+    .btn-danger:hover { background: #b91c1c; }
+    .btn-outline { background: white; color: var(--text); border: 1px solid var(--border); }
+    .btn-outline:hover { background: #f1f5f9; }
 
-    .btn-sm {
-      padding: 6px 10px;
-      font-size: 0.78rem;
-    }
-
-    .btn-primary {
-      background: var(--primary);
-      color: white;
-    }
-
-    .btn-primary:hover {
-      background: var(--primary-hover);
-    }
-
-    .btn-success {
-      background: var(--success);
-      color: white;
-    }
-
-    .btn-success:hover {
-      background: #15803d;
-    }
-
-    .btn-danger {
-      background: var(--danger);
-      color: white;
-    }
-
-    .btn-danger:hover {
-      background: #b91c1c;
-    }
-
-    .btn-outline {
-      background: white;
-      color: var(--text);
-      border: 1px solid var(--border);
-    }
-
-    .btn-outline:hover {
-      background: #f1f5f9;
-    }
-
-    .actions {
-      display: flex;
-      gap: 6px;
-      align-items: center;
-    }
-
-    .empty {
-      text-align: center;
-      padding: 40px 20px;
-      color: var(--muted);
-    }
+    .actions { display: flex; gap: 6px; align-items: center; }
+    .empty { text-align: center; padding: 40px 20px; color: var(--muted); }
 
     .bottom-bar {
       position: fixed;
@@ -337,9 +241,7 @@
       padding: 16px;
     }
 
-    .modal-overlay.active {
-      display: flex;
-    }
+    .modal-overlay.active { display: flex; }
 
     .modal {
       background: white;
@@ -352,14 +254,8 @@
       overflow-y: auto;
     }
 
-    .modal h2 {
-      font-size: 1.15rem;
-      margin-bottom: 16px;
-    }
-
-    .form-group {
-      margin-bottom: 13px;
-    }
+    .modal h2 { font-size: 1.15rem; margin-bottom: 16px; }
+    .form-group { margin-bottom: 13px; }
 
     .form-group label {
       display: block;
@@ -378,20 +274,10 @@
       outline: none;
     }
 
-    .form-group input:focus {
-      border-color: var(--primary);
-    }
+    .form-group input:focus { border-color: var(--primary); }
 
-    .modal-actions {
-      display: flex;
-      gap: 10px;
-      margin-top: 18px;
-    }
-
-    .modal-actions .btn {
-      flex: 1;
-      padding: 11px;
-    }
+    .modal-actions { display: flex; gap: 10px; margin-top: 18px; }
+    .modal-actions .btn { flex: 1; padding: 11px; }
 
     .toast {
       position: fixed;
@@ -427,9 +313,7 @@
       padding: 16px;
     }
 
-    .desktop-share-overlay.active {
-      display: flex;
-    }
+    .desktop-share-overlay.active { display: flex; }
 
     .desktop-share-box {
       width: 100%;
@@ -441,16 +325,8 @@
       text-align: center;
     }
 
-    .desktop-share-box h3 {
-      margin-bottom: 8px;
-      font-size: 1.15rem;
-    }
-
-    .desktop-share-box p {
-      color: var(--muted);
-      font-size: 0.86rem;
-      margin-bottom: 16px;
-    }
+    .desktop-share-box h3 { margin-bottom: 8px; font-size: 1.15rem; }
+    .desktop-share-box p { color: var(--muted); font-size: 0.86rem; margin-bottom: 16px; }
 
     .desktop-share-actions {
       display: grid;
@@ -458,15 +334,8 @@
       gap: 10px;
     }
 
-    .desktop-share-actions .btn {
-      min-height: 46px;
-      font-size: 0.86rem;
-    }
-
-    .saving {
-      opacity: 0.7;
-      pointer-events: none;
-    }
+    .desktop-share-actions .btn { min-height: 46px; font-size: 0.86rem; }
+    .saving { opacity: 0.7; pointer-events: none; }
   </style>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -474,47 +343,28 @@
 </head>
 
 <body>
-
   <div class="container">
-
     <header>
       <h1>مدیریت محصولات</h1>
       <div class="count" id="totalCount">تعداد محصولات: 0</div>
     </header>
 
     <div class="search-wrap">
-      <input
-        type="text"
-        id="searchInput"
-        placeholder="جستجو بر اساس نام یا کد محصول..."
-      >
+      <input type="text" id="searchInput" placeholder="جستجو بر اساس نام یا کد محصول...">
       <span class="icon">🔍</span>
     </div>
 
-    <!-- دو PDF کاملاً جدا -->
     <div class="pdf-buttons">
-
-      <button
-        class="share-list-btn wholesale-pdf-btn"
-        id="shareWholesaleBtn"
-        onclick="shareWholesaleList()"
-      >
+      <button class="share-list-btn wholesale-pdf-btn" id="shareWholesaleBtn" onclick="shareWholesaleList()">
         📦 PDF قیمت عمده
       </button>
-
-      <button
-        class="share-list-btn single-pdf-btn"
-        id="shareSingleBtn"
-        onclick="shareSinglePriceList()"
-      >
+      <button class="share-list-btn single-pdf-btn" id="shareSingleBtn" onclick="shareSinglePriceList()">
         🛍️ PDF فروش تک
       </button>
-
     </div>
 
     <div class="table-wrap">
       <table>
-
         <thead>
           <tr>
             <th>ردیف</th>
@@ -527,204 +377,93 @@
             <th>عملیات</th>
           </tr>
         </thead>
-
         <tbody id="productTable"></tbody>
-
       </table>
-
-      <div class="empty" id="emptyState" style="display:none;">
-        محصولی یافت نشد
-      </div>
+      <div class="empty" id="emptyState" style="display:none;">محصولی یافت نشد</div>
     </div>
-
   </div>
-
 
   <div class="bottom-bar">
-
-    <button
-      class="btn btn-primary"
-      onclick="openAddModal()"
-    >
-      + افزودن محصول
-    </button>
-
-    <button
-      class="btn btn-success"
-      id="saveBtn"
-      onclick="saveToGitHub()"
-    >
-      ذخیره
-    </button>
-
+    <button class="btn btn-primary" onclick="openAddModal()">+ افزودن محصول</button>
+    <button class="btn btn-success" id="saveBtn" onclick="saveToGitHub()">ذخیره</button>
   </div>
 
-
-  <!-- افزودن محصول -->
   <div class="modal-overlay" id="addModal">
-
     <div class="modal">
-
       <h2>افزودن محصول جدید</h2>
 
       <div class="form-group">
         <label>نام محصول</label>
-        <input
-          type="text"
-          id="newName"
-          placeholder="مثال: شلوار جین"
-        >
+        <input type="text" id="newName" placeholder="مثال: شلوار جین">
       </div>
 
       <div class="form-group">
         <label>کد محصول</label>
-        <input
-          type="text"
-          id="newCode"
-          placeholder="مثال: 9901"
-        >
+        <input type="text" id="newCode" placeholder="مثال: 9901">
       </div>
 
       <div class="form-group">
         <label>قیمت عمده (تومان)</label>
-        <input
-          type="number"
-          id="newPrice"
-          placeholder="مثال: 450000"
-        >
+        <input type="number" id="newPrice" placeholder="مثال: 450000">
       </div>
 
       <div class="form-group">
         <label>فروش تک (اختیاری)</label>
-        <input
-          type="number"
-          id="newSinglePrice"
-          placeholder="اگر ندارد خالی بگذارید"
-        >
+        <input type="number" id="newSinglePrice" placeholder="اگر ندارد خالی بگذارید">
       </div>
 
       <div class="form-group">
         <label>قیمت فروش (اختیاری)</label>
-        <input
-          type="number"
-          id="newSalePrice"
-          placeholder="اگر ندارد خالی بگذارید"
-        >
+        <input type="number" id="newSalePrice" placeholder="اگر ندارد خالی بگذارید">
       </div>
 
       <div class="modal-actions">
-
-        <button
-          class="btn btn-outline"
-          onclick="closeAddModal()"
-        >
-          انصراف
-        </button>
-
-        <button
-          class="btn btn-primary"
-          onclick="addProduct()"
-        >
-          افزودن
-        </button>
-
+        <button class="btn btn-outline" onclick="closeAddModal()">انصراف</button>
+        <button class="btn btn-primary" onclick="addProduct()">افزودن</button>
       </div>
-
     </div>
-
   </div>
-
 
   <div class="toast" id="toast"></div>
 
-
-  <div
-    class="desktop-share-overlay"
-    id="desktopShareModal"
-    style="display:none!important;"
-  >
-
+  <div class="desktop-share-overlay" id="desktopShareModal" style="display:none!important;">
     <div class="desktop-share-box">
-
       <h3>اشتراک‌گذاری لیست قیمت</h3>
-
-      <p>
-        فایل PDF آماده است. در کامپیوتر، ابتدا فایل را ذخیره کنید و سپس با تلگرام یا واتساپ ارسال کنید.
-      </p>
-
+      <p>فایل PDF آماده است. در کامپیوتر، ابتدا فایل را ذخیره کنید و سپس با تلگرام یا واتساپ ارسال کنید.</p>
       <div class="desktop-share-actions">
-
-        <button
-          class="btn btn-primary"
-          id="downloadPdfBtn"
-        >
-          ⬇️ دانلود PDF
-        </button>
-
-        <button
-          class="btn btn-success"
-          id="openTelegramBtn"
-        >
-          ✈️ باز کردن تلگرام
-        </button>
-
-        <button
-          class="btn btn-outline"
-          id="openWhatsappBtn"
-        >
-          💬 باز کردن واتساپ
-        </button>
-
-        <button
-          class="btn btn-outline"
-          id="copyShareTextBtn"
-        >
-          📋 کپی متن
-        </button>
-
+        <button class="btn btn-primary" id="downloadPdfBtn">⬇️ دانلود PDF</button>
+        <button class="btn btn-success" id="openTelegramBtn">✈️ باز کردن تلگرام</button>
+        <button class="btn btn-outline" id="openWhatsappBtn">💬 باز کردن واتساپ</button>
+        <button class="btn btn-outline" id="copyShareTextBtn">📋 کپی متن</button>
       </div>
-
-      <button
-        class="btn btn-outline"
-        style="width:100%;margin-top:10px;"
-        onclick="closeDesktopShare()"
-      >
-        بستن
-      </button>
-
+      <button class="btn btn-outline" style="width:100%;margin-top:10px;" onclick="closeDesktopShare()">بستن</button>
     </div>
-
   </div>
 
-
 <script>
-
   // =====================================================
   // تنظیمات گیت‌هاب
   // =====================================================
 
   const GITHUB_USER = "veymacollection";
   const GITHUB_REPO = "ghimat-jadid";
-
-  // توکن فعلی خودت را در همین خط قرار بده
-  const GITHUB_TOKEN = "0uAebARPYwXD1iZSEdkknrGzhTJ3";
-
+  const GITHUB_TOKEN = "YOUR_GITHUB_TOKEN_HERE";
   const FILE_PATH = "products.json";
 
   // =====================================================
-
+  // داده پیش‌فرض فقط به عنوان fallback
+  // =====================================================
 
   let products = [
-
-    { id: 1,  name: "شلوارک لانیا", code: "2101", price: 210000 },
-    { id: 2,  name: "شلوار گیاهی لانیا گل‌دار", code: "2102", price: 210000 },
-    { id: 3,  name: "شلوارک ML", code: "2201", price: 220000 },
-    { id: 4,  name: "تاپ پلنگی", code: "2302", price: 230000 },
-    { id: 5,  name: "شلوار گیاهی مختلف", code: "2301", price: 230000 },
-    { id: 6,  name: "شلوارک پلنگی", code: "2321", price: 232000 },
-    { id: 7,  name: "شلوارک لیدی", code: "2321", price: 232000 },
-    { id: 8,  name: "شلوار گیاهی گل‌ریز", code: "2502", price: 250000 },
-    { id: 9,  name: "شورتک موسلین", code: "2501", price: 250000 },
+    { id: 1, name: "شلوارک لانیا", code: "2101", price: 210000 },
+    { id: 2, name: "شلوار گیاهی لانیا گل‌دار", code: "2102", price: 210000 },
+    { id: 3, name: "شلوارک ML", code: "2201", price: 220000 },
+    { id: 4, name: "تاپ پلنگی", code: "2302", price: 230000 },
+    { id: 5, name: "شلوار گیاهی مختلف", code: "2301", price: 230000 },
+    { id: 6, name: "شلوارک پلنگی", code: "2321", price: 232000 },
+    { id: 7, name: "شلوارک لیدی", code: "2321", price: 232000 },
+    { id: 8, name: "شلوار گیاهی گل‌ریز", code: "2502", price: 250000 },
+    { id: 9, name: "شورتک موسلین", code: "2501", price: 250000 },
     { id: 10, name: "شلوار گیاهی لیدی", code: "2602", price: 260000 },
     { id: 11, name: "شلوار گیاهی ساده لیدی", code: "2602", price: 260000 },
     { id: 12, name: "شلوارک نخی", code: "2601", price: 262000 },
@@ -772,1226 +511,633 @@
     { id: 54, name: "شلوار کرپ مورگان", code: "10001", price: 1000000 },
     { id: 55, name: "شلوار پوست ماری مخمل", code: "3501", price: 350000 },
     { id: 56, name: "شلوار آبرنگی", code: "3581", price: 358000 }
-
   ];
 
-
-  // =====================================================
-  // آماده‌سازی داده‌ها
-  // =====================================================
-
   products.forEach(function(p) {
-
-    if (p.salePrice === undefined) {
-      p.salePrice = null;
-    }
-
-    if (p.singlePrice === undefined) {
-      p.singlePrice = null;
-    }
-
+    if (p.salePrice === undefined) p.salePrice = null;
+    if (p.singlePrice === undefined) p.singlePrice = null;
   });
-
 
   let nextId = 57;
   let fileSha = null;
   let isLoadedFromGitHub = false;
 
-
   function calculateNextId() {
+    if (!products.length) return 1;
 
-    if (!products.length) {
-      return 1;
-    }
-
-    let maxId = products.reduce(function(max, p) {
-
+    const maxId = products.reduce(function(max, p) {
       const id = Number(p.id);
-
-      return Number.isFinite(id)
-        ? Math.max(max, id)
-        : max;
-
+      return Number.isFinite(id) ? Math.max(max, id) : max;
     }, 0);
 
     return maxId + 1;
   }
 
-
   function formatPrice(num) {
-
-    if (
-      num === null ||
-      num === undefined ||
-      num === "" ||
-      !Number.isFinite(Number(num))
-    ) {
+    if (num === null || num === undefined || num === "" || !Number.isFinite(Number(num))) {
       return "—";
     }
-
     return Number(num).toLocaleString("fa-IR");
   }
 
+  function hasPrice(value) {
+    return value !== null &&
+           value !== undefined &&
+           value !== "" &&
+           Number.isFinite(Number(value));
+  }
 
   function showToast(msg) {
-
     const t = document.getElementById("toast");
-
     t.textContent = msg;
-
     t.classList.add("show");
-
     setTimeout(function() {
       t.classList.remove("show");
     }, 2500);
-
   }
-
 
   // =====================================================
   // نمایش جدول
   // =====================================================
 
   function renderTable(list = products) {
-
     const tbody = document.getElementById("productTable");
     const empty = document.getElementById("emptyState");
 
     if (list.length === 0) {
-
       tbody.innerHTML = "";
       empty.style.display = "block";
-
     } else {
-
       empty.style.display = "none";
 
       tbody.innerHTML = list.map(function(p, i) {
-
         return `
-
           <tr data-id="${p.id}">
-
             <td>${i + 1}</td>
-
             <td>${escapeHtml(p.name)}</td>
+            <td><span class="code">${escapeHtml(p.code)}</span></td>
 
             <td>
-              <span class="code">
-                ${escapeHtml(p.code)}
-              </span>
+              <span class="price">${formatPrice(p.price)}</span>
             </td>
 
-            <!-- قیمت عمده -->
             <td>
-              <span class="price">
-                ${formatPrice(p.price)}
-              </span>
-            </td>
-
-            <!-- قیمت جدید عمده -->
-            <td>
-
               <div class="inline-input-group">
-
                 <input
                   type="number"
                   class="new-price-input"
                   placeholder="قیمت جدید"
                   id="newPrice-${p.id}"
                 >
-
                 <button
                   class="btn btn-success btn-sm"
                   onclick="updateCostPrice(${p.id})"
                   title="ثبت قیمت جدید عمده"
-                >
-                  ✓
-                </button>
-
+                >✓</button>
               </div>
-
             </td>
 
-            <!-- قیمت فروش قبلی -->
             <td>
-
               <div class="inline-input-group">
-
                 <input
                   type="number"
                   class="sale-price-input"
                   placeholder="قیمت فروش"
                   id="salePrice-${p.id}"
-                  value="${p.salePrice != null ? p.salePrice : ''}"
+                  value="${hasPrice(p.salePrice) ? p.salePrice : ''}"
                 >
-
                 <button
                   class="btn btn-success btn-sm"
                   onclick="updateSalePrice(${p.id})"
                   title="ثبت قیمت فروش"
-                >
-                  ✓
-                </button>
-
+                >✓</button>
                 <button
                   class="btn btn-primary btn-sm"
                   onclick="shareSingleSale(${p.id})"
                   title="ارسال قیمت فروش این محصول"
-                >
-                  📤
-                </button>
-
+                >📤</button>
               </div>
-
             </td>
 
-            <!-- فروش تک -->
             <td>
-
               <div class="inline-input-group">
-
                 <input
                   type="number"
                   class="single-price-input"
                   placeholder="فقط عمده ❌"
                   id="singlePrice-${p.id}"
-                  value="${p.singlePrice != null ? p.singlePrice : ''}"
+                  value="${hasPrice(p.singlePrice) ? p.singlePrice : ''}"
                 >
-
                 <button
                   class="btn btn-success btn-sm"
                   onclick="updateSinglePrice(${p.id})"
                   title="ثبت فروش تک"
-                >
-                  ✓
-                </button>
-
+                >✓</button>
               </div>
-
             </td>
 
             <td>
-
               <div class="actions">
-
                 <button
                   class="btn btn-danger btn-sm"
                   onclick="deleteProduct(${p.id})"
-                >
-                  حذف
-                </button>
-
+                >حذف</button>
               </div>
-
             </td>
-
           </tr>
-
         `;
-
       }).join("");
-
     }
 
     document.getElementById("totalCount").textContent =
       `تعداد محصولات: ${list.length}`;
-
   }
-
 
   // =====================================================
   // قیمت عمده
   // =====================================================
 
   function updateCostPrice(id) {
-
-    const input =
-      document.getElementById("newPrice-" + id);
-
-    const val =
-      parseInt(input.value, 10);
+    const input = document.getElementById("newPrice-" + id);
+    const val = parseInt(input.value, 10);
 
     if (isNaN(val) || val < 0) {
-
       showToast("قیمت جدید معتبر نیست");
       return;
-
     }
 
-    const product =
-      products.find(function(p) {
-        return p.id === id;
-      });
+    const product = products.find(function(p) { return p.id === id; });
 
     if (product) {
-
       product.price = val;
-
       input.value = "";
-
       applySearch();
-
-      showToast(
-        "قیمت عمده ثبت شد؛ لطفاً ذخیره را بزنید"
-      );
-
+      showToast("قیمت عمده ثبت شد؛ لطفاً ذخیره را بزنید");
     }
-
   }
-
 
   // =====================================================
   // قیمت فروش
   // =====================================================
 
   function updateSalePrice(id) {
+    const input = document.getElementById("salePrice-" + id);
+    const raw = input.value.trim();
+    const val = raw === "" ? null : parseInt(raw, 10);
 
-    const input =
-      document.getElementById("salePrice-" + id);
-
-    const raw =
-      input.value.trim();
-
-    const val =
-      raw === "" ? null : parseInt(raw, 10);
-
-    if (
-      val !== null &&
-      (isNaN(val) || val < 0)
-    ) {
-
+    if (val !== null && (isNaN(val) || val < 0)) {
       showToast("قیمت فروش معتبر نیست");
       return;
-
     }
 
-    const product =
-      products.find(function(p) {
-        return p.id === id;
-      });
+    const product = products.find(function(p) { return p.id === id; });
 
     if (product) {
-
       product.salePrice = val;
-
       applySearch();
-
-      showToast(
-        "قیمت فروش ثبت شد؛ لطفاً ذخیره را بزنید"
-      );
-
+      showToast("قیمت فروش ثبت شد؛ لطفاً ذخیره را بزنید");
     }
-
   }
-
 
   // =====================================================
   // فروش تک
   // =====================================================
 
   function updateSinglePrice(id) {
+    const input = document.getElementById("singlePrice-" + id);
+    const raw = input.value.trim();
+    const val = raw === "" ? null : parseInt(raw, 10);
 
-    const input =
-      document.getElementById("singlePrice-" + id);
-
-    const raw =
-      input.value.trim();
-
-    const val =
-      raw === "" ? null : parseInt(raw, 10);
-
-    if (
-      val !== null &&
-      (isNaN(val) || val < 0)
-    ) {
-
+    if (val !== null && (isNaN(val) || val < 0)) {
       showToast("قیمت فروش تک معتبر نیست");
       return;
-
     }
 
-    const product =
-      products.find(function(p) {
-        return p.id === id;
-      });
+    const product = products.find(function(p) { return p.id === id; });
 
     if (product) {
-
       product.singlePrice = val;
-
       applySearch();
-
-      showToast(
-        "فروش تک ثبت شد؛ لطفاً ذخیره را بزنید"
-      );
-
+      showToast("فروش تک ثبت شد؛ لطفاً ذخیره را بزنید");
     }
-
   }
-
 
   // =====================================================
   // اشتراک قیمت فروش محصول
   // =====================================================
 
   async function shareSingleSale(id) {
+    const product = products.find(function(p) { return p.id === id; });
+    if (!product) return;
 
-    const product =
-      products.find(function(p) {
-        return p.id === id;
-      });
+    const input = document.getElementById("salePrice-" + id);
+    const raw = input ? input.value.trim() : "";
+    const val = raw === "" ? product.salePrice : parseInt(raw, 10);
 
-    if (!product) {
-      return;
-    }
-
-    const input =
-      document.getElementById("salePrice-" + id);
-
-    const raw =
-      input ? input.value.trim() : "";
-
-    const val =
-      raw === ""
-        ? product.salePrice
-        : parseInt(raw, 10);
-
-    if (
-      val === null ||
-      val === undefined ||
-      val === "" ||
-      isNaN(val)
-    ) {
-
+    if (val === null || val === undefined || val === "" || isNaN(val)) {
       showToast("ابتدا قیمت فروش را وارد کنید");
       return;
-
     }
 
-    const text =
-      `${product.name} | کد: ${product.code} | ${formatPrice(val)} تومان`;
+    const text = `${product.name} | کد: ${product.code} | ${formatPrice(val)} تومان`;
 
     if (navigator.share) {
-
       try {
-
         await navigator.share({
           title: "قیمت فروش محصول",
           text: text
         });
-
       } catch (e) {
-
-        if (e.name !== "AbortError") {
-          showToast("خطا در اشتراک‌گذاری");
-        }
-
+        if (e.name !== "AbortError") showToast("خطا در اشتراک‌گذاری");
       }
-
     } else {
-
       try {
-
         await navigator.clipboard.writeText(text);
-
-        showToast(
-          "اشتراک‌گذاری در دسترس نیست، متن کپی شد"
-        );
-
+        showToast("اشتراک‌گذاری در دسترس نیست، متن کپی شد");
       } catch (e) {
-
-        showToast(
-          "اشتراک‌گذاری در این مرورگر پشتیبانی نمی‌شود"
-        );
-
+        showToast("اشتراک‌گذاری در این مرورگر پشتیبانی نمی‌شود");
       }
-
     }
-
   }
 
-
   // =====================================================
-  // ساخت PDF
+  // ساخت PDF با کیفیت خوب و صفحه‌بندی واقعی A4
   // =====================================================
 
   async function createPricePdf(type) {
-
     const isSingle = type === "single";
-
-    const title =
-      isSingle
-        ? "لیست فروش تک"
-        : "لیست قیمت عمده";
-
-    const fileName =
-      isSingle
-        ? "لیست-فروش-تک.pdf"
-        : "لیست-قیمت-عمده.pdf";
-
-
-    /*
-     * برای فروش تک:
-     * همه محصولات نمایش داده می‌شوند.
-     *
-     * اگر singlePrice نداشته باشند:
-     * فروش فقط عمده ❌
-     *
-     * برای عمده:
-     * همه محصولات با قیمت عمده.
-     */
+    const title = isSingle ? "لیست فروش تک" : "لیست قیمت عمده";
+    const fileName = isSingle ? "لیست-فروش-تک.pdf" : "لیست-قیمت-عمده.pdf";
 
     const list = products.slice();
 
-
     if (list.length === 0) {
-
       showToast("محصولی برای ساخت PDF وجود ندارد");
       return;
-
     }
 
+    const btn = document.getElementById(isSingle ? "shareSingleBtn" : "shareWholesaleBtn");
+    const oldText = btn.textContent;
+    btn.disabled = true;
+    btn.style.opacity = "0.7";
+    btn.textContent = "⏳ در حال ساخت PDF...";
 
-    showToast("در حال ساخت PDF کم‌حجم...");
+    showToast("در حال ساخت PDF با کیفیت خوب...");
 
+    const pdfContainer = document.createElement("div");
 
-    const pdfContainer =
-      document.createElement("div");
-
-
-    /*
-     * عرض نسبتاً کم باعث می‌شود حجم تصویر PDF پایین بماند.
-     */
-
+    // خارج از دید ولی قابل رندر توسط html2canvas
     pdfContainer.style.cssText =
       "position:fixed;" +
-      "top:-99999px;" +
-      "left:-99999px;" +
-      "width:650px;" +
-      "padding:20px;" +
+      "left:0;" +
+      "top:0;" +
+      "transform:translateX(-200vw);" +
+      "width:794px;" +
+      "padding:26px;" +
       "background:#ffffff;" +
       "font-family:'Vazirmatn',Tahoma,sans-serif;" +
       "direction:rtl;" +
-      "color:#1e293b;";
+      "color:#1e293b;" +
+      "z-index:-1;";
 
+    const rows = list.map(function(p, index) {
+      let priceCell;
 
-    const rows =
-      list.map(function(p) {
+      if (isSingle) {
+        priceCell = hasPrice(p.singlePrice)
+          ? `<span style="font-weight:700;">${formatPrice(p.singlePrice)} تومان</span>`
+          : `<span style="font-weight:700;">فقط عمده ❌</span>`;
+      } else {
+        priceCell = `<span style="font-weight:700;">${formatPrice(p.price)} تومان</span>`;
+      }
 
-        let priceCell = "";
-
-        if (isSingle) {
-
-          if (
-            p.singlePrice !== null &&
-            p.singlePrice !== undefined &&
-            p.singlePrice !== "" &&
-            !isNaN(Number(p.singlePrice))
-          ) {
-
-            priceCell =
-              `<span style="font-weight:700;">
-                ${formatPrice(p.singlePrice)} تومان
-              </span>`;
-
-          } else {
-
-            priceCell =
-              `<span style="font-weight:700;">
-                فروش فقط عمده ❌
-              </span>`;
-
-          }
-
-        } else {
-
-          priceCell =
-            `<span style="font-weight:700;">
-              ${formatPrice(p.price)} تومان
-            </span>`;
-
-        }
-
-
-        return `
-          <tr>
-
-            <td style="
-              padding:7px 8px;
-              border:1px solid #dbe3ec;
-            ">
-              ${escapeHtml(p.name)}
-            </td>
-
-            <td style="
-              padding:7px 8px;
-              border:1px solid #dbe3ec;
-              text-align:center;
-              direction:ltr;
-            ">
-              ${escapeHtml(p.code)}
-            </td>
-
-            <td style="
-              padding:7px 8px;
-              border:1px solid #dbe3ec;
-              text-align:center;
-            ">
-              ${priceCell}
-            </td>
-
-          </tr>
-        `;
-
-      }).join("");
-
+      return `
+        <tr>
+          <td style="padding:8px 9px;border:1px solid #dbe3ec;text-align:center;width:54px;">
+            ${index + 1}
+          </td>
+          <td style="padding:8px 9px;border:1px solid #dbe3ec;text-align:right;">
+            ${escapeHtml(p.name)}
+          </td>
+          <td style="padding:8px 9px;border:1px solid #dbe3ec;text-align:center;direction:ltr;width:100px;">
+            ${escapeHtml(p.code)}
+          </td>
+          <td style="padding:8px 9px;border:1px solid #dbe3ec;text-align:center;width:190px;">
+            ${priceCell}
+          </td>
+        </tr>
+      `;
+    }).join("");
 
     pdfContainer.innerHTML = `
-
-      <div style="
-        text-align:center;
-        margin-bottom:14px;
-      ">
-
-        <h2 style="
-          margin:0;
-          font-size:20px;
-          font-weight:700;
-        ">
-          ${title}
-        </h2>
-
+      <div style="text-align:center;margin-bottom:16px;">
+        <h2 style="margin:0;font-size:22px;font-weight:700;">${title}</h2>
+        <div style="margin-top:4px;font-size:11px;color:#64748b;">
+          تعداد محصولات: ${list.length}
+        </div>
       </div>
 
-      <table style="
-        width:100%;
-        border-collapse:collapse;
-        font-size:13px;
-      ">
-
+      <table style="width:100%;border-collapse:collapse;font-size:13px;">
         <thead>
-
-          <tr style="
-            background:#f1f5f9;
-          ">
-
-            <th style="
-              padding:8px;
-              border:1px solid #dbe3ec;
-              text-align:right;
-            ">
-              نام محصول
-            </th>
-
-            <th style="
-              padding:8px;
-              border:1px solid #dbe3ec;
-              text-align:center;
-            ">
-              کد
-            </th>
-
-            <th style="
-              padding:8px;
-              border:1px solid #dbe3ec;
-              text-align:center;
-            ">
+          <tr style="background:#f1f5f9;">
+            <th style="padding:9px;border:1px solid #dbe3ec;text-align:center;">ردیف</th>
+            <th style="padding:9px;border:1px solid #dbe3ec;text-align:right;">نام محصول</th>
+            <th style="padding:9px;border:1px solid #dbe3ec;text-align:center;">کد</th>
+            <th style="padding:9px;border:1px solid #dbe3ec;text-align:center;">
               ${isSingle ? "فروش تک" : "قیمت عمده"}
             </th>
-
           </tr>
-
         </thead>
-
-        <tbody>
-          ${rows}
-        </tbody>
-
+        <tbody>${rows}</tbody>
       </table>
-
     `;
-
 
     document.body.appendChild(pdfContainer);
 
-
     try {
+      // scale=1.5: متن واضح‌تر، ولی هنوز حجم معقول.
+      const canvas = await html2canvas(pdfContainer, {
+        scale: 1.5,
+        backgroundColor: "#ffffff",
+        useCORS: true,
+        logging: false,
+        imageTimeout: 15000
+      });
 
-      /*
-       * scale = 1
-       * و JPEG به جای PNG
-       * برای کاهش شدید حجم فایل.
-       */
+      const { jsPDF } = window.jspdf;
+      const pdf = new jsPDF({
+        unit: "pt",
+        format: "a4",
+        compress: true
+      });
 
-      const canvas =
-        await html2canvas(pdfContainer, {
-          scale: 1,
-          backgroundColor: "#ffffff",
-          useCORS: true,
-          logging: false
-        });
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const pageHeight = pdf.internal.pageSize.getHeight();
 
+      const margin = 24;
+      const contentWidth = pageWidth - margin * 2;
+      const contentHeight = pageHeight - margin * 2;
 
-      const {
-        jsPDF
-      } = window.jspdf;
+      // ارتفاع یک صفحه در مختصات تصویر
+      const pageCanvasHeight = Math.floor(
+        canvas.width * (contentHeight / contentWidth)
+      );
 
+      let offsetY = 0;
+      let pageNumber = 0;
 
-      const pdf =
-        new jsPDF({
-          unit: "pt",
-          format: "a4",
-          compress: true
-        });
+      // کیفیت‌های منطقی؛ کیفیت پایین فقط اگر حجم از 5MB عبور کند.
+      const qualities = [0.88, 0.80, 0.72, 0.65];
 
+      // ابتدا JPEG با کیفیت خوب تولید می‌کنیم.
+      let imgData = canvas.toDataURL("image/jpeg", qualities[0]);
 
-      const pageWidth =
-        pdf.internal.pageSize.getWidth();
+      // هر صفحه از همان تصویر، با crop واقعی.
+      while (offsetY < canvas.height) {
+        const sliceHeight = Math.min(pageCanvasHeight, canvas.height - offsetY);
 
-      const pageHeight =
-        pdf.internal.pageSize.getHeight();
+        const pageCanvas = document.createElement("canvas");
+        pageCanvas.width = canvas.width;
+        pageCanvas.height = sliceHeight;
 
+        const ctx = pageCanvas.getContext("2d", { alpha: false });
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, pageCanvas.width, pageCanvas.height);
+        ctx.drawImage(
+          canvas,
+          0, offsetY, canvas.width, sliceHeight,
+          0, 0, canvas.width, sliceHeight
+        );
 
-      const margin = 20;
+        const pageImg = pageCanvas.toDataURL("image/jpeg", qualities[0]);
+        const pageImgHeight = sliceHeight * contentWidth / canvas.width;
 
-      const imgWidth =
-        pageWidth - (margin * 2);
+        if (pageNumber > 0) pdf.addPage();
 
-      const fullImgHeight =
-        (canvas.height * imgWidth) /
-        canvas.width;
+        pdf.addImage(
+          pageImg,
+          "JPEG",
+          margin,
+          margin,
+          contentWidth,
+          pageImgHeight,
+          undefined,
+          "FAST"
+        );
 
+        offsetY += sliceHeight;
+        pageNumber++;
+      }
 
-      /*
-       * تصویر JPEG با کیفیت کم.
-       * چند کیفیت امتحان می‌شود تا PDF تا حد امکان
-       * زیر 100KB باقی بماند.
-       */
+      // اگر حجم غیرعادی بزرگ شد، همان PDF را با کیفیت کمتر دوباره می‌سازیم.
+      let finalBlob = pdf.output("blob");
 
-      const qualities = [
-        0.45,
-        0.35,
-        0.28,
-        0.22,
-        0.18,
-        0.14,
-        0.10
-      ];
-
-
-      let finalBlob = null;
-
-
-      for (
-        let q = 0;
-        q < qualities.length;
-        q++
-      ) {
-
-        const imgData =
-          canvas.toDataURL(
-            "image/jpeg",
-            qualities[q]
-          );
-
-
-        const testPdf =
-          new jsPDF({
+      if (finalBlob.size > 5 * 1024 * 1024) {
+        const rebuild = async function(quality) {
+          const compactPdf = new jsPDF({
             unit: "pt",
             format: "a4",
             compress: true
           });
 
+          let yOffset = 0;
+          let page = 0;
 
-        let remaining =
-          fullImgHeight;
+          while (yOffset < canvas.height) {
+            const h = Math.min(pageCanvasHeight, canvas.height - yOffset);
+            const c = document.createElement("canvas");
+            c.width = canvas.width;
+            c.height = h;
 
-        let y =
-          margin;
-
-
-        /*
-         * تصویر بلند را روی چند صفحه قرار می‌دهیم.
-         */
-
-        testPdf.addImage(
-          imgData,
-          "JPEG",
-          margin,
-          y,
-          imgWidth,
-          fullImgHeight,
-          undefined,
-          "FAST"
-        );
-
-
-        remaining -=
-          (pageHeight - margin * 2);
-
-
-        while (remaining > 0) {
-
-          y =
-            margin -
-            (
-              fullImgHeight -
-              remaining -
-              (pageHeight - margin * 2)
+            const cctx = c.getContext("2d", { alpha: false });
+            cctx.fillStyle = "#ffffff";
+            cctx.fillRect(0, 0, c.width, c.height);
+            cctx.drawImage(
+              canvas,
+              0, yOffset, canvas.width, h,
+              0, 0, canvas.width, h
             );
 
-          /*
-           * محاسبه ساده‌تر برای صفحات بعدی
-           */
-          const pageOffset =
-            (
-              fullImgHeight -
-              remaining
+            const data = c.toDataURL("image/jpeg", quality);
+            const hPt = h * contentWidth / canvas.width;
+
+            if (page > 0) compactPdf.addPage();
+
+            compactPdf.addImage(
+              data,
+              "JPEG",
+              margin,
+              margin,
+              contentWidth,
+              hPt,
+              undefined,
+              "FAST"
             );
 
-          testPdf.addPage();
+            yOffset += h;
+            page++;
+          }
 
-          testPdf.addImage(
-            imgData,
-            "JPEG",
-            margin,
-            margin - pageOffset,
-            imgWidth,
-            fullImgHeight,
-            undefined,
-            "FAST"
-          );
+          return compactPdf.output("blob");
+        };
 
-          remaining -=
-            (pageHeight - margin * 2);
-
+        for (let i = 1; i < qualities.length; i++) {
+          finalBlob = await rebuild(qualities[i]);
+          if (finalBlob.size <= 5 * 1024 * 1024) break;
         }
-
-
-        const blob =
-          testPdf.output("blob");
-
-
-        finalBlob = blob;
-
-
-        /*
-         * هدف اصلی زیر 100KB است.
-         */
-
-        if (blob.size <= 100 * 1024) {
-          break;
-        }
-
       }
 
+      const file = new File([finalBlob], fileName, {
+        type: "application/pdf"
+      });
 
-      const file =
-        new File(
-          [finalBlob],
-          fileName,
-          {
-            type: "application/pdf"
-          }
-        );
-
-
-      /*
-       * موبایل:
-       * Share واقعی فایل PDF
-       *
-       * دسکتاپ:
-       * دانلود مستقیم
-       */
+      const sizeKB = Math.round(finalBlob.size / 1024);
+      const sizeMB = (finalBlob.size / (1024 * 1024)).toFixed(2);
 
       const isMobileDevice =
-        /Android|iPhone|iPad|iPod|Windows Phone|Mobile/i.test(
-          navigator.userAgent
-        );
-
+        /Android|iPhone|iPad|iPod|Windows Phone|Mobile/i.test(navigator.userAgent);
 
       if (
         isMobileDevice &&
         navigator.share &&
         navigator.canShare &&
-        navigator.canShare({
-          files: [file]
-        })
+        navigator.canShare({ files: [file] })
       ) {
-
         try {
-
           await navigator.share({
             files: [file],
             title: title,
             text: title
           });
-
           return;
-
         } catch (e) {
-
-          if (
-            e &&
-            e.name === "AbortError"
-          ) {
-            return;
-          }
-
-          console.warn(
-            "Mobile sharing failed",
-            e
-          );
-
+          if (e && e.name === "AbortError") return;
+          console.warn("Mobile sharing failed", e);
         }
-
       }
 
-
-      /*
-       * دسکتاپ:
-       * دانلود مستقیم
-       */
-
-      pdfDownloadBlob(
-        finalBlob,
-        fileName
-      );
-
-
-      const sizeKB =
-        Math.round(
-          finalBlob.size / 1024
-        );
-
-
-      if (sizeKB <= 100) {
-
-        showToast(
-          `PDF آماده شد (${sizeKB}KB)`
-        );
-
-      } else {
-
-        showToast(
-          `PDF آماده شد (${sizeKB}KB)`
-        );
-
-      }
-
+      pdfDownloadBlob(finalBlob, fileName);
+      showToast(`PDF آماده شد — ${sizeKB < 1024 ? sizeKB + "KB" : sizeMB + "MB"}`);
 
     } catch (e) {
-
       console.error(e);
-
-      showToast(
-        "خطا در ساخت PDF"
-      );
-
+      showToast("خطا در ساخت PDF");
     } finally {
-
-      if (
-        pdfContainer.parentNode
-      ) {
-
-        pdfContainer.parentNode.removeChild(
-          pdfContainer
-        );
-
+      if (pdfContainer.parentNode) {
+        pdfContainer.parentNode.removeChild(pdfContainer);
       }
 
+      btn.disabled = false;
+      btn.style.opacity = "";
+      btn.textContent = oldText;
     }
-
   }
-
-
-  // =====================================================
-  // PDF عمده
-  // =====================================================
 
   async function shareWholesaleList() {
-
     await createPricePdf("wholesale");
-
   }
-
-
-  // =====================================================
-  // PDF فروش تک
-  // =====================================================
 
   async function shareSinglePriceList() {
-
     await createPricePdf("single");
-
   }
 
-
-  // =====================================================
-  // دانلود Blob
-  // =====================================================
-
-  function pdfDownloadBlob(
-    blob,
-    fileName
-  ) {
-
-    const url =
-      URL.createObjectURL(blob);
-
-    const a =
-      document.createElement("a");
+  function pdfDownloadBlob(blob, fileName) {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
 
     a.href = url;
-
     a.download = fileName;
-
     a.style.display = "none";
 
     document.body.appendChild(a);
-
     a.click();
 
-
     setTimeout(function() {
-
       a.remove();
-
       URL.revokeObjectURL(url);
-
     }, 1500);
-
   }
 
-
-  // برای سازگاری با بخش قدیمی
-  function downloadBlob(
-    blob,
-    fileName
-  ) {
-
-    pdfDownloadBlob(
-      blob,
-      fileName
-    );
-
+  function downloadBlob(blob, fileName) {
+    pdfDownloadBlob(blob, fileName);
   }
-
 
   // =====================================================
   // HTML قدیمی اشتراک
   // =====================================================
 
   function createShareHtml(list) {
-
-    const rows =
-      list.map(function(p) {
-
-        return `
-
-          <tr>
-
-            <td>
-              ${escapeHtml(p.name)}
-            </td>
-
-            <td>
-              ${escapeHtml(p.code)}
-            </td>
-
-            <td>
-              ${formatPrice(p.salePrice)}
-              تومان
-            </td>
-
-          </tr>
-
-        `;
-
-      }).join("");
-
+    const rows = list.map(function(p) {
+      return `
+        <tr>
+          <td>${escapeHtml(p.name)}</td>
+          <td>${escapeHtml(p.code)}</td>
+          <td>${formatPrice(p.salePrice)} تومان</td>
+        </tr>
+      `;
+    }).join("");
 
     return `<!DOCTYPE html>
 <html lang="fa" dir="rtl">
-
 <head>
-
 <meta charset="UTF-8">
-
 <title>لیست قیمت فروش</title>
-
 <style>
-
-body{
-  font-family:Tahoma,Arial,sans-serif;
-  padding:30px;
-  direction:rtl
-}
-
-h2{
-  margin-bottom:20px
-}
-
-table{
-  width:100%;
-  border-collapse:collapse
-}
-
-th,td{
-  border:1px solid #ddd;
-  padding:10px;
-  text-align:right
-}
-
-th{
-  background:#f1f5f9
-}
-
+body{font-family:Tahoma,Arial,sans-serif;padding:30px;direction:rtl}
+h2{margin-bottom:20px}
+table{width:100%;border-collapse:collapse}
+th,td{border:1px solid #ddd;padding:10px;text-align:right}
+th{background:#f1f5f9}
 </style>
-
 </head>
-
 <body>
-
-<h2>
-لیست قیمت فروش
-</h2>
-
+<h2>لیست قیمت فروش</h2>
 <table>
-
-<thead>
-
-<tr>
-
-<th>
-نام محصول
-</th>
-
-<th>
-کد
-</th>
-
-<th>
-قیمت فروش
-</th>
-
-</tr>
-
-</thead>
-
-<tbody>
-
-${rows}
-
-</tbody>
-
+<thead><tr><th>نام محصول</th><th>کد</th><th>قیمت فروش</th></tr></thead>
+<tbody>${rows}</tbody>
 </table>
-
 </body>
-
 </html>`;
-
   }
-
-
-  // =====================================================
-  // Escape HTML
-  // =====================================================
 
   function escapeHtml(value) {
-
-    return String(
-      value == null ? "" : value
-    )
-      .replace(
-        /&/g,
-        "&amp;"
-      )
-      .replace(
-        /</g,
-        "&lt;"
-      )
-      .replace(
-        />/g,
-        "&gt;"
-      )
-      .replace(
-        /"/g,
-        "&quot;"
-      )
-      .replace(
-        /'/g,
-        "&#039;"
-      );
-
+    return String(value == null ? "" : value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
   }
-
 
   function openDesktopShare() {
-
-    const modal =
-      document.getElementById(
-        "desktopShareModal"
-      );
-
-    modal.classList.add("active");
-
+    document.getElementById("desktopShareModal").classList.add("active");
   }
-
 
   function closeDesktopShare() {
-
-    document
-      .getElementById(
-        "desktopShareModal"
-      )
-      .classList.remove("active");
-
+    document.getElementById("desktopShareModal").classList.remove("active");
   }
-
 
   // =====================================================
   // حذف محصول
   // =====================================================
 
   function deleteProduct(id) {
+    if (!confirm("آیا از حذف این محصول مطمئن هستید؟")) return;
 
-    if (
-      !confirm(
-        "آیا از حذف این محصول مطمئن هستید؟"
-      )
-    ) {
-      return;
-    }
-
-
-    products =
-      products.filter(function(p) {
-        return p.id !== id;
-      });
-
+    products = products.filter(function(p) {
+      return p.id !== id;
+    });
 
     applySearch();
-
-
-    showToast(
-      "لطفاً دکمه ذخیره را بزنید"
-    );
-
+    showToast("لطفاً دکمه ذخیره را بزنید");
   }
-
 
   // =====================================================
   // افزودن محصول
   // =====================================================
 
   function openAddModal() {
-
-    document
-      .getElementById("addModal")
-      .classList.add("active");
-
+    document.getElementById("addModal").classList.add("active");
 
     document.getElementById("newName").value = "";
     document.getElementById("newCode").value = "";
@@ -1999,638 +1145,269 @@ ${rows}
     document.getElementById("newSinglePrice").value = "";
     document.getElementById("newSalePrice").value = "";
 
-
     setTimeout(function() {
-
-      document
-        .getElementById("newName")
-        .focus();
-
+      document.getElementById("newName").focus();
     }, 100);
-
   }
-
 
   function closeAddModal() {
-
-    document
-      .getElementById("addModal")
-      .classList.remove("active");
-
+    document.getElementById("addModal").classList.remove("active");
   }
-
 
   function addProduct() {
+    const name = document.getElementById("newName").value.trim();
+    const code = document.getElementById("newCode").value.trim();
+    const price = parseInt(document.getElementById("newPrice").value, 10);
 
-    const name =
-      document
-        .getElementById("newName")
-        .value
-        .trim();
+    const singleRaw = document.getElementById("newSinglePrice").value.trim();
+    const saleRaw = document.getElementById("newSalePrice").value.trim();
 
+    const singlePrice = singleRaw === "" ? null : parseInt(singleRaw, 10);
+    const salePrice = saleRaw === "" ? null : parseInt(saleRaw, 10);
 
-    const code =
-      document
-        .getElementById("newCode")
-        .value
-        .trim();
-
-
-    const price =
-      parseInt(
-        document
-          .getElementById("newPrice")
-          .value,
-        10
-      );
-
-
-    const singleRaw =
-      document
-        .getElementById("newSinglePrice")
-        .value
-        .trim();
-
-
-    const saleRaw =
-      document
-        .getElementById("newSalePrice")
-        .value
-        .trim();
-
-
-    const singlePrice =
-      singleRaw === ""
-        ? null
-        : parseInt(singleRaw, 10);
-
-
-    const salePrice =
-      saleRaw === ""
-        ? null
-        : parseInt(saleRaw, 10);
-
-
-    if (
-      !name ||
-      !code ||
-      isNaN(price) ||
-      price < 0
-    ) {
-
-      showToast(
-        "لطفاً نام، کد و قیمت عمده را درست وارد کنید"
-      );
-
+    if (!name || !code || isNaN(price) || price < 0) {
+      showToast("لطفاً نام، کد و قیمت عمده را درست وارد کنید");
       return;
-
     }
 
-
-    if (
-      singlePrice !== null &&
-      (
-        isNaN(singlePrice) ||
-        singlePrice < 0
-      )
-    ) {
-
-      showToast(
-        "قیمت فروش تک معتبر نیست"
-      );
-
+    if (singlePrice !== null && (isNaN(singlePrice) || singlePrice < 0)) {
+      showToast("قیمت فروش تک معتبر نیست");
       return;
-
     }
 
-
-    if (
-      salePrice !== null &&
-      (
-        isNaN(salePrice) ||
-        salePrice < 0
-      )
-    ) {
-
-      showToast(
-        "قیمت فروش معتبر نیست"
-      );
-
+    if (salePrice !== null && (isNaN(salePrice) || salePrice < 0)) {
+      showToast("قیمت فروش معتبر نیست");
       return;
-
     }
 
-
-    /*
-     * جلوگیری از مشکل nextId
-     */
-
-    nextId =
-      Math.max(
-        Number(nextId) || 1,
-        calculateNextId()
-      );
-
+    nextId = Math.max(Number(nextId) || 1, calculateNextId());
 
     products.push({
-
       id: nextId++,
-
       name: name,
-
       code: code,
-
       price: price,
-
       salePrice: salePrice,
-
       singlePrice: singlePrice
-
     });
 
-
     closeAddModal();
-
     applySearch();
-
-
-    showToast(
-      "محصول اضافه شد؛ لطفاً دکمه ذخیره را بزنید"
-    );
-
+    showToast("محصول اضافه شد؛ لطفاً دکمه ذخیره را بزنید");
   }
-
 
   // =====================================================
   // جستجو
   // =====================================================
 
   function applySearch() {
-
-    const q =
-      document
-        .getElementById("searchInput")
-        .value
-        .trim()
-        .toLowerCase();
-
+    const q = document.getElementById("searchInput").value.trim().toLowerCase();
 
     if (!q) {
-
       renderTable(products);
-
       return;
-
     }
 
-
-    const filtered =
-      products.filter(function(p) {
-
-        return (
-          String(p.name || "")
-            .toLowerCase()
-            .includes(q)
-          ||
-          String(p.code || "")
-            .toLowerCase()
-            .includes(q)
-        );
-
-      });
-
+    const filtered = products.filter(function(p) {
+      return (
+        String(p.name || "").toLowerCase().includes(q) ||
+        String(p.code || "").toLowerCase().includes(q)
+      );
+    });
 
     renderTable(filtered);
-
   }
 
-
-  document
-    .getElementById("searchInput")
-    .addEventListener(
-      "input",
-      applySearch
-    );
-
+  document.getElementById("searchInput").addEventListener("input", applySearch);
 
   // =====================================================
   // ذخیره روی GitHub
   // =====================================================
 
   async function saveToGitHub() {
+    // جلوگیری از overwrite کردن products.json با داده fallback
+    if (!isLoadedFromGitHub) {
+      showToast("ابتدا اطلاعات GitHub باید با موفقیت بارگذاری شود");
+      return;
+    }
 
-    const btn =
-      document.getElementById("saveBtn");
-
+    const btn = document.getElementById("saveBtn");
 
     btn.classList.add("saving");
-
-    btn.textContent =
-      "در حال ذخیره...";
-
+    btn.textContent = "در حال ذخیره...";
 
     try {
-
-      /*
-       * قبل از ذخیره همه محصولات را normalize می‌کنیم.
-       */
-
       products.forEach(function(p) {
-
-        if (
-          p.salePrice === undefined
-        ) {
-          p.salePrice = null;
-        }
-
-        if (
-          p.singlePrice === undefined
-        ) {
-          p.singlePrice = null;
-        }
-
+        if (p.salePrice === undefined) p.salePrice = null;
+        if (p.singlePrice === undefined) p.singlePrice = null;
       });
 
+      nextId = Math.max(Number(nextId) || 1, calculateNextId());
 
-      /*
-       * nextId همیشه درست باشد.
-       */
+      const content = JSON.stringify({
+        products: products,
+        nextId: nextId
+      }, null, 2);
 
-      nextId =
-        Math.max(
-          Number(nextId) || 1,
-          calculateNextId()
-        );
+      const encodedContent = btoa(
+        unescape(encodeURIComponent(content))
+      );
 
-
-      const content =
-        JSON.stringify(
-          {
-            products: products,
-            nextId: nextId
-          },
-          null,
-          2
-        );
-
-
-      const encodedContent =
-        btoa(
-          unescape(
-            encodeURIComponent(content)
-          )
-        );
-
-
-      let sha =
-        fileSha;
-
+      let sha = fileSha;
 
       if (!sha) {
-
-        try {
-
-          const getRes =
-            await fetch(
-              `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${FILE_PATH}`,
-              {
-                headers: {
-
-                  "Authorization":
-                    `token ${GITHUB_TOKEN}`,
-
-                  "Accept":
-                    "application/vnd.github.v3+json"
-
-                }
-
-              }
-            );
-
-
-          if (getRes.ok) {
-
-            const data =
-              await getRes.json();
-
-            sha =
-              data.sha;
-
-            fileSha =
-              sha;
-
-          }
-
-        } catch (e) {}
-
-      }
-
-
-      const body = {
-
-        message:
-          "بروزرسانی محصولات",
-
-        content:
-          encodedContent,
-
-        branch:
-          "main"
-
-      };
-
-
-      if (sha) {
-
-        body.sha =
-          sha;
-
-      }
-
-
-      const res =
-        await fetch(
+        const getRes = await fetch(
           `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${FILE_PATH}`,
           {
-
-            method:
-              "PUT",
-
             headers: {
-
-              "Authorization":
-                `token ${GITHUB_TOKEN}`,
-
-              "Accept":
-                "application/vnd.github.v3+json",
-
-              "Content-Type":
-                "application/json"
-
-            },
-
-            body:
-              JSON.stringify(body)
-
+              "Authorization": `token ${GITHUB_TOKEN}`,
+              "Accept": "application/vnd.github.v3+json"
+            }
           }
         );
 
+        if (getRes.ok) {
+          const data = await getRes.json();
+          sha = data.sha;
+          fileSha = sha;
+        }
+      }
+
+      const body = {
+        message: "بروزرسانی محصولات",
+        content: encodedContent,
+        branch: "main"
+      };
+
+      if (sha) body.sha = sha;
+
+      const res = await fetch(
+        `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${FILE_PATH}`,
+        {
+          method: "PUT",
+          headers: {
+            "Authorization": `token ${GITHUB_TOKEN}`,
+            "Accept": "application/vnd.github.v3+json",
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(body)
+        }
+      );
 
       if (res.ok) {
+        const data = await res.json();
 
-        const data =
-          await res.json();
-
-
-        if (
-          data.content &&
-          data.content.sha
-        ) {
-
-          fileSha =
-            data.content.sha;
-
+        if (data.content && data.content.sha) {
+          fileSha = data.content.sha;
         }
 
-
-        showToast(
-          "✅ ذخیره شد، ممنون"
-        );
-
+        showToast("✅ ذخیره شد، ممنون");
       } else {
-
-        const err =
-          await res.json();
-
-
+        const err = await res.json();
         console.error(err);
 
-
         showToast(
-          "خطا در ذخیره: " +
-          (
-            err.message ||
-            res.status
-          )
+          "خطا در ذخیره: " + (err.message || res.status)
         );
-
       }
 
     } catch (err) {
-
       console.error(err);
-
-
-      showToast(
-        "خطا در ارتباط با گیت‌هاب"
-      );
-
+      showToast("خطا در ارتباط با گیت‌هاب");
     }
 
-
     btn.classList.remove("saving");
-
-    btn.textContent =
-      "ذخیره";
-
+    btn.textContent = "ذخیره";
   }
-
 
   // =====================================================
   // بارگذاری از GitHub
   // =====================================================
 
   async function loadFromGitHub() {
-
     try {
-
-      const res =
-        await fetch(
-          `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${FILE_PATH}`,
-          {
-
-            headers: {
-
-              "Authorization":
-                `token ${GITHUB_TOKEN}`,
-
-              "Accept":
-                "application/vnd.github.v3+json"
-
-            }
-
+      const res = await fetch(
+        `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${FILE_PATH}`,
+        {
+          headers: {
+            "Authorization": `token ${GITHUB_TOKEN}`,
+            "Accept": "application/vnd.github.v3+json"
           }
-        );
-
+        }
+      );
 
       if (res.ok) {
+        const data = await res.json();
 
-        const data =
-          await res.json();
+        fileSha = data.sha;
 
+        const content = decodeURIComponent(
+          escape(atob(data.content))
+        );
 
-        fileSha =
-          data.sha;
+        const parsed = JSON.parse(content);
 
-
-        const content =
-          decodeURIComponent(
-            escape(
-              atob(data.content)
-            )
-          );
-
-
-        const parsed =
-          JSON.parse(content);
-
-
-        /*
-         * هم ساختار جدید:
-         * { products: [...], nextId: ... }
-         *
-         * و هم آرایه مستقیم را پشتیبانی می‌کنیم.
-         */
-
-        if (
-          parsed &&
-          Array.isArray(parsed.products)
-        ) {
-
-          products =
-            parsed.products;
-
-        } else if (
-          Array.isArray(parsed)
-        ) {
-
-          products =
-            parsed;
-
+        if (parsed && Array.isArray(parsed.products)) {
+          products = parsed.products;
+        } else if (Array.isArray(parsed)) {
+          products = parsed;
         } else {
-
-          return false;
-
+          throw new Error("ساختار products.json معتبر نیست");
         }
 
-
         products.forEach(function(p) {
-
-          if (
-            p.salePrice === undefined
-          ) {
-            p.salePrice = null;
-          }
-
-          if (
-            p.singlePrice === undefined
-          ) {
-            p.singlePrice = null;
-          }
-
+          if (p.salePrice === undefined) p.salePrice = null;
+          if (p.singlePrice === undefined) p.singlePrice = null;
         });
 
-
-        const calculatedNextId =
-          calculateNextId();
-
-
-        const storedNextId =
-          Number(parsed.nextId);
-
+        const calculatedNextId = calculateNextId();
+        const storedNextId = Number(parsed.nextId);
 
         if (
           Number.isFinite(storedNextId) &&
           storedNextId >= calculatedNextId
         ) {
-
-          nextId =
-            Math.floor(storedNextId);
-
+          nextId = Math.floor(storedNextId);
         } else {
-
-          nextId =
-            calculatedNextId;
-
+          nextId = calculatedNextId;
         }
 
-
-        isLoadedFromGitHub =
-          true;
-
+        isLoadedFromGitHub = true;
 
         renderTable();
-
-
-        showToast(
-          "اطلاعات از گیت‌هاب بارگذاری شد"
-        );
-
+        showToast("اطلاعات از گیت‌هاب بارگذاری شد");
 
         return true;
-
       }
 
     } catch (e) {
-
-      console.log(
-        "خطا در دریافت products.json",
-        e
-      );
-
+      console.log("خطا در دریافت products.json", e);
     }
 
-
-    isLoadedFromGitHub =
-      false;
-
-
+    isLoadedFromGitHub = false;
     return false;
-
   }
-
 
   // =====================================================
   // بستن Modal با کلیک بیرون
   // =====================================================
 
-  document
-    .getElementById("addModal")
-    .addEventListener(
-      "click",
-      function(e) {
-
-        if (
-          e.target === this
-        ) {
-
-          closeAddModal();
-
-        }
-
-      }
-    );
-
+  document.getElementById("addModal").addEventListener("click", function(e) {
+    if (e.target === this) closeAddModal();
+  });
 
   // =====================================================
   // شروع برنامه
   // =====================================================
 
   (async function init() {
-
-    const loaded =
-      await loadFromGitHub();
-
+    const loaded = await loadFromGitHub();
 
     if (!loaded) {
-
       renderTable();
-
+      showToast("⚠️ اطلاعات GitHub بارگذاری نشد؛ ذخیره غیرفعال است");
     }
-
   })();
-
 </script>
-
 </body>
 </html>
