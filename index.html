@@ -69,4 +69,404 @@
     }
     .btn-sm { padding: 6px 10px; font-size: 0.78rem; }
     .btn-primary { background: var(--primary); color: white; }
-    .
+    .btn-primary:hover { background: var(--primary-hover); }
+    .btn-success { background: var(--success); color: white; }
+    .btn-success:hover { background: #15803d; }
+    .btn-danger { background: var(--danger); color: white; }
+    .btn-danger:hover { background: #b91c1c; }
+    .btn-outline { background: white; color: var(--text); border: 1px solid var(--border); }
+    .btn-outline:hover { background: #f1f5f9; }
+    .actions { display: flex; gap: 6px; align-items: center; }
+    .empty { text-align: center; padding: 40px 20px; color: var(--muted); }
+    .bottom-bar {
+      position: fixed; bottom: 0; left: 0; right: 0; background: var(--card);
+      border-top: 1px solid var(--border); padding: 12px 16px; display: flex; gap: 10px;
+      justify-content: center; box-shadow: 0 -4px 12px rgba(0,0,0,0.06); z-index: 100;
+    }
+    .bottom-bar .btn { flex: 1; max-width: 280px; padding: 13px 16px; font-size: 0.95rem; }
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(15, 23, 42, 0.5); display: none;
+      align-items: center; justify-content: center; z-index: 1000; padding: 16px;
+    }
+    .modal-overlay.active { display: flex; }
+    .modal {
+      background: white; border-radius: 14px; width: 100%; max-width: 400px;
+      padding: 22px; box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    }
+    .modal h2 { font-size: 1.15rem; margin-bottom: 16px; }
+    .form-group { margin-bottom: 13px; }
+    .form-group label {
+      display: block; font-size: 0.84rem; font-weight: 600; margin-bottom: 5px; color: var(--muted);
+    }
+    .form-group input {
+      width: 100%; padding: 10px 12px; border: 1px solid var(--border);
+      border-radius: 8px; font-size: 0.95rem; outline: none;
+    }
+    .form-group input:focus { border-color: var(--primary); }
+    .modal-actions { display: flex; gap: 10px; margin-top: 18px; }
+    .modal-actions .btn { flex: 1; padding: 11px; }
+    .toast {
+      position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%) translateY(80px);
+      background: #1e293b; color: white; padding: 12px 20px; border-radius: 8px;
+      font-size: 0.9rem; opacity: 0; transition: all 0.3s ease; z-index: 2000; white-space: nowrap;
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+    .saving { opacity: 0.7; pointer-events: none; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>مدیریت محصولات</h1>
+      <div class="count" id="totalCount">تعداد محصولات: 0</div>
+    </header>
+
+    <div class="search-wrap">
+      <input type="text" id="searchInput" placeholder="جستجو بر اساس نام یا کد محصول...">
+      <span class="icon">🔍</span>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>ردیف</th>
+            <th>نام محصول</th>
+            <th>کد</th>
+            <th>قیمت</th>
+            <th>قیمت فروش</th>
+            <th>قیمت جدید</th>
+            <th>عملیات</th>
+          </tr>
+        </thead>
+        <tbody id="productTable"></tbody>
+      </table>
+      <div class="empty" id="emptyState" style="display:none;">محصولی یافت نشد</div>
+    </div>
+  </div>
+
+  <div class="bottom-bar">
+    <button class="btn btn-primary" onclick="openAddModal()">+ افزودن محصول</button>
+    <button class="btn btn-success" id="saveBtn" onclick="saveToGitHub()">ذخیره</button>
+  </div>
+
+  <div class="modal-overlay" id="addModal">
+    <div class="modal">
+      <h2>افزودن محصول جدید</h2>
+      <div class="form-group">
+        <label>نام محصول</label>
+        <input type="text" id="newName" placeholder="مثال: شلوار جین">
+      </div>
+      <div class="form-group">
+        <label>کد محصول</label>
+        <input type="text" id="newCode" placeholder="مثال: 9901">
+      </div>
+      <div class="form-group">
+        <label>قیمت (تومان)</label>
+        <input type="number" id="newPrice" placeholder="مثال: 450000">
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-outline" onclick="closeAddModal()">انصراف</button>
+        <button class="btn btn-primary" onclick="addProduct()">افزودن</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // ========== تنظیمات گیت‌هاب ==========
+    const GITHUB_USER = "veymacollection";
+    const GITHUB_REPO = "ghimat-jadid";
+    const GITHUB_TOKEN = "0uAebARPYwXD1iZSEdkknrGzhTJ3";   // <--- این خط (حدود ردیف ۲۱۸) — توکن واقعی را اینجا بگذار
+    const FILE_PATH = "products.json";
+    // =====================================
+
+    let products = [
+      { id: 1, name: "شلوارک لانیا", code: "2101", price: 230000, salePrice: 260000 },
+      { id: 2, name: "شلوار گیاهی لانیا گل‌دار", code: "2102", price: 250000, salePrice: 280000 },
+      { id: 3, name: "شلوارک ML", code: "2201", price: 240000, salePrice: 280000 },
+      { id: 4, name: "تاپ پلنگی", code: "2302", price: 250000, salePrice: 290000 },
+      { id: 5, name: "شلوار گیاهی مختلف", code: "2301", price: 250000, salePrice: 280000 },
+      { id: 6, name: "شلوارک پلنگی", code: "2321", price: 265000, salePrice: 300000 },
+      { id: 7, name: "شلوارک لیدی", code: "2321", price: 265000, salePrice: 300000 },
+      { id: 8, name: "شلوار گیاهی گل‌ریز", code: "2502", price: 280000, salePrice: 310000 },
+      { id: 9, name: "شورتک موسلین", code: "2501", price: 280000, salePrice: 310000 },
+      { id: 10, name: "شلوار گیاهی لیدی", code: "2602", price: 300000, salePrice: 320000 },
+      { id: 11, name: "شلوار گیاهی ساده لیدی", code: "2602", price: 300000, salePrice: 320000 },
+      { id: 12, name: "شلوارک نخی", code: "2601", price: 275000, salePrice: 300000 },
+      { id: 13, name: "شلوار صوفیا ژاکارد", code: "2701", price: 270000, salePrice: 290000 },
+      { id: 14, name: "شورتک نخی", code: "1951", price: 210000, salePrice: 240000 },
+      { id: 15, name: "شلوار مرطوب GVG", code: "2902", price: 350000, salePrice: 360000 },
+      { id: 16, name: "شلوار نانو مرطوب", code: "2901", price: 350000, salePrice: 360000 },
+      { id: 17, name: "تاپ کرکره‌ای مشکی", code: "3002", price: 300000, salePrice: 340000 },
+      { id: 18, name: "جوراب شلواری پنتی", code: "3001", price: 330000, salePrice: 380000 },
+      { id: 19, name: "جوراب شلواری گندمی", code: "3101", price: 310000, salePrice: 380000 },
+      { id: 20, name: "تیشرت پلوشرت ویسکوز", code: "3201", price: 320000, salePrice: 390000 },
+      { id: 21, name: "پلوشرت پلنگی", code: "3301", price: 350000, salePrice: 395000 },
+      { id: 22, name: "شورتک گیاهی پنبه", code: "2401", price: 260000, salePrice: 290000 },
+      { id: 23, name: "شلوارک پنبه", code: "3301", price: 330000, salePrice: 390000 },
+      { id: 24, name: "دامن نخی تایلندی", code: "3401", price: 380000, salePrice: 420000 },
+      { id: 25, name: "شلوار کبریتی مشکی", code: "3801", price: 380000, salePrice: 440000 },
+      { id: 26, name: "شلوارک لاکرا", code: "3801", price: 380000, salePrice: 450000 },
+      { id: 27, name: "شلوار نخی", code: "3701", price: 380000, salePrice: 450000 },
+      { id: 28, name: "دامن شلواری توپ‌توپی", code: "4001", price: 400000, salePrice: 480000 },
+      { id: 29, name: "ست پنبه گیاهی تاپ شورتک", code: "4401", price: 480000, salePrice: 550000 },
+      { id: 30, name: "شلوار موسلین", code: "4504", price: 500000, salePrice: 520000 },
+      { id: 31, name: "دامن شلواری طرح لی", code: "4502", price: 500000, salePrice: 590000 },
+      { id: 32, name: "دامن شلواری چهارخونه", code: "4501", price: 500000, salePrice: 590000 },
+      { id: 33, name: "ست گیاهی لیدی", code: "4503", price: 500000, salePrice: 580000 },
+      { id: 34, name: "ست تاپ دامن کوک", code: "4505", price: 450000, salePrice: 550000 },
+      { id: 35, name: "شلوار کبریتی پنبه گیاهی", code: "4801", price: 550000, salePrice: 590000 },
+      { id: 36, name: "تیشرت شلوارک ژور", code: "5402", price: 600000, salePrice: 720000 },
+      { id: 37, name: "تیشرت شلوارک ML", code: "5402", price: 580000, salePrice: 620000 },
+      { id: 38, name: "ست سه تیکه", code: "5501", price: 550000, salePrice: 650000 },
+      { id: 39, name: "تاپ شورتک کبریتی", code: "5401", price: 580000, salePrice: 660000 },
+      { id: 40, name: "ست گیاهی CZU", code: "5701", price: 570000, salePrice: 650000 },
+      { id: 41, name: "شلوار نگین‌دار موسلین", code: "4901", price: 490000, salePrice: 580000 },
+      { id: 42, name: "ست گیاهی تیشرت شلوار Atara", code: "6001", price: 600000, salePrice: null },
+      { id: 43, name: "ست نگین‌دار", code: "6201", price: 620000, salePrice: 730000 },
+      { id: 44, name: "ست لاکرا کراپ شورتک", code: "6201", price: 620000, salePrice: null },
+      { id: 45, name: "ست نخی تایلندی", code: "6601", price: 660000, salePrice: null },
+      { id: 46, name: "ست موسلین", code: "7001", price: 679000, salePrice: null },
+      { id: 47, name: "ست پنبه تیشرت شلوارک", code: "6801", price: 680000, salePrice: null },
+      { id: 48, name: "ست لاکرا", code: "7002", price: 700000, salePrice: null },
+      { id: 49, name: "ست لاکرا نایک", code: "7003", price: 700000, salePrice: 795000 },
+      { id: 50, name: "ست کبریتی پلنگی بغل نوار", code: "7201", price: 690000, salePrice: 860000 },
+      { id: 51, name: "تیشرت شلوار کبریتی جدید", code: "7501", price: 750000, salePrice: 890000 },
+      { id: 52, name: "ست موسلین پلنگی", code: "7501", price: 850000, salePrice: 960000 },
+      { id: 53, name: "ست تاپ دامن موسلین", code: "8001", price: 800000, salePrice: 910000 },
+      { id: 54, name: "شلوار کرپ مورگان", code: "10001", price: 1000000, salePrice: 1150000 },
+      { id: 55, name: "شلوار پوست ماری مخمل", code: "3501", price: 400000, salePrice: 450000 },
+      { id: 56, name: "شلوار آبرنگی", code: "3581", price: 358000, salePrice: 540000 },
+      { id: 62, name: "ست لاریس مودال", code: "1002", price: 1000000, salePrice: 1150000 }
+    ];
+
+    let nextId = 63;
+    let fileSha = null;
+
+    function formatPrice(num) {
+      if (num === null || num === undefined) return "—";
+      return Number(num).toLocaleString("fa-IR");
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById("toast");
+      t.textContent = msg;
+      t.classList.add("show");
+      setTimeout(() => t.classList.remove("show"), 2500);
+    }
+
+    function renderTable(list = products) {
+      const tbody = document.getElementById("productTable");
+      const empty = document.getElementById("emptyState");
+
+      if (list.length === 0) {
+        tbody.innerHTML = "";
+        empty.style.display = "block";
+      } else {
+        empty.style.display = "none";
+        tbody.innerHTML = list.map((p, i) => `
+          <tr data-id="${p.id}">
+            <td>${i + 1}</td>
+            <td>${p.name}</td>
+            <td><span class="code">${p.code}</span></td>
+            <td><span class="price">${formatPrice(p.price)}</span></td>
+            <td><span class="sale-price">${formatPrice(p.salePrice)}</span></td>
+            <td>
+              <input type="number" class="new-price-input" placeholder="قیمت جدید" id="newPrice-${p.id}">
+            </td>
+            <td>
+              <div class="actions">
+                <button class="btn btn-success btn-sm" onclick="updatePrice(${p.id})">ثبت</button>
+                <button class="btn btn-danger btn-sm" onclick="deleteProduct(${p.id})">حذف</button>
+              </div>
+            </td>
+          </tr>
+        `).join("");
+      }
+      document.getElementById("totalCount").textContent = `تعداد محصولات: ${list.length}`;
+    }
+
+    function updatePrice(id) {
+      const input = document.getElementById("newPrice-" + id);
+      const val = parseInt(input.value, 10);
+      if (isNaN(val) || val < 0) {
+        showToast("قیمت جدید معتبر نیست");
+        return;
+      }
+      const product = products.find(p => p.id === id);
+      if (product) {
+        product.price = val;
+        input.value = "";
+        applySearch();
+        showToast("قیمت ثبت شد — برای ذخیره در گیت‌هاب دکمه ذخیره را بزنید");
+      }
+    }
+
+    function deleteProduct(id) {
+      if (!confirm("آیا از حذف این محصول مطمئن هستید؟")) return;
+      products = products.filter(p => p.id !== id);
+      applySearch();
+      showToast("محصول حذف شد — برای ذخیره در گیت‌هاب دکمه ذخیره را بزنید");
+    }
+
+    function openAddModal() {
+      document.getElementById("addModal").classList.add("active");
+      document.getElementById("newName").value = "";
+      document.getElementById("newCode").value = "";
+      document.getElementById("newPrice").value = "";
+      setTimeout(() => document.getElementById("newName").focus(), 100);
+    }
+
+    function closeAddModal() {
+      document.getElementById("addModal").classList.remove("active");
+    }
+
+    function addProduct() {
+      const name = document.getElementById("newName").value.trim();
+      const code = document.getElementById("newCode").value.trim();
+      const price = parseInt(document.getElementById("newPrice").value, 10);
+
+      if (!name || !code || isNaN(price) || price < 0) {
+        showToast("لطفاً همه فیلدها را درست پر کنید");
+        return;
+      }
+
+      products.push({
+        id: nextId++,
+        name: name,
+        code: code,
+        price: price,
+        salePrice: null
+      });
+
+      closeAddModal();
+      applySearch();
+      showToast("محصول اضافه شد — برای ذخیره در گیت‌هاب دکمه ذخیره را بزنید");
+    }
+
+    function applySearch() {
+      const q = document.getElementById("searchInput").value.trim().toLowerCase();
+      if (!q) {
+        renderTable(products);
+        return;
+      }
+      const filtered = products.filter(p =>
+        p.name.toLowerCase().includes(q) || p.code.toLowerCase().includes(q)
+      );
+      renderTable(filtered);
+    }
+
+    document.getElementById("searchInput").addEventListener("input", applySearch);
+
+    async function saveToGitHub() {
+      const btn = document.getElementById("saveBtn");
+      btn.classList.add("saving");
+      btn.textContent = "در حال ذخیره...";
+
+      try {
+        const content = JSON.stringify({ products: products, nextId: nextId }, null, 2);
+        const encodedContent = btoa(unescape(encodeURIComponent(content)));
+
+        let sha = fileSha;
+        if (!sha) {
+          try {
+            const getRes = await fetch(
+              `https://api.github.com/repos/\( {GITHUB_USER}/ \){GITHUB_REPO}/contents/${FILE_PATH}`,
+              {
+                headers: {
+                  "Authorization": `token ${GITHUB_TOKEN}`,
+                  "Accept": "application/vnd.github.v3+json"
+                }
+              }
+            );
+            if (getRes.ok) {
+              const data = await getRes.json();
+              sha = data.sha;
+              fileSha = sha;
+            }
+          } catch (e) {}
+        }
+
+        const body = {
+          message: "بروزرسانی محصولات",
+          content: encodedContent,
+          branch: "main"
+        };
+        if (sha) body.sha = sha;
+
+        const res = await fetch(
+          `https://api.github.com/repos/\( {GITHUB_USER}/ \){GITHUB_REPO}/contents/${FILE_PATH}`,
+          {
+            method: "PUT",
+            headers: {
+              "Authorization": `token ${GITHUB_TOKEN}`,
+              "Accept": "application/vnd.github.v3+json",
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(body)
+          }
+        );
+
+        if (res.ok) {
+          const data = await res.json();
+          fileSha = data.content.sha;
+          showToast("✅ با موفقیت در گیت‌هاب ذخیره شد");
+        } else {
+          const err = await res.json();
+          console.error(err);
+          showToast("خطا در ذخیره: " + (err.message || res.status));
+        }
+      } catch (err) {
+        console.error(err);
+        showToast("خطا در ارتباط با گیت‌هاب");
+      }
+
+      btn.classList.remove("saving");
+      btn.textContent = "ذخیره";
+    }
+
+    async function loadFromGitHub() {
+      try {
+        const res = await fetch(
+          `https://api.github.com/repos/\( {GITHUB_USER}/ \){GITHUB_REPO}/contents/${FILE_PATH}`,
+          {
+            headers: {
+              "Authorization": `token ${GITHUB_TOKEN}`,
+              "Accept": "application/vnd.github.v3+json"
+            }
+          }
+        );
+
+        if (res.ok) {
+          const data = await res.json();
+          fileSha = data.sha;
+          const content = decodeURIComponent(escape(atob(data.content)));
+          const parsed = JSON.parse(content);
+
+          if (parsed.products && Array.isArray(parsed.products)) {
+            products = parsed.products;
+            nextId = parsed.nextId || (products.length + 1);
+            renderTable();
+            showToast("داده‌ها از گیت‌هاب بارگذاری شد");
+            return true;
+          }
+        }
+      } catch (e) {
+        console.log("فایل products.json هنوز وجود ندارد یا توکن نامعتبر است");
+      }
+      return false;
+    }
+
+    document.getElementById("addModal").addEventListener("click", function(e) {
+      if (e.target === this) closeAddModal();
+    });
+
+    (async function init() {
+      const loaded = await loadFromGitHub();
+      if (!loaded) renderTable();
+    })();
+  </script>
+</body>
+</html>
