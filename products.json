@@ -214,7 +214,7 @@
       "code": "3701",
       "price": 380000,
       "salePrice": 450000,
-      "singlePrice": null
+      "singlePrice": 490000
     },
     {
       "id": 28,
@@ -222,7 +222,7 @@
       "code": "4001",
       "price": 400000,
       "salePrice": 480000,
-      "singlePrice": null
+      "singlePrice": 530000
     },
     {
       "id": 29,
@@ -237,7 +237,7 @@
       "name": "شلوار موسلین",
       "code": "4504",
       "price": 500000,
-      "salePrice": 520000,
+      "salePrice": 550000,
       "singlePrice": null
     },
     {
