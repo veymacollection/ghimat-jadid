@@ -46,7 +46,7 @@
       "code": "2321",
       "price": 265000,
       "salePrice": 300000,
-      "singlePrice": null
+      "singlePrice": 350000
     },
     {
       "id": 7,
@@ -54,7 +54,7 @@
       "code": "2322",
       "price": 265000,
       "salePrice": 300000,
-      "singlePrice": null
+      "singlePrice": 350000
     },
     {
       "id": 8,
@@ -62,7 +62,7 @@
       "code": "2502",
       "price": 280000,
       "salePrice": 310000,
-      "singlePrice": null
+      "singlePrice": 350000
     },
     {
       "id": 9,
@@ -70,7 +70,7 @@
       "code": "2501",
       "price": 280000,
       "salePrice": 310000,
-      "singlePrice": null
+      "singlePrice": 350000
     },
     {
       "id": 10,
@@ -78,7 +78,7 @@
       "code": "2602",
       "price": 300000,
       "salePrice": 320000,
-      "singlePrice": null
+      "singlePrice": 360000
     },
     {
       "id": 11,
@@ -86,7 +86,7 @@
       "code": "2603",
       "price": 300000,
       "salePrice": 320000,
-      "singlePrice": null
+      "singlePrice": 360000
     },
     {
       "id": 12,
