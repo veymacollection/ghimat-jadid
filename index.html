@@ -577,13 +577,10 @@
 
   <script>
 
-    // ========== تنظیمات گیت‌هاب ==========
-    const GITHUB_USER = "veymacollection";
-    const GITHUB_REPO = "ghimat-jadid";
-
-    const GITHUB_TOKEN = "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";
-
-    const FILE_PATH = "products.json";
+    // ========== تنظیمات ورکر ==========
+    // آدرس ورکر خودت رو اینجا بذار (بعد از دیپلوی، از داشبورد Cloudflare Workers کپی کن)
+    // مثال: "https://veyma-products.your-subdomain.workers.dev"
+    const WORKER_URL = "https://lively-fire-9aa1.ingtrad2.workers.dev";
     // =====================================
 
 
@@ -654,7 +651,6 @@
     });
 
     let nextId = 57;
-    let fileSha = null;
 
 
     function formatPrice(num) {
@@ -1256,94 +1252,23 @@ th{background:#f1f5f9}
           );
 
 
-        const encodedContent =
-          btoa(
-            unescape(
-              encodeURIComponent(content)
-            )
-          );
-
-
-        let sha = fileSha;
-
-
-        if (!sha) {
-
-          try {
-
-            const getRes =
-              await fetch(
-                `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${FILE_PATH}`,
-                {
-                  headers: {
-                    "Authorization":
-                      `token ${GITHUB_TOKEN}`,
-
-                    "Accept":
-                      "application/vnd.github.v3+json"
-                  }
-                }
-              );
-
-
-            if (getRes.ok) {
-
-              const data =
-                await getRes.json();
-
-              sha = data.sha;
-              fileSha = sha;
-            }
-
-          } catch (e) {}
-        }
-
-
-        const body = {
-
-          message: "بروزرسانی محصولات",
-
-          content: encodedContent,
-
-          branch: "main"
-        };
-
-
-        if (sha) {
-          body.sha = sha;
-        }
-
-
         const res =
           await fetch(
-            `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${FILE_PATH}`,
+            `${WORKER_URL}/products`,
             {
               method: "PUT",
 
               headers: {
-
-                "Authorization":
-                  `token ${GITHUB_TOKEN}`,
-
-                "Accept":
-                  "application/vnd.github.v3+json",
-
                 "Content-Type":
                   "application/json"
               },
 
-              body: JSON.stringify(body)
+              body: content
             }
           );
 
 
         if (res.ok) {
-
-          const data =
-            await res.json();
-
-          fileSha =
-            data.content.sha;
 
           showToast(
             "✅ ذخیره شد، ممنون"
@@ -1352,13 +1277,13 @@ th{background:#f1f5f9}
         } else {
 
           const err =
-            await res.json();
+            await res.json().catch(() => ({}));
 
           console.error(err);
 
           showToast(
             "خطا در ذخیره: " +
-            (err.message || res.status)
+            (err.error || res.status)
           );
         }
 
@@ -1367,7 +1292,7 @@ th{background:#f1f5f9}
         console.error(err);
 
         showToast(
-          "خطا در ارتباط با گیت‌هاب"
+          "خطا در ارتباط با سرور"
         );
 
       }
@@ -1384,38 +1309,14 @@ th{background:#f1f5f9}
 
         const res =
           await fetch(
-            `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${FILE_PATH}`,
-            {
-              headers: {
-
-                "Authorization":
-                  `token ${GITHUB_TOKEN}`,
-
-                "Accept":
-                  "application/vnd.github.v3+json"
-              }
-            }
+            `${WORKER_URL}/products`
           );
 
 
         if (res.ok) {
 
-          const data =
-            await res.json();
-
-          fileSha = data.sha;
-
-
-          const content =
-            decodeURIComponent(
-              escape(
-                atob(data.content)
-              )
-            );
-
-
           const parsed =
-            JSON.parse(content);
+            await res.json();
 
 
           if (
@@ -1448,7 +1349,7 @@ th{background:#f1f5f9}
       } catch (e) {
 
         console.log(
-          "فایل products.json هنوز وجود ندارد"
+          "خطا در اتصال به سرور"
         );
       }
 
