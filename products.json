@@ -326,7 +326,7 @@
       "code": "4901",
       "price": 490000,
       "salePrice": 580000,
-      "singlePrice": null
+      "singlePrice": 630000
     },
     {
       "id": 42,
@@ -334,7 +334,7 @@
       "code": "6001",
       "price": 620000,
       "salePrice": 720000,
-      "singlePrice": null
+      "singlePrice": 790000
     },
     {
       "id": 43,
@@ -342,7 +342,7 @@
       "code": "6201",
       "price": 620000,
       "salePrice": 730000,
-      "singlePrice": null
+      "singlePrice": 790000
     },
     {
       "id": 44,
@@ -350,7 +350,7 @@
       "code": "6202",
       "price": 620000,
       "salePrice": 755000,
-      "singlePrice": null
+      "singlePrice": 860000
     },
     {
       "id": 45,
@@ -358,7 +358,7 @@
       "code": "6601",
       "price": 680000,
       "salePrice": 760000,
-      "singlePrice": null
+      "singlePrice": 790000
     },
     {
       "id": 47,
