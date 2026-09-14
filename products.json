@@ -463,7 +463,15 @@
       "price": 375000,
       "salePrice": 510000,
       "singlePrice": 590000
+    },
+    {
+      "id": 65,
+      "name": "شلوار مخمل عروسکی",
+      "code": "4201",
+      "price": 420000,
+      "salePrice": 470000,
+      "singlePrice": 520000
     }
   ],
-  "nextId": 65
+  "nextId": 66
 }
