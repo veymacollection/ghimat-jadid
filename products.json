@@ -487,7 +487,15 @@
       "price": 400000,
       "salePrice": 470000,
       "singlePrice": 530000
+    },
+    {
+      "id": 68,
+      "name": "شلوار مرطوب خزدار",
+      "code": "4201",
+      "price": 420000,
+      "salePrice": 480000,
+      "singlePrice": 530000
     }
   ],
-  "nextId": 68
+  "nextId": 69
 }
