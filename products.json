@@ -230,7 +230,7 @@
       "code": "4401",
       "price": 480000,
       "salePrice": 550000,
-      "singlePrice": null
+      "singlePrice": 620000
     },
     {
       "id": 30,
@@ -238,7 +238,7 @@
       "code": "4504",
       "price": 500000,
       "salePrice": 550000,
-      "singlePrice": null
+      "singlePrice": 600000
     },
     {
       "id": 31,
@@ -246,7 +246,7 @@
       "code": "4502",
       "price": 500000,
       "salePrice": 590000,
-      "singlePrice": null
+      "singlePrice": 650000
     },
     {
       "id": 32,
@@ -254,7 +254,7 @@
       "code": "4501",
       "price": 500000,
       "salePrice": 590000,
-      "singlePrice": null
+      "singlePrice": 650000
     },
     {
       "id": 33,
@@ -262,7 +262,7 @@
       "code": "4503",
       "price": 500000,
       "salePrice": 580000,
-      "singlePrice": null
+      "singlePrice": 650000
     },
     {
       "id": 34,
@@ -270,7 +270,7 @@
       "code": "4505",
       "price": 450000,
       "salePrice": 550000,
-      "singlePrice": null
+      "singlePrice": 600000
     },
     {
       "id": 35,
@@ -278,7 +278,7 @@
       "code": "4801",
       "price": 550000,
       "salePrice": 590000,
-      "singlePrice": null
+      "singlePrice": 660000
     },
     {
       "id": 36,
@@ -286,7 +286,7 @@
       "code": "5402",
       "price": 600000,
       "salePrice": 720000,
-      "singlePrice": null
+      "singlePrice": 800000
     },
     {
       "id": 37,
@@ -294,7 +294,7 @@
       "code": "5403",
       "price": 580000,
       "salePrice": 620000,
-      "singlePrice": null
+      "singlePrice": 700000
     },
     {
       "id": 38,
@@ -302,7 +302,7 @@
       "code": "5501",
       "price": 550000,
       "salePrice": 650000,
-      "singlePrice": null
+      "singlePrice": 750000
     },
     {
       "id": 39,
@@ -310,7 +310,7 @@
       "code": "5401",
       "price": 580000,
       "salePrice": 660000,
-      "singlePrice": null
+      "singlePrice": 750000
     },
     {
       "id": 40,
