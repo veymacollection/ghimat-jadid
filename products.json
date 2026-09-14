@@ -455,7 +455,15 @@
       "price": 1200000,
       "salePrice": 1350000,
       "singlePrice": null
+    },
+    {
+      "id": 64,
+      "name": "شلوار بافت",
+      "code": "3751",
+      "price": 375000,
+      "salePrice": 510000,
+      "singlePrice": 590000
     }
   ],
-  "nextId": 64
+  "nextId": 65
 }
