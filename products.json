@@ -365,24 +365,24 @@
       "name": "ست پنبه تیشرت شلوارک",
       "code": "6801",
       "price": 680000,
-      "salePrice": 795000,
-      "singlePrice": null
+      "salePrice": 790000,
+      "singlePrice": 850000
     },
     {
       "id": 48,
       "name": "ست لاکرا",
       "code": "7002",
       "price": 700000,
-      "salePrice": 795000,
-      "singlePrice": null
+      "salePrice": 790000,
+      "singlePrice": 850000
     },
     {
       "id": 49,
       "name": "ست لاکرا نایک",
       "code": "7003",
       "price": 700000,
-      "salePrice": 795000,
-      "singlePrice": null
+      "salePrice": 790000,
+      "singlePrice": 850000
     },
     {
       "id": 50,
@@ -398,7 +398,7 @@
       "code": "7501",
       "price": 850000,
       "salePrice": 960000,
-      "singlePrice": null
+      "singlePrice": 1100000
     },
     {
       "id": 53,
@@ -406,7 +406,7 @@
       "code": "8001",
       "price": 800000,
       "salePrice": 910000,
-      "singlePrice": null
+      "singlePrice": 950000
     },
     {
       "id": 54,
@@ -422,7 +422,7 @@
       "code": "3501",
       "price": 400000,
       "salePrice": 450000,
-      "singlePrice": null
+      "singlePrice": 490000
     },
     {
       "id": 56,
@@ -430,15 +430,15 @@
       "code": "3581",
       "price": 358000,
       "salePrice": 540000,
-      "singlePrice": null
+      "singlePrice": 590000
     },
     {
       "id": 57,
       "name": "ست کبریتی سفید جدید",
       "code": "7502",
       "price": 750000,
-      "salePrice": 890000,
-      "singlePrice": null
+      "salePrice": 860000,
+      "singlePrice": 950000
     },
     {
       "id": 62,
@@ -446,7 +446,7 @@
       "code": "1002",
       "price": 1000000,
       "salePrice": 1150000,
-      "singlePrice": null
+      "singlePrice": 1300000
     },
     {
       "id": 63,
@@ -454,7 +454,7 @@
       "code": "1201",
       "price": 1200000,
       "salePrice": 1350000,
-      "singlePrice": null
+      "singlePrice": 1650000
     },
     {
       "id": 64,
