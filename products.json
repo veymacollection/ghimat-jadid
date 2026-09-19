@@ -557,15 +557,22 @@
       "name": "ست تدی",
       "code": "7802",
       "price": 780000,
-      "salePrice": null
+      "salePrice": 890000
     },
     {
       "id": 78,
       "name": "شلوار تدی",
       "code": "4251",
       "price": 425000,
+      "salePrice": 520000
+    },
+    {
+      "id": 79,
+      "name": "شلوار پیلیسه",
+      "code": "5502",
+      "price": 550000,
       "salePrice": null
     }
   ],
-  "nextId": 79
+  "nextId": 80
 }
