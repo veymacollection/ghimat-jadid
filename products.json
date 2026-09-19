@@ -495,7 +495,21 @@
       "price": 420000,
       "salePrice": 480000,
       "singlePrice": 530000
+    },
+    {
+      "id": 69,
+      "name": "شلوار مخمل بغل نوار مشکی",
+      "code": "4461",
+      "price": 446000,
+      "salePrice": null
+    },
+    {
+      "id": 70,
+      "name": "شلوار مخمل کبریتی",
+      "code": "3841",
+      "price": 384000,
+      "salePrice": null
     }
   ],
-  "nextId": 69
+  "nextId": 71
 }
