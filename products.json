@@ -567,18 +567,11 @@
       "salePrice": 520000
     },
     {
-      "id": 79,
-      "name": "شلوار پیلیسه",
-      "code": "5502",
-      "price": 550000,
-      "salePrice": 590000
-    },
-    {
       "id": 80,
       "name": "شلوار پیلیسه گل ریز",
       "code": "5502",
       "price": 550000,
-      "salePrice": null
+      "salePrice": 590000
     }
   ],
   "nextId": 81
