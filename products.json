@@ -125,7 +125,7 @@
       "name": "شلوار نانو مرطوب",
       "code": "2901",
       "price": 350000,
-      "salePrice": 360000,
+      "salePrice": 380000,
       "singlePrice": 400000
     },
     {
@@ -141,7 +141,7 @@
       "name": "جوراب شلواری پنتی",
       "code": "3001",
       "price": 330000,
-      "salePrice": 380000,
+      "salePrice": 370000,
       "singlePrice": 420000
     },
     {
@@ -149,7 +149,7 @@
       "name": "جوراب شلواری گندمی",
       "code": "3101",
       "price": 310000,
-      "salePrice": 380000,
+      "salePrice": 360000,
       "singlePrice": 420000
     },
     {
@@ -197,7 +197,7 @@
       "name": "شلوار کبریتی مشکی",
       "code": "3801",
       "price": 380000,
-      "salePrice": 440000,
+      "salePrice": 445000,
       "singlePrice": 490000
     },
     {
@@ -205,7 +205,7 @@
       "name": "شلوارک لاکرا",
       "code": "3802",
       "price": 380000,
-      "salePrice": 450000,
+      "salePrice": 455000,
       "singlePrice": 500000
     },
     {
@@ -213,7 +213,7 @@
       "name": "شلوار نخی",
       "code": "3701",
       "price": 380000,
-      "salePrice": 450000,
+      "salePrice": 455000,
       "singlePrice": 490000
     },
     {
@@ -221,7 +221,7 @@
       "name": "دامن شلواری توپ‌توپی",
       "code": "4001",
       "price": 400000,
-      "salePrice": 480000,
+      "salePrice": 475000,
       "singlePrice": 530000
     },
     {
@@ -229,7 +229,7 @@
       "name": "ست پنبه گیاهی تاپ شورتک",
       "code": "4401",
       "price": 480000,
-      "salePrice": 550000,
+      "salePrice": 555000,
       "singlePrice": 620000
     },
     {
@@ -237,7 +237,7 @@
       "name": "شلوار موسلین",
       "code": "4504",
       "price": 500000,
-      "salePrice": 550000,
+      "salePrice": 555000,
       "singlePrice": 600000
     },
     {
@@ -245,7 +245,7 @@
       "name": "دامن شلواری طرح لی",
       "code": "4502",
       "price": 500000,
-      "salePrice": 590000,
+      "salePrice": 565000,
       "singlePrice": 650000
     },
     {
@@ -253,7 +253,7 @@
       "name": "دامن شلواری چهارخونه",
       "code": "4501",
       "price": 500000,
-      "salePrice": 590000,
+      "salePrice": 565000,
       "singlePrice": 650000
     },
     {
@@ -261,7 +261,7 @@
       "name": "ست گیاهی لیدی",
       "code": "4503",
       "price": 500000,
-      "salePrice": 580000,
+      "salePrice": 588000,
       "singlePrice": 650000
     },
     {
