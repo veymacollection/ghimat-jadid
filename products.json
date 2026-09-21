@@ -598,7 +598,7 @@
       "id": 84,
       "name": "دامن شلواری پیلیسه میکس",
       "code": "5085",
-      "price": 565000,
+      "price": 508500,
       "salePrice": null
     },
     {
@@ -613,7 +613,7 @@
       "name": "شلوار مخمل توپ توپی رنگی",
       "code": "4012",
       "price": 401000,
-      "salePrice": null
+      "salePrice": 445000
     }
   ],
   "nextId": 87
