@@ -677,22 +677,33 @@
       "name": "شلوار جاگر",
       "code": "sh01",
       "price": 870000,
-      "salePrice": 945000
+      "salePrice": 945000,
+      "singlePrice": null
     },
     {
       "id": 95,
       "name": "تاپ جلو دکمه دار ویسکوز",
       "code": "tt01",
       "price": 270000,
-      "salePrice": 295000
+      "salePrice": 295000,
+      "singlePrice": null
     },
     {
       "id": 96,
       "name": "ست مخمل پلنگی نگین دار",
       "code": "sm02",
       "price": 1350000,
-      "salePrice": 1490000
+      "salePrice": 1490000,
+      "singlePrice": null
+    },
+    {
+      "id": 97,
+      "name": "شلوار مخمل نگین دار",
+      "code": "6202",
+      "price": 620000,
+      "salePrice": null,
+      "singlePrice": null
     }
   ],
-  "nextId": 97
+  "nextId": 98
 }
