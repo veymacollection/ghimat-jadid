@@ -671,7 +671,14 @@
       "price": 960000,
       "salePrice": 1050000,
       "singlePrice": null
+    },
+    {
+      "id": 94,
+      "name": "شلوار جاگر",
+      "code": "sh01",
+      "price": 870000,
+      "salePrice": 855000
     }
   ],
-  "nextId": 94
+  "nextId": 95
 }
