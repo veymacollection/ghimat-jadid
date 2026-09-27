@@ -1,0 +1,32 @@
+        const res = await fetch(`${WORKER_URL}/products`, { cache: "no-store" });
+
+        if (!res.ok) {
+          throw new Error("server error");
+        }
+
+        const parsed = await res.json();
+
+        if (!parsed.products || !Array.isArray(parsed.products)) {
+          throw new Error("bad data");
+        }
+
+        allSaleProducts = parsed.products.filter(function(p) {
+          return p.salePrice !== null && p.salePrice !== undefined && p.salePrice !== "";
+        });
+
+        renderTable(allSaleProducts);
+
+      } catch (e) {
+        console.error(e);
+        showState(
+          "خطا در دریافت لیست قیمت<br><button class='retry-btn' onclick='loadSaleList()'>تلاش دوباره</button>"
+        );
+        document.getElementById("totalCount").textContent = "";
+      }
+    }
+
+    loadSaleList();
+  </script>
+
+</body>
+</html>
