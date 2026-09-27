@@ -91,6 +91,14 @@
       pointer-events: none;
     }
 
+    .table-note {
+      text-align: right;
+      color: var(--muted);
+      font-size: 0.78rem;
+      margin-bottom: 4px;
+      padding: 0 6px;
+    }
+
     .table-wrap {
       background: var(--card);
       border: 1px solid var(--border);
@@ -197,10 +205,11 @@
     </header>
 
     <div class="search-wrap">
-      <input type="text" id="searchInput" placeholder="جستجوی نام یا کد محصول...">
+      <input type="text" id="searchInput" placeholder="جستجوی نام محصول...">
       <span class="icon">🔍</span>
     </div>
 
+    <div class="table-note">کد</div>
     <div class="table-wrap">
       <table>
         <thead>
@@ -263,7 +272,7 @@
         return `
           <tr>
             <td>${i + 1}</td>
-            <td>${escapeHtml(p.code)} - ${escapeHtml(p.name)}</td>
+            <td>${escapeHtml(p.name)} - ${escapeHtml(p.code)}</td>
             <td><span class="price">${formatPrice(p.salePrice)}</span></td>
           </tr>
         `;
