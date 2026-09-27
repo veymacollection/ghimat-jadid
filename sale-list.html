@@ -1,3 +1,300 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>لیست قیمت فروش | ویما کالکشن</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #2563eb;
+      --success: #16a34a;
+      --bg: #f1f5f9;
+      --card: #ffffff;
+      --border: #e2e8f0;
+      --text: #1e293b;
+      --muted: #64748b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: "Vazirmatn", "Tahoma", "Segoe UI", Geneva, Verdana, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      min-height: 100vh;
+      padding: 14px 10px 30px;
+    }
+
+    .container {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    header {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 18px;
+      margin-bottom: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+
+    header h1 {
+      font-size: 1.2rem;
+      margin-bottom: 4px;
+    }
+
+    header .count {
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .search-wrap {
+      position: relative;
+      margin-bottom: 12px;
+    }
+
+    .search-wrap input {
+      width: 100%;
+      padding: 11px 40px 11px 12px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 0.92rem;
+      outline: none;
+      background: var(--card);
+      font-family: inherit;
+    }
+
+    .search-wrap input:focus {
+      border-color: var(--primary);
+    }
+
+    .search-wrap .icon {
+      position: absolute;
+      left: 13px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      pointer-events: none;
+    }
+
+    .table-wrap {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+      overflow: hidden;
+    }
+
+    table {
+      width: 100%;
+      max-width: 100%;
+      table-layout: fixed;
+      border-collapse: collapse;
+    }
+
+    thead {
+      background: #f1f5f9;
+    }
+
+    th, td {
+      padding: 9px 6px;
+      border-bottom: 1px solid var(--border);
+      overflow-wrap: break-word;
+      word-break: break-word;
+    }
+
+    th {
+      font-weight: 700;
+      color: var(--muted);
+      font-size: 0.72rem;
+      text-align: center;
+    }
+
+    td {
+      font-size: 0.82rem;
+      text-align: center;
+    }
+
+    /* ستون ردیف */
+    th:nth-child(1), td:nth-child(1) {
+      width: 13%;
+      color: var(--muted);
+    }
+
+    /* ستون نام محصول */
+    th:nth-child(2), td:nth-child(2) {
+      width: 52%;
+      text-align: right;
+      font-weight: 500;
+    }
+
+    /* ستون قیمت فروش */
+    th:nth-child(3), td:nth-child(3) {
+      width: 35%;
+    }
+
+    td .price {
+      font-weight: 700;
+      color: var(--success);
+      direction: ltr;
+      display: inline-block;
+      font-size: 0.8rem;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    .state-msg {
+      text-align: center;
+      padding: 40px 16px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .retry-btn {
+      margin-top: 12px;
+      padding: 9px 18px;
+      border: none;
+      border-radius: 8px;
+      background: var(--primary);
+      color: #fff;
+      font-family: inherit;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.75rem;
+      margin-top: 16px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <header>
+      <h1>لیست قیمت فروش</h1>
+      <div class="count" id="totalCount">در حال بارگذاری...</div>
+    </header>
+
+    <div class="search-wrap">
+      <input type="text" id="searchInput" placeholder="جستجوی نام محصول...">
+      <span class="icon">🔍</span>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>ردیف</th>
+            <th>محصول</th>
+            <th>قیمت فروش</th>
+          </tr>
+        </thead>
+        <tbody id="productTable"></tbody>
+      </table>
+      <div class="state-msg" id="stateMsg" style="display:none;"></div>
+    </div>
+
+    <footer>ویما کالکشن</footer>
+
+  </div>
+
+  <script>
+    // همان آدرس ورکری که در فایل مدیریت محصولات استفاده می‌شود
+    // این فایل فقط می‌خواند و چیزی را تغییر نمی‌دهد
+    const WORKER_URL = "https://lively-fire-9aa1.ingtrad2.workers.dev";
+
+    let allSaleProducts = [];
+
+    function formatPrice(num) {
+      return Number(num).toLocaleString("fa-IR");
+    }
+
+    function escapeHtml(value) {
+      return String(value == null ? "" : value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function showState(message) {
+      const stateMsg = document.getElementById("stateMsg");
+      const tbody = document.getElementById("productTable");
+      tbody.innerHTML = "";
+      stateMsg.style.display = "block";
+      stateMsg.innerHTML = message;
+    }
+
+    function renderTable(list) {
+      const tbody = document.getElementById("productTable");
+      const stateMsg = document.getElementById("stateMsg");
+
+      if (!list || list.length === 0) {
+        showState("محصولی با قیمت فروش ثبت‌شده یافت نشد");
+        document.getElementById("totalCount").textContent = "تعداد محصولات: 0";
+        return;
+      }
+
+      stateMsg.style.display = "none";
+
+      tbody.innerHTML = list.map(function(p, i) {
+        return `
+          <tr>
+            <td>${i + 1}</td>
+            <td>${escapeHtml(p.name)}</td>
+            <td><span class="price">${formatPrice(p.salePrice)}</span></td>
+          </tr>
+        `;
+      }).join("");
+
+      document.getElementById("totalCount").textContent =
+        "تعداد محصولات: " + list.length;
+    }
+
+    function applySearch() {
+      const q = document.getElementById("searchInput").value.trim().toLowerCase();
+
+      if (!q) {
+        renderTable(allSaleProducts);
+        return;
+      }
+
+      const filtered = allSaleProducts.filter(function(p) {
+        return p.name.toLowerCase().includes(q);
+      });
+
+      renderTable(filtered);
+    }
+
+    document.getElementById("searchInput").addEventListener("input", applySearch);
+
+    async function loadSaleList() {
+      document.getElementById("totalCount").textContent = "در حال بارگذاری...";
+      showState("در حال بارگذاری لیست قیمت...");
+
+      try {
         const res = await fetch(`${WORKER_URL}/products`, { cache: "no-store" });
 
         if (!res.ok) {
