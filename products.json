@@ -703,7 +703,14 @@
       "price": 620000,
       "salePrice": 680000,
       "singlePrice": null
+    },
+    {
+      "id": 98,
+      "name": "شلوار پلنگی",
+      "code": "As46",
+      "price": 295000,
+      "salePrice": null
     }
   ],
-  "nextId": 98
+  "nextId": 99
 }
