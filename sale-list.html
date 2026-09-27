@@ -197,7 +197,7 @@
     </header>
 
     <div class="search-wrap">
-      <input type="text" id="searchInput" placeholder="جستجوی نام محصول...">
+      <input type="text" id="searchInput" placeholder="جستجوی نام یا کد محصول...">
       <span class="icon">🔍</span>
     </div>
 
@@ -263,7 +263,7 @@
         return `
           <tr>
             <td>${i + 1}</td>
-            <td>${escapeHtml(p.name)}</td>
+            <td>${escapeHtml(p.code)} - ${escapeHtml(p.name)}</td>
             <td><span class="price">${formatPrice(p.salePrice)}</span></td>
           </tr>
         `;
@@ -282,7 +282,8 @@
       }
 
       const filtered = allSaleProducts.filter(function(p) {
-        return p.name.toLowerCase().includes(q);
+        return p.name.toLowerCase().includes(q) ||
+          String(p.code).toLowerCase().includes(q);
       });
 
       renderTable(filtered);
