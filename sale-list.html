@@ -91,14 +91,6 @@
       pointer-events: none;
     }
 
-    .table-note {
-      text-align: right;
-      color: var(--muted);
-      font-size: 0.78rem;
-      margin-bottom: 4px;
-      padding: 0 6px;
-    }
-
     .table-wrap {
       background: var(--card);
       border: 1px solid var(--border);
@@ -167,6 +159,15 @@
       border-bottom: none;
     }
 
+    tbody tr:nth-child(even) {
+      background: #eef1fa;
+    }
+
+    .code-tag {
+      color: #94a3b8;
+      font-size: 0.74rem;
+    }
+
     .state-msg {
       text-align: center;
       padding: 40px 16px;
@@ -209,13 +210,12 @@
       <span class="icon">🔍</span>
     </div>
 
-    <div class="table-note">کد</div>
     <div class="table-wrap">
       <table>
         <thead>
           <tr>
             <th>ردیف</th>
-            <th>محصول</th>
+            <th>کد محصول</th>
             <th>قیمت فروش</th>
           </tr>
         </thead>
@@ -272,7 +272,7 @@
         return `
           <tr>
             <td>${i + 1}</td>
-            <td>${escapeHtml(p.name)} - ${escapeHtml(p.code)}</td>
+            <td>${escapeHtml(p.name)} <span class="code-tag">${escapeHtml(p.code)}</span></td>
             <td><span class="price">${formatPrice(p.salePrice)}</span></td>
           </tr>
         `;
