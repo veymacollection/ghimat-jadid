@@ -687,7 +687,15 @@
       "price": 850000,
       "salePrice": 950000,
       "singlePrice": null
+    },
+    {
+      "id": 100,
+      "name": "شلوار پیژامه",
+      "code": "shp1",
+      "price": 440000,
+      "salePrice": null,
+      "singlePrice": null
     }
   ],
-  "nextId": 100
+  "nextId": 101
 }
