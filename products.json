@@ -52,8 +52,8 @@
       "id": 7,
       "name": "شلوارک لیدی",
       "code": "2322",
-      "price": 265000,
-      "salePrice": 285000,
+      "price": 310000,
+      "salePrice": 335000,
       "singlePrice": 350000
     },
     {
@@ -76,16 +76,16 @@
       "id": 10,
       "name": "شلوار گیاهی لیدی",
       "code": "2602",
-      "price": 300000,
-      "salePrice": 320000,
+      "price": 330000,
+      "salePrice": 350000,
       "singlePrice": 360000
     },
     {
       "id": 11,
       "name": "شلوار گیاهی ساده لیدی",
       "code": "2603",
-      "price": 300000,
-      "salePrice": 320000,
+      "price": 330000,
+      "salePrice": 350000,
       "singlePrice": 360000
     },
     {
@@ -148,7 +148,7 @@
       "id": 19,
       "name": "جوراب شلواری گندمی",
       "code": "3101",
-      "price": 310000,
+      "price": 360000,
       "salePrice": 360000,
       "singlePrice": 420000
     },
@@ -260,8 +260,8 @@
       "id": 33,
       "name": "ست گیاهی لیدی",
       "code": "4503",
-      "price": 500000,
-      "salePrice": 590000,
+      "price": 560000,
+      "salePrice": 650000,
       "singlePrice": 650000
     },
     {
@@ -532,8 +532,8 @@
       "id": 76,
       "name": "شلوار لیدی خزدار قواره دار",
       "code": "7801",
-      "price": 780000,
-      "salePrice": 880000,
+      "price": 850000,
+      "salePrice": 950000,
       "singlePrice": null
     },
     {
