@@ -181,7 +181,7 @@
       "name": "شلوارک پنبه",
       "code": "3302",
       "price": 330000,
-      "salePrice": 390000,
+      "salePrice": 450000,
       "singlePrice": 420000
     },
     {
@@ -189,7 +189,7 @@
       "name": "دامن نخی تایلندی",
       "code": "3401",
       "price": 380000,
-      "salePrice": 420000,
+      "salePrice": 470000,
       "singlePrice": 470000
     },
     {
@@ -197,7 +197,7 @@
       "name": "شلوار کبریتی مشکی",
       "code": "3801",
       "price": 380000,
-      "salePrice": 445000,
+      "salePrice": 460000,
       "singlePrice": 490000
     },
     {
@@ -205,7 +205,7 @@
       "name": "شلوارک لاکرا",
       "code": "3802",
       "price": 380000,
-      "salePrice": 455000,
+      "salePrice": 470000,
       "singlePrice": 500000
     },
     {
