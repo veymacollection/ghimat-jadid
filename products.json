@@ -29,7 +29,7 @@
       "name": "تاپ پلنگی",
       "code": "2302",
       "price": 250000,
-      "salePrice": 350000,
+      "salePrice": 300000,
       "singlePrice": 350000
     },
     {
@@ -541,7 +541,7 @@
       "name": "شلوار تدی",
       "code": "4251",
       "price": 425000,
-      "salePrice": 570000,
+      "salePrice": 499000,
       "singlePrice": null
     },
     {
