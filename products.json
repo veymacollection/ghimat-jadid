@@ -687,7 +687,15 @@
       "price": 440000,
       "salePrice": 490000,
       "singlePrice": null
+    },
+    {
+      "id": 103,
+      "name": "ست بلوز شلوار مخمل",
+      "code": "sgh1",
+      "price": 720000,
+      "salePrice": 850000,
+      "singlePrice": null
     }
   ],
-  "nextId": 103
+  "nextId": 104
 }
