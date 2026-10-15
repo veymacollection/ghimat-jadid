@@ -679,7 +679,15 @@
       "price": 440000,
       "salePrice": 470000,
       "singlePrice": null
+    },
+    {
+      "id": 102,
+      "name": "شلوار مخمل پلنگی",
+      "code": "shmp1",
+      "price": 440000,
+      "salePrice": null,
+      "singlePrice": null
     }
   ],
-  "nextId": 102
+  "nextId": 103
 }
