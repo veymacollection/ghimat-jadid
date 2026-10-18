@@ -548,16 +548,16 @@
       "id": 80,
       "name": "شلوار پیلیسه گل ریز",
       "code": "5502",
-      "price": 540000,
-      "salePrice": 620000,
+      "price": 630000,
+      "salePrice": 690000,
       "singlePrice": null
     },
     {
       "id": 82,
       "name": "دامن شلواری پیلیسه پلنگی",
       "code": "5601",
-      "price": 560000,
-      "salePrice": 660000,
+      "price": 650000,
+      "salePrice": 730000,
       "singlePrice": null
     },
     {
