@@ -393,14 +393,6 @@
       "singlePrice": null
     },
     {
-      "id": 86,
-      "name": "شلوار مخمل توپ توپی رنگی",
-      "code": "4012",
-      "price": 401000,
-      "salePrice": 480000,
-      "singlePrice": null
-    },
-    {
       "id": 88,
       "name": "شلوار مخمل آفتابگردون",
       "code": "4014",
@@ -421,7 +413,7 @@
       "name": "مخمل کبریتی رنگی",
       "code": "3842",
       "price": 384000,
-      "salePrice": 460000,
+      "salePrice": 520000,
       "singlePrice": null
     },
     {
@@ -445,7 +437,7 @@
       "name": "ست دو تیکه موسلین",
       "code": "7001",
       "price": 960000,
-      "salePrice": 1080000,
+      "salePrice": 1150000,
       "singlePrice": null
     },
     {
