@@ -449,19 +449,11 @@
       "singlePrice": null
     },
     {
-      "id": 95,
-      "name": "تاپ جلو دکمه دار ویسکوز",
-      "code": "tt01",
-      "price": 270000,
-      "salePrice": 295000,
-      "singlePrice": null
-    },
-    {
       "id": 96,
       "name": "ست مخمل پلنگی نگین دار",
       "code": "sm02",
       "price": 1350000,
-      "salePrice": 1550000,
+      "salePrice": 1590000,
       "singlePrice": null
     },
     {
