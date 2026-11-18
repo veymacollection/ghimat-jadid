@@ -89,14 +89,6 @@
       "singlePrice": 350000
     },
     {
-      "id": 13,
-      "name": "شلوار صوفیا ژاکارد",
-      "code": "2701",
-      "price": 270000,
-      "salePrice": 370000,
-      "singlePrice": 350000
-    },
-    {
       "id": 14,
       "name": "شورتک نخی",
       "code": "1951",
@@ -118,14 +110,6 @@
       "code": "2901",
       "price": 430000,
       "salePrice": 470000,
-      "singlePrice": 400000
-    },
-    {
-      "id": 17,
-      "name": "تاپ کرکره‌ای مشکی",
-      "code": "3002",
-      "price": 300000,
-      "salePrice": 390000,
       "singlePrice": 400000
     },
     {
