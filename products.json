@@ -185,28 +185,12 @@
       "singlePrice": 660000
     },
     {
-      "id": 36,
-      "name": "تیشرت شلوارک ژور",
-      "code": "5402",
-      "price": 650000,
-      "salePrice": 750000,
-      "singlePrice": 800000
-    },
-    {
       "id": 37,
       "name": "تیشرت شلوارک ML",
       "code": "5403",
       "price": 580000,
       "salePrice": 690000,
       "singlePrice": 700000
-    },
-    {
-      "id": 38,
-      "name": "ست سه تیکه",
-      "code": "5501",
-      "price": 550000,
-      "salePrice": 750000,
-      "singlePrice": 750000
     },
     {
       "id": 39,
